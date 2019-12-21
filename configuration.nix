@@ -50,11 +50,11 @@
     pkgs.chromium
   ];
 
-  nixpkgs.overlayds = {
-    my = pkgs.recurseIntoAttrs {
-      neovim = pkgs.callPackage ./pkgs/neovim/default.nix {};
-    };
-  };
+  nixpkgs.overlays = [
+    (self: super:
+      (import ./packages/default.nix { pkgs = super; })
+    )
+  ];
 
   nixpkgs.config = {
     allowUnfree = true;
