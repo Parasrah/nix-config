@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./cfgs/neovim.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -48,7 +49,12 @@
     pkgs.git
     pkgs.vlc
     pkgs.chromium
+    pkgs.neovim
   ];
+
+  environment.variables = {
+    NVIMCONFIG = "/etc/nixos/pkgs/neovim/config";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -64,7 +70,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -83,21 +89,32 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Security
+  security.sudo = {
+    wheelNeedsPassword = true;
+  };
+
   users.mutableUsers = true;
   users.users = {
+    root = {
+      home = "/root";
+      isNormalUser = false;
+      group = "root";
+      extraGroups = [ "nixos-config" ];
+    };
     parasrah = {
       isNormalUser = true;
       home = "/home/parasrah";
-      description = "Personal Account";
-      extraGroups = [ "wheel" "networkmanager" ];
-      hashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
+      description = "Brad";
+      extraGroups = [ "wheel" "networkmanager" "nixos-config" ];
+      initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
     };
     qnbst = {
       isNormalUser = true;
       home = "/home/qnbst";
-      description = "The best!";
+      description = "Bea";
       extraGroups = [ "networkmanager" ];
-      hashedPassword = "$6$rpJzIzk6jGJ7SQ/3$IYQTa/JugakPHG.DyDz/hBb1w3euy0iNTII2rVZaJrmIUfb1H79AC6YYXRNAcScmDQx76am83T6ZyQNaRCZex0";
+      initialHashedPassword = "$6$rpJzIzk6jGJ7SQ/3$IYQTa/JugakPHG.DyDz/hBb1w3euy0iNTII2rVZaJrmIUfb1H79AC6YYXRNAcScmDQx76am83T6ZyQNaRCZex0";
     };
   };
 
@@ -106,6 +123,12 @@
     enable = true;
     layout = "us";
     xkbOptions = "ctrl:nocaps";
+  };
+
+  systemd.services.permission-configure = {
+    script = ''
+      chown /etc/nixos :nixos-config
+    '';
   };
 
   # This value determines the NixOS release with which your system is to be
