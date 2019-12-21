@@ -1,0 +1,5 @@
+{ pkgs }:
+
+pkgs.kitty.override {
+
+}

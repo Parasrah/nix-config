@@ -44,24 +44,29 @@
     wget vim
     pkgs.mkpasswd
     pkgs.firefox
-    pkgs.kitty
     pkgs.git
     pkgs.vlc
     pkgs.chromium
+    pkgs.ripgrep
+    unstable.nodejs
   ];
 
   nixpkgs.overlays = [
     (self: super:
-      (import ./packages/default.nix { pkgs = super; })
+      (import ./pkgs/default.nix { pkgs = super; })
     )
   ];
 
   nixpkgs.config = {
     allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import ./cfg/unstable.nix { config = config; };
+    };
   };
 
   environment.variables = {
     NVIMCONFIG = "/etc/nixos/pkgs/neovim/config";
+    KITTY_CONFIG_DIRECTORY = "/etc/nixos/pkgs/kitty";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -73,6 +78,15 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  systemd.services.configure-permissions = {
+    script = ''
+      chown -R root:nixos-config /etc/nixos
+      chmod -R g+rwx /etc/nixos
+    '';
+    wantedBy = [ "multi-user.target" ];
+    description = "allow nixos-config user access to change system config";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -102,13 +116,22 @@
     wheelNeedsPassword = true;
   };
 
+  # Users
   users.mutableUsers = true;
+
+  users.groups = {
+    nixos-config = { };
+  };
+
   users.users = {
     root = {
       home = "/root";
       isNormalUser = false;
       group = "root";
       extraGroups = [ "nixos-config" ];
+      packages = with pkgs; [
+        unstable.neovim
+      ];
     };
     parasrah = {
       isNormalUser = true;
@@ -116,6 +139,10 @@
       description = "Brad";
       extraGroups = [ "wheel" "networkmanager" "nixos-config" ];
       initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
+      packages = with pkgs; [
+       	unstable.neovim
+        my.kitty
+      ];
     };
     qnbst = {
       isNormalUser = true;
@@ -131,12 +158,6 @@
     enable = true;
     layout = "us";
     xkbOptions = "ctrl:nocaps";
-  };
-
-  systemd.services.permission-configure = {
-    script = ''
-      chown /etc/nixos :nixos-config
-    '';
   };
 
   # This value determines the NixOS release with which your system is to be

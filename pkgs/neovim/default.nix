@@ -1,6 +1,7 @@
+{ pkgs }:
+
 pkgs.neovim.override {
+  vimAlias = false;
   configure = {
-    customRC = builtins.readFile ./config/init.vim;
-    vimAlias = false;
   };
 }
