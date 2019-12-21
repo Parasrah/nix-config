@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cfgs/neovim.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -49,8 +48,17 @@
     pkgs.git
     pkgs.vlc
     pkgs.chromium
-    pkgs.neovim
   ];
+
+  nixpkgs.overlayds = {
+    my = pkgs.recurseIntoAttrs {
+      neovim = pkgs.callPackage ./pkgs/neovim/default.nix {};
+    };
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   environment.variables = {
     NVIMCONFIG = "/etc/nixos/pkgs/neovim/config";
