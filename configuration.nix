@@ -66,9 +66,9 @@
   };
 
   environment.variables = {
-    NIXOS = "/etc/nixos";
-    NVIMCONFIG = "$NIXOS/pkgs/neovim/config";
-    KITTY_CONFIG_DIRECTORY = "$NIXOS/pkgs/kitty";
+    NIX = "/etc/nixos";
+    NVIMCONFIG = "$NIX/pkgs/neovim/config";
+    KITTY_CONFIG_DIRECTORY = "$NIX/pkgs/kitty";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -143,7 +143,8 @@
       initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
       packages = with pkgs; [
        	unstable.neovim
-        my.kitty
+        custom.kitty
+        custom.azuredatastudio
       ];
     };
     qnbst = {
