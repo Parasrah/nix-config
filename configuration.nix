@@ -48,6 +48,7 @@
     pkgs.vlc
     pkgs.chromium
     pkgs.ripgrep
+    pkgs.gnupg
     unstable.nodejs
   ];
 
@@ -65,8 +66,9 @@
   };
 
   environment.variables = {
-    NVIMCONFIG = "/etc/nixos/pkgs/neovim/config";
-    KITTY_CONFIG_DIRECTORY = "/etc/nixos/pkgs/kitty";
+    NIXOS = "/etc/nixos";
+    NVIMCONFIG = "$NIXOS/pkgs/neovim/config";
+    KITTY_CONFIG_DIRECTORY = "$NIXOS/pkgs/kitty";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -82,7 +84,7 @@
   systemd.services.configure-permissions = {
     script = ''
       chown -R root:nixos-config /etc/nixos
-      chmod -R g+rwx /etc/nixos
+      chmod -R g+rw /etc/nixos
     '';
     wantedBy = [ "multi-user.target" ];
     description = "allow nixos-config user access to change system config";
