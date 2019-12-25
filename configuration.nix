@@ -41,15 +41,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim
-    pkgs.mkpasswd
-    pkgs.firefox
-    pkgs.git
-    pkgs.vlc
-    pkgs.chromium
-    pkgs.ripgrep
-    pkgs.gnupg
-    unstable.nodejs
+    wget
+    curl
+    vim
+    mkpasswd
+    git
+    ripgrep
+    gnupg
+    nix-index
+    unstable.neovim
   ];
 
   nixpkgs.overlays = [
@@ -126,15 +126,8 @@
   };
 
   users.users = {
-    root = {
-      home = "/root";
-      isNormalUser = false;
-      group = "root";
-      extraGroups = [ "nixos-config" ];
-      packages = with pkgs; [
-        unstable.neovim
-      ];
-    };
+    root = import ./users/root.nix { inherit pkgs; };
+    parasrah = import ./users/parasrah.nix { inherit pkgs; };
     parasrah = {
       isNormalUser = true;
       home = "/home/parasrah";
@@ -144,15 +137,8 @@
       packages = with pkgs; [
        	unstable.neovim
         custom.kitty
-        custom.azuredatastudio
+        nix-index
       ];
-    };
-    qnbst = {
-      isNormalUser = true;
-      home = "/home/qnbst";
-      description = "Bea";
-      extraGroups = [ "networkmanager" ];
-      initialHashedPassword = "$6$rpJzIzk6jGJ7SQ/3$IYQTa/JugakPHG.DyDz/hBb1w3euy0iNTII2rVZaJrmIUfb1H79AC6YYXRNAcScmDQx76am83T6ZyQNaRCZex0";
     };
   };
 
