@@ -1,5 +1,5 @@
-config: pkgs:
+{ config }: pkgs:
 
 {
-  unstable: import ./unstable.nix { config = config; };
+  unstable = import ./unstable.nix { config = config; };
 }

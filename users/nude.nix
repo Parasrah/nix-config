@@ -6,7 +6,7 @@
   home = "/home/nude";
   extraGroups = [ "wheel" "networkmanager" "nixos-config" ];
   packages = with pkgs; [
-    dbeaver-ce
+    dbeaver
     firefox
     vlc
     unstable.nodejs

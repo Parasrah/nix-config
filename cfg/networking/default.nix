@@ -1,13 +1,14 @@
 { hostname, interface }:
 
 {
-  networking.hostName = hostname;
+  hostName = hostname;
   # wpa_supplicant
-  wireless.enable = true;
+  # wireless.enable = true;
   # network manager
-  # networkmanager.enable = true;
+  networkmanager.enable = true;
 
-  "interfaces.${interface}.useDHCP" = true;
+  interfaces."${interface}".useDHCP = true;
+  # interfaces.wlp2s0.useDHCP = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
