@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   home-manager = builtins.fetchGit {
@@ -16,6 +16,11 @@ in
       ../users/root.nix
     ];
 
+  environment.variables = {
+    NIX = "/etc/nixos";
+    NVIMCONFIG = "$NIX/dotfiles/nvim";
+  };
+
   # packages always available on all machines
   environment.systemPackages = with pkgs; [
     git
@@ -26,7 +31,7 @@ in
     nettools
   ];
 
-  systemd.services.configure-permissions = {
+  systemd.services.configuration-perms = {
     script = ''
       chown -R root:nixos-config /etc/nixos
       chmod -R g+rw /etc/nixos
@@ -35,22 +40,13 @@ in
     description = "allow nixos-config user access to change system config";
   };
 
-  time = import ../cfg/time/default.nix;
+  time = import ../cfg/time;
 
   nixpkgs.overlays = [
-    (self: super:
-      (import ../pkgs/default.nix { pkgs = super; })
-    )
+    (import ../pkgs)
   ];
 
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
-  environment.variables = {
-    NIX = "/etc/nixos";
-    NVIMCONFIG = "$NIX/dotfiles/nvim";
-  };
+  nixpkgs.config = import ../cfg/pkgsConfig { inherit config; };
 
   # Security
   security.sudo = {
@@ -60,7 +56,7 @@ in
   # Users
   users.mutableUsers = true;
 
-  users.groups.nixos-config = { };
+  users.groups.nixos-config = {};
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

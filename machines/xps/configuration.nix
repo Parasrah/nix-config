@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  default = import ../default.nix { inherit pkgs; };
-
-in
-default // {
+{
   imports =
     [
       ../default.nix
@@ -16,17 +12,15 @@ default // {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking = import ../../cfg/networking/default.nix {
+  networking = import ../../cfg/networking {
     hostname = "xps";
     interface = "wlp2s0";
   };
 
   # packages available to all users
-  environment.systemPackages = with pkgs; default.environment.systemPackages ++ [
+  environment.systemPackages = with pkgs; [
     mkpasswd
-    gnupg
     nix-index
-    unstable.neovim
   ];
 
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
@@ -37,6 +31,4 @@ default // {
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  nixpkgs.config.packageOverrides = import ../../cfg/packageOverrides/default.nix { inherit config; };
 }

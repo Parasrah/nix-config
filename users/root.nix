@@ -14,7 +14,6 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
-      neovim
     ];
   };
 }

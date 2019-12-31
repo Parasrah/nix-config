@@ -1,8 +1,10 @@
 { username, homemanager, user }:
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   users.users."${username}" = user;
-  home-manager.users."${username}" = homemanager pkgs;
+  home-manager.users."${username}" = {
+    nixpkgs.config = import ../../cfg/pkgsConfig { inherit config; };
+  } // homemanager pkgs;
 }

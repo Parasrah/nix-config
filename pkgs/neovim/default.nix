@@ -1,8 +1,9 @@
-{ pkgs }:
+{ unstable }:
 
-# TODO: override version & get rid of unstable channel
-pkgs.neovim.override {
+unstable.neovim.override {
   vimAlias = false;
-  configure = {
-  };
+  withNodeJs = true;
+  withPython = false;
+  withPython3 = true;
+  withRuby = false;
 }
