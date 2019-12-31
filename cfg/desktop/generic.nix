@@ -2,12 +2,15 @@
 
 {
   i18n.consoleUseXkbConfig = true;
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "ctrl:nocaps";
-  services.xserver.libinput = {
+
+  services.xserver = {
     enable = true;
-    naturalScrolling = true;
-    tapping = true;
+    layout = "us";
+    xkbOptions = "ctrl:nocaps";
+    libinput = {
+      enable = true;
+      naturalScrolling = true;
+      tapping = true;
+    };
   };
 }

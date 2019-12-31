@@ -35,24 +35,20 @@ create {
     };
 
     xsession.windowManager.i3 = {
-      enable = true;
+      enable = false;
       config = {
-        gaps = {
-          inner = 12;
-          outer = 5;
-        };
       };
     };
 
-    # gtk.iconTheme = with pkgs; {
-    #   name = "Paper";
-    #   package = paper-icon-theme;
-    # };
+    gtk.iconTheme = with pkgs; {
+      name = "Paper";
+      package = paper-icon-theme;
+    };
 
-    # gtk.theme = with pkgs; {
-    #   name = "Ant";
-    #   package = ant-theme;
-    # };
+    gtk.theme = with pkgs; {
+      name = "Ant";
+      package = ant-theme;
+    };
 
     programs.bash = {
       enable = true;
