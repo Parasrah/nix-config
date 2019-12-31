@@ -7,7 +7,9 @@ in
 default // {
   imports =
     [
+      ../default.nix
       ../../cfg/desktop/gnome.nix
+      ../../users/parasrah.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -36,5 +38,5 @@ default // {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  nixpkgs.config.packageOverrides = import ../cfg/packageOverrides/default.nix { inherit config; };
+  nixpkgs.config.packageOverrides = import ../../cfg/packageOverrides/default.nix { inherit config; };
 }

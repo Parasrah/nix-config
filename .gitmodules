@@ -1,3 +1,6 @@
 [submodule "pkgs/neovim/config"]
 	path = pkgs/neovim/config
 	url = git@github.com:Parasrah/nvim-config.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:Parasrah/dotfiles.git

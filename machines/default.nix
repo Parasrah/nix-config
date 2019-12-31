@@ -12,7 +12,9 @@ in
   imports =
     [
       ../hardware-configuration.nix
-    ]
+      "${home-manager}/nixos"
+      ../users/root.nix
+    ];
 
   # packages always available on all machines
   environment.systemPackages = with pkgs; [
@@ -21,7 +23,7 @@ in
     curl
     vim
     ripgrep
-    net-tools
+    nettools
   ];
 
   systemd.services.configure-permissions = {
@@ -33,7 +35,7 @@ in
     description = "allow nixos-config user access to change system config";
   };
 
-  time = import ../../cfg/time/default.nix;
+  time = import ../cfg/time/default.nix;
 
   nixpkgs.overlays = [
     (self: super:
@@ -47,7 +49,7 @@ in
 
   environment.variables = {
     NIX = "/etc/nixos";
-    NVIMCONFIG = "$NIX/pkgs/neovim/config";
+    NVIMCONFIG = "$NIX/dotfiles/nvim";
   };
 
   # Security
@@ -59,8 +61,6 @@ in
   users.mutableUsers = true;
 
   users.groups.nixos-config = { };
-
-  users.users.root = import ../../users/root.nix { pkgs = pkgs; };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

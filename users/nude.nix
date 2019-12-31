@@ -1,5 +1,3 @@
-{ pkgs }:
-
 {
   description = "Nude Solutions";
   isNormalUser = true;
