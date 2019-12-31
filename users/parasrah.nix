@@ -24,12 +24,39 @@ create {
       nodejs
       nodePackages.eslint
       nodePackages.neovim
+      unstable.cascadia-code
+      unstable.brave
     ];
 
     xdg.configFile."kitty/kitty.conf" = {
       source = builtins.path {
         path = ../dotfiles/kitty.conf;
       };
+    };
+
+    xsession.windowManager.i3 = {
+      enable = true;
+      config = {
+        gaps = {
+          inner = 12;
+          outer = 5;
+        };
+      };
+    };
+
+    # gtk.iconTheme = with pkgs; {
+    #   name = "Paper";
+    #   package = paper-icon-theme;
+    # };
+
+    # gtk.theme = with pkgs; {
+    #   name = "Ant";
+    #   package = ant-theme;
+    # };
+
+    programs.bash = {
+      enable = true;
+      initExtra = builtins.readFile ../dotfiles/powerline.sh;
     };
 
     programs.git = {
@@ -58,7 +85,7 @@ create {
     programs.fzf = {
       enable = true;
       defaultCommand = "rg";
-    }
+    };
 
     programs.vscode = {
       enable = true;
