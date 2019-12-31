@@ -26,6 +26,12 @@ create {
       nodePackages.neovim
     ];
 
+    xdg.configFile."kitty/kitty.conf" = {
+      source = builtins.path {
+        path = ../dotfiles/kitty.conf;
+      };
+    };
+
     programs.git = {
       enable = true;
       userEmail = "git@parasrah.com";
@@ -48,6 +54,11 @@ create {
         };
       };
     };
+
+    programs.fzf = {
+      enable = true;
+      defaultCommand = "rg";
+    }
 
     programs.vscode = {
       enable = true;
