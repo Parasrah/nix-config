@@ -21,6 +21,12 @@ in
     NVIMCONFIG = "$NIX/dotfiles/nvim";
   };
 
+  environment.etc."inputrc" = {
+    text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
+      set completion-ignore-case On
+    '');
+  };
+
   # packages always available on all machines
   environment.systemPackages = with pkgs; [
     git

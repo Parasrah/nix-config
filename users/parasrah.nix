@@ -26,6 +26,9 @@ create {
       nodePackages.neovim
       unstable.cascadia-code
       unstable.brave
+      unstable.elmPackages.elm-language-server
+      unstable.elmPackages.elm-format
+      unstable.elmPackages.elm-test
     ];
 
     xdg.configFile."kitty/kitty.conf" = {
