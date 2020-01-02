@@ -39,6 +39,9 @@ in
     vim
     ripgrep
     nettools
+  ];
+
+  fonts.fonts = with pkgs; [
     unstable.cascadia-code
   ];
 
@@ -63,6 +66,7 @@ in
   security.sudo = {
     wheelNeedsPassword = true;
   };
+
 
   # Users
   users.mutableUsers = true;

@@ -21,6 +21,7 @@ create {
       kitty
       neovim
       powershell
+      gnome3.seahorse
       nodejs
       nodePackages.eslint
       nodePackages.neovim
