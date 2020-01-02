@@ -24,7 +24,6 @@ create {
       nodejs
       nodePackages.eslint
       nodePackages.neovim
-      unstable.cascadia-code
       unstable.brave
       unstable.elmPackages.elm-language-server
       unstable.elmPackages.elm-format
@@ -37,20 +36,10 @@ create {
       };
     };
 
-    xsession.windowManager.i3 = {
-      enable = false;
-      config = {
+    xdg.configFile."i3/config" = {
+      source = builtins.path {
+        path = ../dotfiles/i3.config;
       };
-    };
-
-    gtk.iconTheme = with pkgs; {
-      name = "Paper";
-      package = paper-icon-theme;
-    };
-
-    gtk.theme = with pkgs; {
-      name = "Ant";
-      package = ant-theme;
     };
 
     programs.bash = {

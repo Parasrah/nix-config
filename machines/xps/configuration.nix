@@ -4,7 +4,7 @@
   imports =
     [
       ../default.nix
-      ../../cfg/desktop/gnome.nix
+      ../../cfg/desktop/gnome-i3.nix
       ../../users/parasrah.nix
     ];
 

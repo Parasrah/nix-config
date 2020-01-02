@@ -21,6 +21,10 @@ in
     NVIMCONFIG = "$NIX/dotfiles/nvim";
   };
 
+  environment.sessionVariables = {
+    TERMINAL = "kitty";
+  };
+
   environment.etc."inputrc" = {
     text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
       set completion-ignore-case On
@@ -35,6 +39,7 @@ in
     vim
     ripgrep
     nettools
+    unstable.cascadia-code
   ];
 
   systemd.services.configuration-perms = {
