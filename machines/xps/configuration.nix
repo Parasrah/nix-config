@@ -31,6 +31,15 @@
     enableSSHSupport = false;
   };
 
+  services.redis = {
+    enable = true;
+  };
+
+  # docker
+  virtualisation.docker = {
+    enable = true;
+  };
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;

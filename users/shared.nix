@@ -1,10 +1,3 @@
-let
-  fromPath =
-    path : builtins.path {
-      path = path;
-    };
-
-in
 {
   git = {
     aliases = {
@@ -28,13 +21,19 @@ in
     defaultCommand = "rg";
   };
 
+  bash = {
+    enable = true;
+    initExtra = (builtins.readFile ../dotfiles/powerline.sh) + ''
+      if [ -n "$DESKTOP_SESSION" ];then
+        eval $(gnome-keyring-daemon --start)
+        export SSH_AUTH_SOCK
+      fi
+    '';
+  };
+
   xdg.configFile = {
-    "i3/config".source = fromPath ../dotfiles/i3.config;
+    "i3/config".source = ../dotfiles/i3.config;
 
-    "kitty/kitty.conf".source = fromPath ../dotfiles/kitty.conf;
-
-    "fish/fish_variables".source = fromPath ../dotfiles/fish/fish_variables;
-    
-    "fish/functions".source = fromPath ../dotfiles/fish/functions;
+    "kitty/kitty.conf".source = ../dotfiles/kitty.conf;
   };
 }

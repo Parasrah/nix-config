@@ -34,15 +34,7 @@ create {
 
     xdg.configFile = shared.xdg.configFile;
 
-    programs.bash = {
-      enable = true;
-      initExtra = builtins.readFile ../dotfiles/powerline.sh ++ ''
-        if [ -n "$DESKTOP_SESSION" ];then
-          eval $(gnome-keyring-daemon --start)
-          export SSH_AUTH_SOCK
-        fi
-      '';
-    };
+    programs.bash = shared.bash;
 
     programs.git = with shared.git; {
       enable = true;

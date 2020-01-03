@@ -11,16 +11,8 @@
 
     libinput = {
       enable = true;
+      naturalScrolling = true;
       tapping = true;
     };
-
-    extraConfig = ''
-      Section "InputClass"
-        Identifier "touchpad"
-        Driver "libinput"
-        MatchIsTouchpad "on"
-        Option "NaturalScrolling" "true"
-      EndSection
-    '';
   };
 }

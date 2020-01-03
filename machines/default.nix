@@ -37,6 +37,7 @@ in
     wget
     curl
     vim
+    unzip
     ripgrep
     nettools
   ];
@@ -66,7 +67,6 @@ in
   security.sudo = {
     wheelNeedsPassword = true;
   };
-
 
   # Users
   users.mutableUsers = true;
