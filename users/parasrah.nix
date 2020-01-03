@@ -1,6 +1,8 @@
 let
   create = import ./util/create.nix;
 
+  shared = import ./shared.nix;
+
 in
 create {
   username = "parasrah";
@@ -20,7 +22,6 @@ create {
       vlc
       kitty
       neovim
-      powershell
       gnome3.seahorse
       nodejs
       nodePackages.eslint
@@ -31,50 +32,26 @@ create {
       unstable.elmPackages.elm-test
     ];
 
-    xdg.configFile."kitty/kitty.conf" = {
-      source = builtins.path {
-        path = ../dotfiles/kitty.conf;
-      };
-    };
-
-    xdg.configFile."i3/config" = {
-      source = builtins.path {
-        path = ../dotfiles/i3.config;
-      };
-    };
+    xdg.configFile = shared.xdg.configFile;
 
     programs.bash = {
       enable = true;
       initExtra = builtins.readFile ../dotfiles/powerline.sh;
     };
 
-    programs.git = {
+    programs.git = with shared.git; {
       enable = true;
       userEmail = "git@parasrah.com";
       userName = "Parasrah";
-      aliases = { 
-        co = "checkout";
-        all = "add -A";
-        st = "status";
-        pullprev = "!git checkout - && git pull && git checkout -";
-        last = "log -1 HEAD";
-        tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
-      };
+      aliases = aliases;
+      extraConfig = extraConfig;
       signing = {
         signByDefault = true;
         key = "8922B1C024EFBF5C";
       };
-      extraConfig = {
-        core = {
-          editor = "neovim";
-        };
-      };
     };
 
-    programs.fzf = {
-      enable = true;
-      defaultCommand = "rg";
-    };
+    programs.fzf = shared.fzf;
 
     programs.vscode = {
       enable = true;

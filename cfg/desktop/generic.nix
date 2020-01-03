@@ -8,7 +8,7 @@
     xkbOptions = "ctrl:nocaps";
     libinput = {
       enable = true;
-      naturalScrolling = true;
+      naturalScrolling = false;
       tapping = true;
     };
   };
