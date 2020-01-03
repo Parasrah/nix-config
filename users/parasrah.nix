@@ -36,7 +36,12 @@ create {
 
     programs.bash = {
       enable = true;
-      initExtra = builtins.readFile ../dotfiles/powerline.sh;
+      initExtra = builtins.readFile ../dotfiles/powerline.sh ++ ''
+        if [ -n "$DESKTOP_SESSION" ];then
+          eval $(gnome-keyring-daemon --start)
+          export SSH_AUTH_SOCK
+        fi
+      '';
     };
 
     programs.git = with shared.git; {

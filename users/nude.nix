@@ -12,6 +12,7 @@ create {
     isNormalUser = true;
     home = "/home/nude";
     extraGroups = [ "wheel" "networkmanager" "nixos-config" ];
+    initialHashedPassword = "$6$eixEF7GGOo8T.4s$Npn8iBhur3G0uJmWc/L1MthwooGQX.KVmVd9jMnlWu6DLfOo7r7a3jVy/IirhN4c.0oI07KSyTGg2SKQSwa6v1";
   };
 
   homemanager = pkgs: {
@@ -28,17 +29,7 @@ create {
       unstable.teams
     ];
 
-    xdg.configFile."kitty/kitty.conf" = {
-      source = builtins.path {
-        path = ../dotfiles/kitty.conf;
-      };
-    };
-
-    xdg.configFile."i3/config" = {
-      source = builtins.path {
-        path = ../dotfiles/i3.config;
-      };
-    };
+    xdg.configFile = shared.xdg.configFile;
 
     programs.git = with shared.git; {
       enable = true;
