@@ -17,7 +17,6 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
-      sqlpackage
       dbeaver
       vlc
       kitty

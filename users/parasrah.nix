@@ -24,6 +24,7 @@ create {
       neovim
       gnome3.seahorse
       nodejs
+      lua51Packages.lua-lsp
       nodePackages.eslint
       nodePackages.neovim
       unstable.brave
