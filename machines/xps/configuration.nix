@@ -26,6 +26,15 @@
     nix-index
   ];
 
+  programs.bash = {
+    promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
+      if [ -n "$DESKTOP_SESSION" ];then
+        eval $(gnome-keyring-daemon --start)
+        export SSH_AUTH_SOCK
+      fi
+    '';
+  };
+
   programs.gnupg.agent = {
     enable = false;
     enableSSHSupport = false;

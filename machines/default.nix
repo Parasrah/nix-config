@@ -19,6 +19,7 @@ in
   environment.variables = {
     NIX = "/etc/nixos";
     NVIMCONFIG = "$NIX/dotfiles/nvim";
+    POWERLINE_GIT = "1";
   };
 
   environment.sessionVariables = {
