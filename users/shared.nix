@@ -23,17 +23,20 @@
 
   bash = {
     enable = true;
-    # initExtra = ''
-    #   if [ -n "$DESKTOP_SESSION" ];then
-    #     eval $(gnome-keyring-daemon --start)
-    #     export SSH_AUTH_SOCK
-    #   fi
-    # '';
   };
 
   xdg.configFile = {
     "i3/config".source = ../dotfiles/i3.config;
 
+    "dunst/dunstrc".source = ../dotfiles/dunst.ini;
+
     "kitty/kitty.conf".source = ../dotfiles/kitty.conf;
+
+    "polybar/config".source = ../dotfiles/polybar/config.ini;
+
+    "polybar/launch.sh" = {
+      source = ../dotfiles/polybar/launch.sh;
+      executable = true;
+    };
   };
 }

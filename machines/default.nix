@@ -20,6 +20,7 @@ in
     NIX = "/etc/nixos";
     NVIMCONFIG = "$NIX/dotfiles/nvim";
     POWERLINE_GIT = "1";
+    EDITOR = "neovim";
   };
 
   environment.sessionVariables = {
@@ -27,9 +28,17 @@ in
   };
 
   environment.etc."inputrc" = {
-    text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
+    text = ''
+      set meta-flag on
+      set input-meta on
+      set convert-meta off
+      set output-meta on
+      set colored-stats on
       set completion-ignore-case On
-    '');
+      set show-all-if-ambiguous On
+      set show-all-if-unmodified On
+      set visible-stats On
+    '';
   };
 
   # packages always available on all machines
@@ -41,9 +50,14 @@ in
     unzip
     ripgrep
     nettools
+    killall
   ];
 
   fonts.fonts = with pkgs; [
+    noto-fonts
+    material-icons
+    font-awesome
+    fira-mono
     unstable.cascadia-code
   ];
 

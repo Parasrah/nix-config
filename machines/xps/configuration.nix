@@ -5,7 +5,7 @@
     [
       ../default.nix
       # desktop
-      ../../cfg/desktop/gnome-i3.nix
+      ../../cfg/desktop/i3.nix
       # users
       ../../users/parasrah.nix
       ../../users/nude.nix
@@ -24,10 +24,14 @@
   environment.systemPackages = with pkgs; [
     mkpasswd
     nix-index
+    dolphin
+    vlc
+    pango
   ];
 
   programs.bash = {
     promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
+      set -o vi
       if [ -n "$DESKTOP_SESSION" ];then
         eval $(gnome-keyring-daemon --start)
         export SSH_AUTH_SOCK

@@ -22,6 +22,7 @@ create {
       vlc
       kitty
       neovim
+      nnn
       gnome3.seahorse
       nodejs
       lua51Packages.lua-lsp
@@ -31,7 +32,10 @@ create {
       unstable.elmPackages.elm-language-server
       unstable.elmPackages.elm-format
       unstable.elmPackages.elm-test
+      unstable.elmPackages.elm
     ];
+
+    home.sessionVariables = { };
 
     xdg.configFile = shared.xdg.configFile;
 

@@ -17,11 +17,11 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
-      dbeaver
-      vlc
+      jetbrains.datagrip
       kitty
       neovim
       powershell
+      nnn
       nodejs
       nodePackages.eslint
       nodePackages.neovim
