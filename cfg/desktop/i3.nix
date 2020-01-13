@@ -20,6 +20,7 @@
         dunst
         pango
         i3lock
+        pulseaudio-ctl
         (unstable.polybar.override {
           i3Support = true;
           mpdSupport = true;

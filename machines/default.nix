@@ -54,10 +54,9 @@ in
   ];
 
   fonts.fonts = with pkgs; [
+    unifont
     noto-fonts
-    material-icons
     font-awesome
-    fira-mono
     unstable.cascadia-code
   ];
 

@@ -32,11 +32,6 @@
 
     "kitty/kitty.conf".source = ../dotfiles/kitty.conf;
 
-    "polybar/config".source = ../dotfiles/polybar/config.ini;
-
-    "polybar/launch.sh" = {
-      source = ../dotfiles/polybar/launch.sh;
-      executable = true;
-    };
+    "polybar".source = ../dotfiles/polybar;
   };
 }
