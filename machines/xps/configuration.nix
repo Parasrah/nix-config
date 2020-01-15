@@ -27,6 +27,7 @@
     dolphin
     vlc
     pango
+    spotify
   ];
 
   programs.bash = {
@@ -44,13 +45,10 @@
     enableSSHSupport = false;
   };
 
-  services.redis = {
-    enable = true;
-  };
-
-  # docker
   virtualisation.docker = {
     enable = true;
+    enableOnBoot = true;
+    liveRestore = true;
   };
 
   # Enable sound.

@@ -17,14 +17,15 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
-      dbeaver
       firefox
+      inotify-tools
       vlc
       kitty
       neovim
       nnn
       gnome3.seahorse
       nodejs
+      elixir
       lua51Packages.lua-lsp
       nodePackages.eslint
       nodePackages.neovim
@@ -35,7 +36,9 @@ create {
       unstable.elmPackages.elm
     ];
 
-    home.sessionVariables = { };
+    home.sessionVariables = {
+      PROJECTS = "$HOME/Projects";
+    };
 
     xdg.configFile = shared.xdg.configFile;
 
