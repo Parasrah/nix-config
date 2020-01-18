@@ -2,6 +2,8 @@
 
 { pkgs, config, ... }:
 
+# TODO: allow imports
+
 {
   users.users."${username}" = user;
   home-manager.users."${username}" = {

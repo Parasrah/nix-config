@@ -24,10 +24,10 @@
   environment.systemPackages = with pkgs; [
     mkpasswd
     nix-index
-    dolphin
     vlc
     pango
     spotify
+    bluez-tools
   ];
 
   programs.bash = {
@@ -43,6 +43,17 @@
   programs.gnupg.agent = {
     enable = false;
     enableSSHSupport = false;
+  };
+
+  services.postgresql = {
+    enable = true;
+  };
+
+  services.xserver = {
+    videoDrivers = [ "intel" ];
+    deviceSection = ''
+      Option "TearFree" "true"
+    '';
   };
 
   virtualisation.docker = {

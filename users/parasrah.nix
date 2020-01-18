@@ -17,19 +17,20 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
+      htop
       firefox
       inotify-tools
-      vlc
       kitty
       neovim
       nnn
+      azuredatastudio
       gnome3.seahorse
-      nodejs
-      elixir
       lua51Packages.lua-lsp
-      nodePackages.eslint
-      nodePackages.neovim
       unstable.brave
+      unstable.chromium
+      unstable.nodejs
+      unstable.nodePackages.neovim
+      unstable.nodePackages.eslint
       unstable.elmPackages.elm-language-server
       unstable.elmPackages.elm-format
       unstable.elmPackages.elm-test
