@@ -17,50 +17,79 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
+      nnn
       htop
-      firefox
-      inotify-tools
       kitty
       neovim
-      nnn
+      dolphin
+      spotify
+      firefox
+      inotify-tools
       azuredatastudio
       gnome3.seahorse
-      lua51Packages.lua-lsp
       unstable.brave
+      unstable.postman
       unstable.chromium
       unstable.nodejs
+      lua51Packages.lua-lsp
       unstable.nodePackages.neovim
       unstable.nodePackages.eslint
-      unstable.elmPackages.elm-language-server
-      unstable.elmPackages.elm-format
-      unstable.elmPackages.elm-test
       unstable.elmPackages.elm
+      unstable.elmPackages.elm-test
+      unstable.elmPackages.elm-format
+      unstable.elmPackages.elm-language-server
     ];
 
     home.sessionVariables = {
       PROJECTS = "$HOME/Projects";
     };
 
-    xdg.configFile = shared.xdg.configFile;
-
-    programs.bash = shared.bash;
-
-    programs.git = with shared.git; {
-      enable = true;
-      userEmail = "git@parasrah.com";
-      userName = "Parasrah";
-      aliases = aliases;
-      extraConfig = extraConfig;
-      signing = {
-        signByDefault = true;
-        key = "8922B1C024EFBF5C";
-      };
+    xdg.configFile = {
+      i3.source = ../dotfiles/i3;
+      polybar.source = ../dotfiles/polybar;
+      dunst.source = ../dotfiles/dunst;
+      kitty.source = ../dotfiles/kitty;
     };
 
-    programs.fzf = shared.fzf;
+    programs = {
+      bash = {
+        enable = true;
+      };
 
-    programs.vscode = {
-      enable = true;
+      fzf = {
+        enable = true;
+        defaultCommand = "rg";
+      };
+
+      git = {
+        enable = true;
+        userEmail = "git@parasrah.com";
+        userName = "Parasrah";
+
+        aliases = {
+          co = "checkout";
+          all = "add -A";
+          st = "status";
+          pullprev = "!git checkout - && git pull && git checkout -";
+          last = "log -1 HEAD";
+          tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
+        };
+
+        extraConfig = {
+          core = {
+            editor = "neovim";
+          };
+        };
+
+        signing = {
+          signByDefault = true;
+          key = "8922B1C024EFBF5C";
+        };
+      };
+
+      vscode = {
+        enable = true;
+      };
     };
   };
 }

@@ -8,7 +8,6 @@
       ../../cfg/desktop/i3.nix
       # users
       ../../users/parasrah.nix
-      ../../users/nude.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -26,7 +25,6 @@
     nix-index
     vlc
     pango
-    spotify
     bluez-tools
   ];
 
