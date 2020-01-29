@@ -21,37 +21,46 @@
 
   # packages available to all users
   environment.systemPackages = with pkgs; [
-    mkpasswd
-    nix-index
     vlc
     pango
+    mkpasswd
+    nix-index
     bluez-tools
+    lxappearance
   ];
 
-  programs.bash = {
-    promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
-      set -o vi
-      if [ -n "$DESKTOP_SESSION" ];then
-        eval $(gnome-keyring-daemon --start)
-        export SSH_AUTH_SOCK
-      fi
-    '';
+  programs = {
+    bash = {
+      promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
+        set -o vi
+        if [ -n "$DESKTOP_SESSION" ];then
+          eval $(gnome-keyring-daemon --start)
+          export SSH_AUTH_SOCK
+        fi
+      '';
+    };
+
+    gnupg.agent = {
+      enable = false;
+      enableSSHSupport = false;
+    };
+
+    dconf = {
+      enable = true;
+    };
   };
 
-  programs.gnupg.agent = {
-    enable = false;
-    enableSSHSupport = false;
-  };
+  services = {
+    postgresql = {
+      enable = true;
+    };
 
-  services.postgresql = {
-    enable = true;
-  };
-
-  services.xserver = {
-    videoDrivers = [ "intel" ];
-    deviceSection = ''
-      Option "TearFree" "true"
-    '';
+    xserver = {
+      videoDrivers = [ "intel" ];
+      deviceSection = ''
+        Option "TearFree" "true"
+      '';
+    };
   };
 
   virtualisation.docker = {

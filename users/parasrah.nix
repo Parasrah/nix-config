@@ -21,19 +21,32 @@ create {
       htop
       kitty
       neovim
-      dolphin
       spotify
       firefox
+      playerctl
+      breeze-gtk
       inotify-tools
+      signal-desktop
       azuredatastudio
+      adapta-gtk-theme
+      paper-icon-theme
+
+      xorg.xbacklight
+
+      gnome3.nautilus
       gnome3.seahorse
+
+      lua51Packages.lua-lsp
+
       unstable.brave
       unstable.postman
       unstable.chromium
-      unstable.nodejs
-      lua51Packages.lua-lsp
+      unstable.flameshot
+      unstable.nodejs-12_x
+
       unstable.nodePackages.neovim
       unstable.nodePackages.eslint
+
       unstable.elmPackages.elm
       unstable.elmPackages.elm-test
       unstable.elmPackages.elm-format
@@ -41,7 +54,12 @@ create {
     ];
 
     home.sessionVariables = {
-      PROJECTS = "$HOME/Projects";
+      PROJECTS = "TEST";
+    };
+
+    home.file = {
+      ".background-image".source = ../dotfiles/wallpaper.jpg;
+      ".npmrc".source = ../dotfiles/npmrc;
     };
 
     xdg.configFile = {
@@ -49,6 +67,7 @@ create {
       polybar.source = ../dotfiles/polybar;
       dunst.source = ../dotfiles/dunst;
       kitty.source = ../dotfiles/kitty;
+      rofi.source = ../dotfiles/rofi;
     };
 
     programs = {
