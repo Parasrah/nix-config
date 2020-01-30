@@ -29,6 +29,10 @@
     lxappearance
   ];
 
+  environment.variables = {
+    WIRELESS_INTERFACE = "wlp2s0";
+  };
+
   programs = {
     bash = {
       promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
