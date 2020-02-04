@@ -92,6 +92,7 @@ create {
           pullprev = "!git checkout - && git pull && git checkout -";
           last = "log -1 HEAD";
           tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
+          recent = "for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/";
         };
 
         extraConfig = {
