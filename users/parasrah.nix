@@ -17,10 +17,12 @@ create {
 
   homemanager = pkgs: {
     home.packages = with pkgs; [
+      go
       nnn
       htop
       kitty
       neovim
+      gnumake
       spotify
       firefox
       playerctl
@@ -39,6 +41,7 @@ create {
       lua51Packages.lua-lsp
 
       unstable.brave
+      unstable.elixir
       unstable.postman
       unstable.chromium
       unstable.flameshot
@@ -52,10 +55,6 @@ create {
       unstable.elmPackages.elm-format
       unstable.elmPackages.elm-language-server
     ];
-
-    home.sessionVariables = {
-      PROJECTS = "TEST";
-    };
 
     home.file = {
       ".background-image".source = ../dotfiles/wallpaper.jpg;
