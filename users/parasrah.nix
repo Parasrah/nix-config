@@ -24,9 +24,12 @@ create {
       neovim
       gnumake
       spotify
+      python3
       firefox
+      bookworm
       playerctl
       breeze-gtk
+      pavucontrol
       inotify-tools
       signal-desktop
       azuredatastudio
@@ -37,6 +40,9 @@ create {
 
       gnome3.nautilus
       gnome3.seahorse
+
+      python37Packages.pip
+      python37Packages.setuptools
 
       lua51Packages.lua-lsp
 
@@ -53,6 +59,7 @@ create {
       unstable.elmPackages.elm
       unstable.elmPackages.elm-test
       unstable.elmPackages.elm-format
+      unstable.elmPackages.elm-analyse
       unstable.elmPackages.elm-language-server
     ];
 

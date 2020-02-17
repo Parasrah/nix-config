@@ -59,6 +59,10 @@
       enable = true;
     };
 
+    blueman = {
+      enable = true;
+    };
+
     xserver = {
       videoDrivers = [ "intel" ];
       deviceSection = ''
@@ -75,5 +79,9 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
 }
