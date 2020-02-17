@@ -16,15 +16,16 @@ in
       ../users/root.nix
     ];
 
-  environment.variables = {
+  environment.variables = rec {
     NIX = "/etc/nixos";
-    NVIMCONFIG = "$NIX/dotfiles/nvim";
+    DOTFILES =  "${NIX}/dotfiles";
+    NVIMCONFIG = "${DOTFILES}/nvim";
     POWERLINE_GIT = "1";
-    EDITOR = "neovim";
-  };
-
-  environment.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     TERMINAL = "kitty";
+    PROJECTS = "$HOME/Projects";
+    BLOG = "${PROJECTS}/blog";
   };
 
   environment.etc."inputrc" = {
