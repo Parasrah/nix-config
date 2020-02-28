@@ -69,6 +69,29 @@
         Option "TearFree" "true"
       '';
     };
+
+    mopidy = {
+      enable = true;
+      extensionPackages = with pkgs; [
+        mopidy-spotify
+        mopidy-local-sqlite
+        mopidy-iris
+      ];
+      configuration = ''
+        [spotify]
+        ${builtins.readFile ../../secrets/spotify.conf}
+
+        [mpd]
+        enabled = true
+        hostname = 127.0.0.1
+
+        [iris]
+        country = ca
+        locale = en_CA
+        spotify_authorization_url =
+        lastfm_authorization_url =
+      '';
+    };
   };
 
   virtualisation.docker = {

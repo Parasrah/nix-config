@@ -1,2 +1,4 @@
 /hardware-configuration.nix
 result
+secrets/*
+!secrets/.gitkeep
