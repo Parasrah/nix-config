@@ -28,6 +28,7 @@ create {
       firefox
       bookworm
       playerctl
+      wireguard
       breeze-gtk
       pavucontrol
       inotify-tools
@@ -46,6 +47,7 @@ create {
 
       lua51Packages.lua-lsp
 
+      unstable.scc
       unstable.brave
       unstable.elixir
       unstable.postman
