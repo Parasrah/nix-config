@@ -1,1 +1,1 @@
-/etc/nixos/machines/xps/configuration.nix
+/etc/nixos/machines/lexi/configuration.nix

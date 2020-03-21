@@ -49,6 +49,7 @@ in
     curl
     vim
     unzip
+    gnupg
     ripgrep
     nettools
     killall

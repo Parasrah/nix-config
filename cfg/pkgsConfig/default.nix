@@ -1,15 +1,9 @@
 { config }:
 
-let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-
-in
 {
   allowUnfree = true;
   packageOverrides = {
-    unstable = import unstableTarball {
+    unstable = import <nixos-unstable> {
       config = config.nixpkgs.config;
     };
   };

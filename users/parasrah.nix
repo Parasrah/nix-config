@@ -47,7 +47,9 @@ create {
 
       lua51Packages.lua-lsp
 
+      unstable.rls
       unstable.scc
+      unstable.cargo
       unstable.brave
       unstable.elixir
       unstable.postman
@@ -105,13 +107,13 @@ create {
 
         extraConfig = {
           core = {
-            editor = "neovim";
+            editor = "nvim";
           };
         };
 
         signing = {
           signByDefault = true;
-          key = "8922B1C024EFBF5C";
+          key = builtins.readFile ../secrets/gpg/signingkey;
         };
       };
 
