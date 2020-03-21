@@ -1,3 +1,4 @@
+{}:
 {
   name = "backlight";
   value = ''

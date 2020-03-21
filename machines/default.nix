@@ -51,8 +51,10 @@ in
     unzip
     gnupg
     ripgrep
-    nettools
     killall
+    hddtemp
+    nettools
+    lm_sensors
   ];
 
   fonts.fonts = with pkgs; [

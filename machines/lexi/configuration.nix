@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  fun =
+    import ../../fun { inherit pkgs; };
+
 {
   imports =
     [

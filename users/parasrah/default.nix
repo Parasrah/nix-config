@@ -1,10 +1,8 @@
 let
-  util = import ./util;
+  util = import ../util;
 
 in
-util.create {
-  username = "parasrah";
-
+util.create { fun, pkgs, config, polybar }: {
   user = {
     isNormalUser = true;
     home = "/home/parasrah";
@@ -13,7 +11,7 @@ util.create {
     initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
   };
 
-  homemanager = pkgs: {
+  homemanager = {
     home.packages = with pkgs; [
       go
       nnn
@@ -120,5 +118,5 @@ util.create {
         enable = true;
       };
     };
-  };
+  }
 }
