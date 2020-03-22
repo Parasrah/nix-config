@@ -42,21 +42,6 @@ in
     '';
   };
 
-  # packages always available on all machines
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    vim
-    unzip
-    gnupg
-    ripgrep
-    killall
-    hddtemp
-    nettools
-    lm_sensors
-  ];
-
   fonts.fonts = with pkgs; [
     unifont
     noto-fonts

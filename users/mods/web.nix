@@ -5,9 +5,8 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      unstable.rustc
-      unstable.rls
-      unstable.cargo
+      unstable.nodejs-12_x
+      unstable.nodePackages.eslint
     ];
   };
 }

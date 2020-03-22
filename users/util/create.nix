@@ -4,7 +4,7 @@
 #   -> { os : Config.Users.User, homemanager: Pkgs -> HomeManager.Users.User }
 #
 # { mods: List Mod, username: String }
-{ mods, username }
+{ mods, username }:
 
 # input from `imports`
 { pkgs, config, ... }:
@@ -17,17 +17,17 @@ let
     fun.pipe
       [ (fun.lists.map (mod: mod { inherit username pkgs; }))
         (fun.lists.map (x: x.os))
-        (fun.lists.foldl fun.attrsets.recursiveUpdate {})
-      ]
-      mods
+        (fun.lists.foldl fun.recursiveUpdateConcat {})
+      ] mods;
 
   homemanager = pkgs:
     fun.pipe
       [ (fun.lists.map (mod: mod { inherit username pkgs; }))
         (fun.lists.map (x: x.homemanager))
-        (fun.lists.foldl fun.attrsets.recursiveUpdate {})
-      ]
+        (fun.lists.foldl fun.recursiveUpdateConcat {})
+      ] mods;
 
+in
 {
   users.users."${username}" = user;
   home-manager.users."${username}" = {

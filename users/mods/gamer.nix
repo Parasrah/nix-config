@@ -8,6 +8,7 @@
       unstable.steam
       unstable.lutris
       unstable.google-chrome
+      spotify
     ];
   };
 }

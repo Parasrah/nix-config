@@ -1,85 +1,36 @@
-let
-  util = import ../util;
+{ pkgs, ... }:
 
-in
-util.create { fun, pkgs, config, polybar }: {
-  user = {
-    isNormalUser = true;
-    home = "/home/parasrah";
+{
+  os = {
     description = "Brad";
     extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" ];
     initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
   };
 
   homemanager = {
-    home.packages = with pkgs; [
-      go
-      nnn
-      gcc
-      htop
-      kitty
-      neovim
-      gnumake
-      spotify
-      python3
-      firefox
-      bookworm
-      playerctl
-      wireguard
-      breeze-gtk
-      pavucontrol
-      inotify-tools
-      signal-desktop
-      azuredatastudio
-      adapta-gtk-theme
-      paper-icon-theme
-
-      xorg.xbacklight
-
-      gnome3.nautilus
-      gnome3.seahorse
-
-      python37Packages.pip
-      python37Packages.setuptools
-
-      lua51Packages.lua-lsp
-
-      unstable.rls
-      unstable.scc
-      unstable.cargo
-      unstable.brave
-      unstable.elixir
-      unstable.postman
-      unstable.chromium
-      unstable.flameshot
-      unstable.nodejs-12_x
-
-      unstable.nodePackages.neovim
-      unstable.nodePackages.eslint
-
-      unstable.elmPackages.elm
-      unstable.elmPackages.elm-test
-      unstable.elmPackages.elm-format
-      unstable.elmPackages.elm-analyse
-      unstable.elmPackages.elm-language-server
-    ];
-
     home.file = {
-      ".background-image".source = ../dotfiles/wallpaper.jpg;
-      ".npmrc".source = ../dotfiles/npmrc;
+      ".background-image".source = ./dotfiles/wallpaper.jpg;
+      ".npmrc".source = ./dotfiles/npmrc;
     };
 
     xdg.configFile = {
-      i3.source = ../dotfiles/i3;
-      polybar.source = ../dotfiles/polybar;
-      dunst.source = ../dotfiles/dunst;
-      kitty.source = ../dotfiles/kitty;
-      rofi.source = ../dotfiles/rofi;
+      i3.source = ./dotfiles/i3;
+      polybar.source = ./dotfiles/polybar;
+      dunst.source = ./dotfiles/dunst;
+      kitty.source = ./dotfiles/kitty;
+      rofi.source = ./dotfiles/rofi;
     };
 
     programs = {
       bash = {
         enable = true;
+        initExtra = builtins.readFile ./dotfiles/powerline.sh + ''
+          set -o vi
+          if [ -n "$DESKTOP_SESSION" ]; then
+            eval $(gnome-keyring-daemon --start)
+            export SSH_AUTH_SOCK
+          fi
+        '';
       };
 
       fzf = {
@@ -110,13 +61,9 @@ util.create { fun, pkgs, config, polybar }: {
 
         signing = {
           signByDefault = true;
-          key = builtins.readFile ../secrets/gpg/signingkey;
+          key = builtins.readFile ../../secrets/gpg/signingkey;
         };
       };
-
-      vscode = {
-        enable = true;
-      };
     };
-  }
+  };
 }

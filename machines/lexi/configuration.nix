@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  fun =
-    import ../../fun { inherit pkgs; };
-
-in
 {
   imports =
     [
@@ -12,23 +7,8 @@ in
       # desktop
       ../../cfg/desktop/i3.nix
       # users
-      ../../users/parasrah.nix
-      # TODO: remove
-      "${builtins.fetchGit {
-        url = "https://github.com/msteen/nixos-vsliveshare.git";
-        ref = "refs/heads/master";
-      }}"
+      ../../users/parasrah/lexi.nix
     ];
-
-  services.vsliveshare = {
-    enable = true;
-    extensionsDir = "$HOME/.vscode/extensions";
-    nixpkgsPath = builtins.fetchGit {
-      url = "https://github.com/NixOS/nixpkgs.git";
-      ref = "refs/heads/nixos-20.03";
-      rev = "61cc1f0dc07c2f786e0acfd07444548486f4153b";
-    };
-  };
 
   # Hardware
   hardware.opengl.driSupport32Bit = true;
@@ -58,36 +38,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # packages available to all users
-  environment.systemPackages = with pkgs; [
-    vlc
-    pango
-    steam
-    parted
-    mkpasswd
-    nix-index
-    bluez-tools
-    lxappearance
-    google-chrome
-    desktop-file-utils
-    unstable.vscode
-  ];
-
-  environment.variables = {
-    WIRELESS_INTERFACE = "wlp4s0";
-  };
-
   programs = {
-    bash = {
-      promptInit = (builtins.readFile ../../users/parasrah/dotfiles/powerline.sh) + ''
-        set -o vi
-        if [ -n "$DESKTOP_SESSION" ];then
-          eval $(gnome-keyring-daemon --start)
-          export SSH_AUTH_SOCK
-        fi
-      '';
-    };
-
     gnupg.agent = {
       enable = false;
       enableSSHSupport = false;

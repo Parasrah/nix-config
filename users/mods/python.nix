@@ -5,9 +5,9 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      unstable.rustc
-      unstable.rls
-      unstable.cargo
+      python37
+      python37Packages.pip
+      python37Packages.setuptools
     ];
   };
 }
