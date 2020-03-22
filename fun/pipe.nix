@@ -1,14 +1,11 @@
 { lib }:
 
-let
-  lists =
-    lib.lists;
+with lib;
 
-in
 fns: input:
   lists.foldr
     (fn: aggregate:
       fn aggregate
     )
     input
-    fns
+    (lists.reverseList fns)

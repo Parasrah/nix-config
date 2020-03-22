@@ -18,7 +18,7 @@ in
 
   environment.variables = rec {
     NIX = "/etc/nixos";
-    DOTFILES =  "${NIX}/dotfiles";
+    DOTFILES =  "${NIX}/users/parasrah/dotfiles";
     NVIMCONFIG = "${DOTFILES}/nvim";
     POWERLINE_GIT = "1";
     EDITOR = "nvim";

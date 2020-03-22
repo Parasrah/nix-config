@@ -69,16 +69,16 @@ util.create {
     ];
 
     home.file = {
-      ".background-image".source = ../dotfiles/wallpaper.jpg;
-      ".npmrc".source = ../dotfiles/npmrc;
+      ".background-image".source = ./parasrah/dotfiles/wallpaper.jpg;
+      ".npmrc".source = ./parasrah/dotfiles/npmrc;
     };
 
     xdg.configFile = {
-      i3.source = ../dotfiles/i3;
-      polybar.source = ../dotfiles/polybar;
-      dunst.source = ../dotfiles/dunst;
-      kitty.source = ../dotfiles/kitty;
-      rofi.source = ../dotfiles/rofi;
+      i3.source = ./parasrah/dotfiles/i3;
+      polybar.source = ./parasrah/dotfiles/polybar;
+      dunst.source = ./parasrah/dotfiles/dunst;
+      kitty.source = ./parasrah/dotfiles/kitty;
+      rofi.source = ./parasrah/dotfiles/rofi;
     };
 
     programs = {

@@ -79,7 +79,7 @@ in
 
   programs = {
     bash = {
-      promptInit = (builtins.readFile ../../dotfiles/powerline.sh) + ''
+      promptInit = (builtins.readFile ../../users/parasrah/dotfiles/powerline.sh) + ''
         set -o vi
         if [ -n "$DESKTOP_SESSION" ];then
           eval $(gnome-keyring-daemon --start)
