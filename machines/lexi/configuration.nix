@@ -4,6 +4,7 @@ let
   fun =
     import ../../fun { inherit pkgs; };
 
+in
 {
   imports =
     [
@@ -12,7 +13,22 @@ let
       ../../cfg/desktop/i3.nix
       # users
       ../../users/parasrah.nix
+      # TODO: remove
+      "${builtins.fetchGit {
+        url = "https://github.com/msteen/nixos-vsliveshare.git";
+        ref = "refs/heads/master";
+      }}"
     ];
+
+  services.vsliveshare = {
+    enable = true;
+    extensionsDir = "$HOME/.vscode/extensions";
+    nixpkgsPath = builtins.fetchGit {
+      url = "https://github.com/NixOS/nixpkgs.git";
+      ref = "refs/heads/nixos-20.03";
+      rev = "61cc1f0dc07c2f786e0acfd07444548486f4153b";
+    };
+  };
 
   # Hardware
   hardware.opengl.driSupport32Bit = true;
@@ -47,12 +63,14 @@ let
     vlc
     pango
     steam
-    google-chrome
     parted
     mkpasswd
     nix-index
     bluez-tools
     lxappearance
+    google-chrome
+    desktop-file-utils
+    unstable.vscode
   ];
 
   environment.variables = {

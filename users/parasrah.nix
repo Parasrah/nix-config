@@ -49,7 +49,9 @@ util.create {
       unstable.rls
       unstable.scc
       unstable.cargo
+      unstable.rustc
       unstable.brave
+      unstable.lutris
       unstable.elixir
       unstable.postman
       unstable.chromium
@@ -114,10 +116,6 @@ util.create {
           signByDefault = true;
           key = builtins.readFile ../secrets/gpg/signingkey;
         };
-      };
-
-      vscode = {
-        enable = true;
       };
     };
   };
