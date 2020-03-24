@@ -1,13 +1,20 @@
 
 { username, pkgs }:
 
+let
+  homeDirectory =
+    "/home/" + username;
+
+in
 {
   os = {
     isNormalUser = true;
-    home = "/home/" + username;
+    home = homeDirectory;
   };
 
   homemanager = {
+
+    home.homeDirectory = homeDirectory;
     home.packages = with pkgs; [
       vlc
       git

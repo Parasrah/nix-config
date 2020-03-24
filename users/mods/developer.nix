@@ -14,7 +14,7 @@
       firefox
       mkpasswd
       nix-index
-#      google-chrome
+      unstable.google-chrome
       unstable.scc
       unstable.neovim
       unstable.vscode
