@@ -5,9 +5,10 @@
     [
       ../default.nix
       # desktop
-      ../../cfg/desktop/i3.nix
+      ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/lexi.nix
+      ../../users/qnbst/lexi.nix
     ];
 
   # Hardware
@@ -68,7 +69,7 @@
       allowedUDPPorts = [];
     };
 
-    # wg-quick.interfaces = import ../../cfg/wireguard 5;
+    wg-quick.interfaces = import ../../cfg/wireguard 5;
   };
 
   # Sound

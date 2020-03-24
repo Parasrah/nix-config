@@ -20,7 +20,9 @@ util.create
       ({ pkgs, username }: {
         os = { };
 
-        homemanager = { };
+        homemanager = {
+          home.packages = with pkgs; [ ];
+        };
       })
     ];
   }

@@ -1,9 +1,12 @@
+# Core User Config
+#
+# All normal users should extend from "core"
 
 { username, pkgs }:
 
 let
   homeDirectory =
-    "/home/" + username;
+    "/home/${username}";
 
 in
 {
@@ -13,8 +16,8 @@ in
   };
 
   homemanager = {
-
     home.homeDirectory = homeDirectory;
+
     home.packages = with pkgs; [
       vlc
       git
@@ -28,6 +31,8 @@ in
       killall
       hddtemp
       nettools
+      wireguard
+      playerctl
       lm_sensors
       bluez-tools
       lxappearance

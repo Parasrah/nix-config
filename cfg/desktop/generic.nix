@@ -4,6 +4,7 @@
   i18n.consoleUseXkbConfig = true;
 
   services.xserver = {
+    enable = true;
 
     layout = "us";
 

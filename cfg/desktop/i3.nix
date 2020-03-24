@@ -43,7 +43,7 @@
   services.gnome3.gnome-keyring.enable = true;
 
   programs.nm-applet = {
-    enable = true;
+    enable = false;
   };
 
   security.pam.services.login.enableGnomeKeyring = true;

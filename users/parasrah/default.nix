@@ -8,6 +8,13 @@
   };
 
   homemanager = {
+    home.packages = with pkgs; [
+      adapta-gtk-theme
+      paper-icon-theme
+      breeze-gtk
+      signal-desktop
+    ];
+
     home.file = {
       ".background-image".source = ./dotfiles/wallpaper.jpg;
       ".npmrc".source = ./dotfiles/npmrc;

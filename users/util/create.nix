@@ -20,7 +20,7 @@ let
         (fun.lists.foldl fun.recursiveUpdateConcat {})
       ] mods;
 
-  homemanager = pkgs:
+  homemanager =
     fun.pipe
       [ (fun.lists.map (mod: mod { inherit username pkgs; }))
         (fun.lists.map (x: x.homemanager))
@@ -30,7 +30,8 @@ let
 in
 {
   users.users."${username}" = user;
+
   home-manager.users."${username}" = {
     nixpkgs.config = import ../../cfg/pkgsConfig { inherit config; };
-  } // homemanager pkgs;
+  } // homemanager;
 }

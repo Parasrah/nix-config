@@ -14,6 +14,7 @@
       firefox
       mkpasswd
       nix-index
+      inotify-tools
       unstable.google-chrome
       unstable.scc
       unstable.neovim
