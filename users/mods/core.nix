@@ -16,6 +16,7 @@
       curl
       unzip
       gnupg
+      kitty
       ripgrep
       killall
       hddtemp

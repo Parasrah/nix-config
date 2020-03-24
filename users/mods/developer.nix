@@ -14,7 +14,7 @@
       firefox
       mkpasswd
       nix-index
-      google-chrome
+#      google-chrome
       unstable.scc
       unstable.neovim
       unstable.vscode
@@ -24,6 +24,7 @@
       desktop-file-utils
       unstable.nodejs-12_x
       lua51Packages.lua-lsp
+      gnome3.gnome-terminal
       unstable.nodePackages.neovim
     ];
   };
