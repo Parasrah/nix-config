@@ -1,1 +1,0 @@
-/etc/nixos/machines/lexi/configuration.nix
