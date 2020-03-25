@@ -11,6 +11,12 @@
       xterm.enable = false;
     };
 
+    displayManager = {
+      lightdm = {
+        enable = true;
+      };
+    };
+
     windowManager.i3 = {
       enable = true;
 
@@ -42,9 +48,7 @@
 
   services.gnome3.gnome-keyring.enable = true;
 
-  programs.nm-applet = {
-    enable = false;
-  };
+  programs.nm-applet.enable = false;
 
   security.pam.services.login.enableGnomeKeyring = true;
 
