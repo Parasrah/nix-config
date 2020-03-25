@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./generic.nix ];
+  imports = [
+    ./generic.nix
+  ];
 
   services.xserver = {
     enable = true;
