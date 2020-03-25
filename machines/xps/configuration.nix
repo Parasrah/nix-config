@@ -21,12 +21,7 @@
 
   # packages available to all users
   environment.systemPackages = with pkgs; [
-    vlc
-    pango
-    mkpasswd
-    nix-index
-    bluez-tools
-    lxappearance
+    xbacklight
   ];
 
   environment.variables = {

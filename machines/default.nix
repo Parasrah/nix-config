@@ -1,24 +1,16 @@
 { pkgs, config, ... }:
 
-let
-  home-manager = builtins.fetchGit {
-    url = "https://github.com/rycee/home-manager.git";
-    rev = "9bdfdfe14e03786f767eb3224e53713d34c70ced";
-    ref = "release-19.09";
-  };
-
-in
 {
   imports =
     [
       ../hardware-configuration.nix
-      "${home-manager}/nixos"
+      <home-manager/nixos>
       ../users/root.nix
     ];
 
   environment.variables = rec {
     NIX = "/etc/nixos";
-    DOTFILES =  "${NIX}/dotfiles";
+    DOTFILES =  "${NIX}/users/parasrah/dotfiles";
     NVIMCONFIG = "${DOTFILES}/nvim";
     POWERLINE_GIT = "1";
     EDITOR = "nvim";
@@ -41,18 +33,6 @@ in
       set visible-stats On
     '';
   };
-
-  # packages always available on all machines
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    vim
-    unzip
-    ripgrep
-    nettools
-    killall
-  ];
 
   fonts.fonts = with pkgs; [
     unifont

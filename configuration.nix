@@ -1,1 +1,0 @@
-/etc/nixos/machines/xps/configuration.nix

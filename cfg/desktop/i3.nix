@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./generic.nix ];
+  imports = [
+    ./generic.nix
+  ];
 
   services.xserver = {
     enable = true;
@@ -9,6 +11,12 @@
     desktopManager = {
       default = "none";
       xterm.enable = false;
+    };
+
+    displayManager = {
+      lightdm = {
+        enable = true;
+      };
     };
 
     windowManager.i3 = {
@@ -42,9 +50,7 @@
 
   services.gnome3.gnome-keyring.enable = true;
 
-  programs.nm-applet = {
-    enable = true;
-  };
+  programs.nm-applet.enable = false;
 
   security.pam.services.login.enableGnomeKeyring = true;
 
