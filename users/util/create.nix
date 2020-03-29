@@ -33,5 +33,8 @@ in
 
   home-manager.users."${username}" = {
     nixpkgs.config = import ../../cfg/pkgsConfig { inherit config; };
+    nixpkgs.overlays = [
+      (import ../../pkgs)
+    ];
   } // homemanager;
 }

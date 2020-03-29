@@ -8,6 +8,7 @@
       nnn
       gcc
       htop
+      neovim
       parted
       gnumake
       spotify
@@ -17,7 +18,6 @@
       inotify-tools
       unstable.google-chrome
       unstable.scc
-      unstable.neovim
       unstable.vscode
       unstable.lua5_1
       unstable.postman

@@ -16,6 +16,7 @@ util.create
       (import ../mods/python.nix)
       (import ../mods/rust.nix)
       (import ../mods/web.nix)
+      (import ../mods/dotnet.nix)
       (import ./default.nix)
       ({ pkgs, username }: {
         os = { };
