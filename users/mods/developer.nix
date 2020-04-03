@@ -8,6 +8,7 @@
       nnn
       gcc
       htop
+      nixops
       neovim
       parted
       gnumake

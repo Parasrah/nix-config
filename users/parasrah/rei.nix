@@ -21,7 +21,9 @@ util.create
         os = { };
 
         homemanager = {
-          home.packages = with pkgs; [ ];
+          home.packages = with pkgs; [
+            tigervnc
+          ];
         };
       })
     ];
