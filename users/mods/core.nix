@@ -32,8 +32,8 @@ in
       hddtemp
       nettools
       wireguard
-      playerctl
       lm_sensors
+      pavucontrol
       bluez-tools
       lxappearance
       unstable.brave
