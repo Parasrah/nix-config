@@ -18,6 +18,10 @@
     home.file = {
       ".background-image".source = ./dotfiles/wallpaper.jpg;
       ".npmrc".source = ./dotfiles/npmrc;
+      xterm-kitty = {
+        source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
+        target = ".terminfo/x/xterm-kitty";
+      };
     };
 
     xdg.configFile = {

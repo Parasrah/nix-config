@@ -7,8 +7,9 @@
     home.packages = with pkgs; [
       nnn
       gcc
+      pass
       htop
-      nixops
+      conda
       neovim
       parted
       gnumake
@@ -16,9 +17,10 @@
       firefox
       mkpasswd
       nix-index
-      inotify-tools
-      unstable.google-chrome
+      git-crypt
       unstable.scc
+      inotify-tools
+      unstable.nixops
       unstable.vscode
       unstable.lua5_1
       unstable.postman
@@ -27,6 +29,7 @@
       unstable.nodejs-12_x
       lua51Packages.lua-lsp
       gnome3.gnome-terminal
+      unstable.google-chrome
       unstable.nodePackages.neovim
     ];
   };

@@ -5,7 +5,7 @@
     [
       ../default.nix
       # desktop
-      ../../cfg/desktop/i3.nix
+      ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/rei.nix
       # live share
@@ -37,6 +37,8 @@
       allowedTCPPorts = [];
       allowedUDPPorts = [];
     };
+
+    wg-quick.interfaces = import ../../cfg/wireguard 2;
   };
 
   environment.variables = {
@@ -104,11 +106,16 @@
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    liveRestore = true;
+  virtualisation = {
+    docker = {
+      enable = false;
+      enableOnBoot = false;
+      liveRestore = true;
+    };
   };
+
+
+  users.extraGroups.vboxusers.members = [ "parasrah" ];
 
   # Enable sound.
   sound.enable = true;

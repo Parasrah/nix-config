@@ -19,19 +19,27 @@ in
     home.homeDirectory = homeDirectory;
 
     home.packages = with pkgs; [
+      at
       vlc
       git
       vim
+      zip
+      lsof
       wget
       curl
       unzip
       gnupg
       kitty
+      mtools
+      p7zip
       ripgrep
       killall
       hddtemp
+      usbutils
       nettools
+      libnotify
       wireguard
+      unetbootin
       lm_sensors
       pavucontrol
       bluez-tools

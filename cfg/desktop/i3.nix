@@ -39,9 +39,12 @@
   };
 
   services.compton = {
-    enable = true;
+    enable = false;
     shadow = false;
     inactiveOpacity = "0.8";
+    menuOpacity = "1.0";
+    fade = true;
+    fadeDelta = 5;
   };
 
   services.mpd = {
