@@ -12,6 +12,7 @@
     NIX = "/etc/nixos";
     DOTFILES =  "${NIX}/users/parasrah/dotfiles";
     NVIMCONFIG = "${DOTFILES}/nvim";
+    KAKCONFIG = "${DOTFILES}/kak";
     POWERLINE_GIT = "1";
     EDITOR = "nvim";
     VISUAL = "nvim";

@@ -30,6 +30,7 @@
       dunst.source = ./dotfiles/dunst;
       kitty.source = ./dotfiles/kitty;
       rofi.source = ./dotfiles/rofi;
+      kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
     };
 
     programs = {

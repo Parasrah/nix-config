@@ -20,7 +20,6 @@
       git-crypt
       unstable.scc
       inotify-tools
-      unstable.nixops
       unstable.vscode
       unstable.lua5_1
       unstable.postman

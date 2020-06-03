@@ -30,8 +30,9 @@ in
       unzip
       gnupg
       kitty
-      mtools
       p7zip
+      mtools
+      openssl
       ripgrep
       killall
       hddtemp

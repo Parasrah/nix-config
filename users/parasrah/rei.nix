@@ -9,6 +9,7 @@ util.create
     mods = [
       (import ../mods/core.nix)
       (import ../mods/developer.nix)
+      (import ../mods/kakoune.nix)
       (import ../mods/elixir.nix)
       (import ../mods/elm.nix)
       (import ../mods/gamer.nix)
