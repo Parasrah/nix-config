@@ -45,9 +45,14 @@ in
       pavucontrol
       bluez-tools
       lxappearance
-      unstable.brave
+
+      xorg.xkbcomp
+      xorg.xmodmap
+
       gnome3.nautilus
       gnome3.seahorse
+
+      unstable.brave
       unstable.flameshot
     ];
   };
