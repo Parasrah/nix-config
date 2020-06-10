@@ -5,8 +5,12 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      kakoune-unwrapped
+      bc
+      file
+      ripgrep
       unstable.kak-lsp
+      kakoune-unwrapped
+      editorconfig-core-c
     ];
   };
 }

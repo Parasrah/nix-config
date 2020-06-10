@@ -9,10 +9,12 @@
 
   homemanager = {
     home.packages = with pkgs; [
+      file
+      breeze-gtk
+      asciidoctor
+      signal-desktop
       adapta-gtk-theme
       paper-icon-theme
-      breeze-gtk
-      signal-desktop
     ];
 
     home.file = {

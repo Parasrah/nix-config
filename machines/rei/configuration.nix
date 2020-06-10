@@ -83,7 +83,7 @@
     };
 
     mopidy = {
-      enable = true;
+      enable = false;
       extensionPackages = with pkgs; [
         mopidy-spotify
         mopidy-local-sqlite
@@ -108,7 +108,7 @@
 
   virtualisation = {
     docker = {
-      enable = false;
+      enable = true;
       enableOnBoot = false;
       liveRestore = true;
     };

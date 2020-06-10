@@ -13,8 +13,8 @@
       neovim
       parted
       gnumake
-      spotify
       firefox
+      spotify
       mkpasswd
       nix-index
       git-crypt

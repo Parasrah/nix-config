@@ -22,12 +22,14 @@
     windowManager.i3 = {
       enable = true;
 
+      package = pkgs.unstable.i3;
+
       extraPackages = with pkgs; [
         dmenu
         rofi
         dunst
         pango
-        i3lock
+        unstable.i3lock
         pulseaudio-ctl
         (unstable.polybar.override {
           i3Support = true;
@@ -41,10 +43,10 @@
   services.compton = {
     enable = false;
     shadow = false;
-    inactiveOpacity = "0.8";
+    inactiveOpacity = "0.85";
     menuOpacity = "1.0";
     fade = true;
-    fadeDelta = 5;
+    fadeDelta = 3;
   };
 
   services.mpd = {

@@ -19,6 +19,8 @@
     TERMINAL = "kitty";
     PROJECTS = "$HOME/Projects";
     BLOG = "${PROJECTS}/blog";
+    PAGER = "kak";
+    MANPAGER = "${KAKCONFIG}/bin/kak-man-pager";
   };
 
   environment.etc."inputrc" = {

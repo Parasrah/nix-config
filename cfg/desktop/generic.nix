@@ -12,11 +12,10 @@ in
   services.xserver = {
     enable = true;
 
+    autoRepeatDelay = 240;
+    autoRepeatInterval = 40;
+
     displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
-
-    # layout = "us";
-
-    # xkbOptions = "ctrl:nocaps";
 
     libinput = {
       enable = true;
