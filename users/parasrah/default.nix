@@ -8,8 +8,33 @@
   };
 
   homemanager = {
+    home.sessionVariables = rec {
+      NIX = "/etc/nixos";
+      # dotfiles
+      DOTFILES =  "${NIX}/users/parasrah/dotfiles";
+      NVIMCONFIG = "${DOTFILES}/nvim";
+      KAKCONFIG = "${DOTFILES}/kak";
+      POWERLINE_GIT = "1";
+
+      # projects
+      PROJECTS = "$HOME/Projects";
+      BLOG = "${PROJECTS}/blog";
+      ACREAGE = "${PROJECTS}/acreage";
+      NERVES = "${PROJECTS}/nerves";
+
+      # common variables
+      PAGER = "kak";
+      MANPAGER = "kak-man-pager";
+      EDITOR = "vi";
+      VISUAL = "kak";
+      TERMINAL = "kitty";
+
+      # this is so profile will be loaded in all environments
+      PROFILE_LOADED = "1";
+      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$PATH";
+    };
+
     home.packages = with pkgs; [
-      file
       breeze-gtk
       asciidoctor
       signal-desktop
@@ -32,7 +57,9 @@
       dunst.source = ./dotfiles/dunst;
       kitty.source = ./dotfiles/kitty;
       rofi.source = ./dotfiles/rofi;
+      kak-lsp.source = ./dotfiles/kak/kak-lsp;
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
+      "broot/conf.toml".source = ./dotfiles/broot/conf.toml;
     };
 
     programs = {
@@ -40,10 +67,19 @@
         enable = true;
         initExtra = builtins.readFile ./dotfiles/powerline.sh + ''
           set -o vi
+
+          # ssh agent fix for i3
           if [ -n "$DESKTOP_SESSION" ]; then
             eval $(gnome-keyring-daemon --start)
             export SSH_AUTH_SOCK
           fi
+
+          # ensure profile is loaded
+          if [ -z "$PROFILE_LOADED" ]; then
+            . $HOME/.profile
+          fi
+
+          source $HOME/.config/broot/launcher/bash/br
         '';
       };
 

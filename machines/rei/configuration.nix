@@ -23,6 +23,7 @@
   # packages available to all users
   environment.systemPackages = with pkgs; [
     xorg.xbacklight
+    linuxPackages.batman_adv
   ];
 
   networking = {

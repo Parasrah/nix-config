@@ -6,6 +6,7 @@
   homemanager = {
     home.packages = with pkgs; [
       bc
+      nnn
       file
       ripgrep
       unstable.kak-lsp

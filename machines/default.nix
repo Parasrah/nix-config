@@ -8,19 +8,8 @@
       ../users/root.nix
     ];
 
-  environment.variables = rec {
-    NIX = "/etc/nixos";
-    DOTFILES =  "${NIX}/users/parasrah/dotfiles";
-    NVIMCONFIG = "${DOTFILES}/nvim";
-    KAKCONFIG = "${DOTFILES}/kak";
-    POWERLINE_GIT = "1";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+  environment.variables = {
     TERMINAL = "kitty";
-    PROJECTS = "$HOME/Projects";
-    BLOG = "${PROJECTS}/blog";
-    PAGER = "kak";
-    MANPAGER = "${KAKCONFIG}/bin/kak-man-pager";
   };
 
   environment.etc."inputrc" = {

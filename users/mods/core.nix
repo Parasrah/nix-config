@@ -20,6 +20,7 @@ in
 
     home.packages = with pkgs; [
       at
+      iw
       vlc
       git
       vim
@@ -30,6 +31,7 @@ in
       unzip
       gnupg
       kitty
+      broot
       p7zip
       mtools
       openssl
