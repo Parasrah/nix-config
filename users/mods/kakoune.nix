@@ -6,12 +6,14 @@
   homemanager = {
     home.packages = with pkgs; [
       bc
-      nnn
+      jq
       file
       ripgrep
-      unstable.kak-lsp
+      coreutils
       kakoune-unwrapped
       editorconfig-core-c
+
+      unstable.nnn
     ];
   };
 }

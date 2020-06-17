@@ -5,7 +5,6 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      nnn
       gcc
       pass
       htop
@@ -18,16 +17,18 @@
       mkpasswd
       nix-index
       git-crypt
-      unstable.scc
       inotify-tools
+      desktop-file-utils
+      lua51Packages.lua-lsp
+      gnome3.gnome-terminal
+
+      unstable.nnn
+      unstable.scc
       unstable.vscode
       unstable.lua5_1
       unstable.postman
       unstable.chromium
-      desktop-file-utils
       unstable.nodejs-12_x
-      lua51Packages.lua-lsp
-      gnome3.gnome-terminal
       unstable.google-chrome
       unstable.nodePackages.neovim
     ];

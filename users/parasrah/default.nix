@@ -31,7 +31,7 @@
 
       # this is so profile will be loaded in all environments
       PROFILE_LOADED = "1";
-      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$PATH";
+      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.cargo/bin:$PATH";
     };
 
     home.packages = with pkgs; [
@@ -49,6 +49,14 @@
         source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
         target = ".terminfo/x/xterm-kitty";
       };
+      kak-connect = {
+        source = ./dotfiles/kak/share/kakoune-connect.desktop;
+        target = ".local/share/applications/kakoune-connect.desktop";
+      };
+      "kakoune.svg" = {
+        source = ./dotfiles/kak/share/kakoune.logo;
+        target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
+      };
     };
 
     xdg.configFile = {
@@ -60,6 +68,42 @@
       kak-lsp.source = ./dotfiles/kak/kak-lsp;
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
       "broot/conf.toml".source = ./dotfiles/broot/conf.toml;
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      associations = {
+        added = {
+          # "x-scheme-handler/http" = "firefox.desktop";
+          # "x-scheme-handler/https" = "firefox.desktop";
+          # "text/html" = "firefox.desktop";
+          "image/png" = "brave-browser.desktop";
+          "application/pdf" = "okularApplication_dvi.desktop";
+        };
+        removed = {
+        };
+      };
+      defaultApplications = {
+        "x-scheme-handler/http" = "brave-browser.desktop";
+        "x-scheme-handler/https" = "brave-browser.desktop";
+        "x-scheme-handler/ftp" = "brave-browser.desktop";
+        "x-scheme-handler/chrome" = "brave-browser.desktop";
+        "text/html" = "brave-browser.desktop";
+        "application/x-extension-htm" = "brave-browser.desktop";
+        "application/x-extension-html" = "brave-browser.desktop";
+        "application/x-extension-shtml" = "brave-browser.desktop";
+        "application/xhtml+xml" = "brave-browser.desktop";
+        "application/x-extension-xhtml" = "brave-browser.desktop";
+        "application/x-extension-xht" = "brave-browser.desktop";
+        "x-scheme-handler/about" = "brave-browser.desktop";
+        "x-scheme-handler/unknown" = "brave-browser.desktop";
+        "x-scheme-handler/postman" = "Postman.desktop";
+        "x-scheme-handler/mailto" = "brave-browser.desktop";
+        "application/json" = "kakoune-connect.desktop";
+        "text/plain" = "kakoune-connect.desktop";
+        "text/xml" = "kakoune-connect.desktop";
+        "text/x-ruby" = "kakoune-connect.desktop";
+      };
     };
 
     programs = {
@@ -105,7 +149,7 @@
 
         extraConfig = {
           core = {
-            editor = "nvim";
+            editor = "kak";
           };
         };
 
