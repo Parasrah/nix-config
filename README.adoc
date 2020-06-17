@@ -1,0 +1,22 @@
+= NixOS Configuration
+Parasrah <git@parasrah.com>
+
+These configuration files are used to provision my various machines with NixOS. These configurations are tailored for the following use-cases:
+
+* Development
+** kakoune
+** neovim
+** vscode
+** Elm
+** Elixir
+** Rust
+** Javascript
+** React
+
+* Gaming
+** AMD CPU & Card
+** Steam
+
+* Multi-User
+** gnome & i3
+** home-manager
