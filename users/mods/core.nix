@@ -33,6 +33,7 @@ in
       kitty
       broot
       p7zip
+      parted
       mtools
       openssl
       ripgrep
@@ -41,12 +42,14 @@ in
       usbutils
       nettools
       libnotify
+      nix-index
       wireguard
       unetbootin
       lm_sensors
       pavucontrol
       bluez-tools
       lxappearance
+      desktop-file-utils
 
       xorg.xkbcomp
       xorg.xmodmap
@@ -54,6 +57,7 @@ in
       gnome3.nautilus
       gnome3.seahorse
 
+      unstable.nnn
       unstable.ytop
       unstable.brave
       unstable.httpie

@@ -1,3 +1,5 @@
+
+
 { username, pkgs }:
 
 {
@@ -5,7 +7,8 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      # currently these are all fetched via nix-shell
+      unstable.lua5_1
+      lua51Packages.lua-lsp
     ];
   };
 }

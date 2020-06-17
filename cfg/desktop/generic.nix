@@ -12,10 +12,14 @@ in
   services.xserver = {
     enable = true;
 
-    autoRepeatDelay = 250;
-    autoRepeatInterval = 20;
+    # doesn't work?
+    # autoRepeatDelay = 250;
+    # autoRepeatInterval = 20;
 
-    displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
+    displayManager.sessionCommands = ''
+      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
+      ${pkgs.xlibs.xset}/bin/xset r rate 250 20
+    '';
 
     libinput = {
       enable = true;
