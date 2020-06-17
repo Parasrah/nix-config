@@ -12,8 +12,8 @@ in
   services.xserver = {
     enable = true;
 
-    autoRepeatDelay = 240;
-    autoRepeatInterval = 40;
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 20;
 
     displayManager.sessionCommands = "${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY";
 

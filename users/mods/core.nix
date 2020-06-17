@@ -54,7 +54,9 @@ in
       gnome3.nautilus
       gnome3.seahorse
 
+      unstable.ytop
       unstable.brave
+      unstable.httpie
       unstable.flameshot
     ];
   };
