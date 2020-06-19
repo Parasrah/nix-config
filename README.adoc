@@ -20,3 +20,7 @@ These configuration files are used to provision my various machines with NixOS. 
 * Multi-User
 ** gnome & i3
 ** home-manager
+
+== TODO
+
+* [ ] pin current channel for NixOS stable

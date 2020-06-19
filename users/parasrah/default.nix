@@ -40,6 +40,8 @@
       signal-desktop
       adapta-gtk-theme
       paper-icon-theme
+
+      unstable.etcher
     ];
 
     home.file = {

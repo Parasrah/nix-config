@@ -22,7 +22,10 @@
 
   # packages available to all users
   environment.systemPackages = with pkgs; [
+    polkit_gnome
+
     xorg.xbacklight
+
     linuxPackages.batman_adv
   ];
 

@@ -8,5 +8,8 @@
   };
 
   homemanager = {
+    home.packages = with pkgs; [
+      lolcat
+    ];
   };
 }
