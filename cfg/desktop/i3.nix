@@ -9,11 +9,11 @@
     enable = true;
 
     desktopManager = {
-      default = "none";
       xterm.enable = false;
     };
 
     displayManager = {
+      defaultSession = "none+i3";
       lightdm = {
         enable = true;
       };
@@ -21,8 +21,6 @@
 
     windowManager.i3 = {
       enable = true;
-
-      package = pkgs.unstable.i3;
 
       extraPackages = with pkgs; [
         dmenu

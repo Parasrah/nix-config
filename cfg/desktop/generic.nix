@@ -7,7 +7,7 @@ let
     '';
 in
 {
-  i18n.consoleUseXkbConfig = true;
+  console.useXkbConfig = true;
 
   services.xserver = {
     enable = true;

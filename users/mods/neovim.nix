@@ -1,5 +1,5 @@
 
-{ username, pkgs }:
+{ pkgs, ... }:
 
 {
   os = { };

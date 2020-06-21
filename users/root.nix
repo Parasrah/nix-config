@@ -7,7 +7,7 @@ create
     username = "root";
 
     mods = [
-      ({ username, pkgs }: {
+      ({ pkgs, ... }: {
         os = {
           home = "/root";
           isNormalUser = false;

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   os = {
@@ -10,6 +10,7 @@
   homemanager = {
     home.sessionVariables = rec {
       NIX = "/etc/nixos";
+
       # dotfiles
       DOTFILES =  "${NIX}/users/parasrah/dotfiles";
       NVIMCONFIG = "${DOTFILES}/nvim";
@@ -31,7 +32,7 @@
 
       # this is so profile will be loaded in all environments
       PROFILE_LOADED = "1";
-      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.cargo/bin:$PATH";
+      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.cargo/bin:$HOME/Scripts:$PATH";
     };
 
     home.packages = with pkgs; [
@@ -76,9 +77,6 @@
       enable = true;
       associations = {
         added = {
-          # "x-scheme-handler/http" = "firefox.desktop";
-          # "x-scheme-handler/https" = "firefox.desktop";
-          # "text/html" = "firefox.desktop";
           "image/png" = "brave-browser.desktop";
           "application/pdf" = "okularApplication_dvi.desktop";
         };
@@ -111,7 +109,7 @@
     programs = {
       bash = {
         enable = true;
-        initExtra = builtins.readFile ./dotfiles/powerline.sh + ''
+        initExtra = lib.mkBefore (builtins.readFile ./dotfiles/powerline.sh + ''
           set -o vi
 
           # ssh agent fix for i3
@@ -126,12 +124,15 @@
           fi
 
           source $HOME/.config/broot/launcher/bash/br
-        '';
+        '');
+
+        shellAliases = {
+        };
       };
 
       fzf = {
         enable = true;
-        defaultCommand = "rg";
+        defaultCommand = "rg --files";
       };
 
       git = {

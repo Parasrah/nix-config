@@ -21,7 +21,7 @@ util.create
       (import ../mods/web.nix)
       (import ../mods/utilities.nix)
       (import ./default.nix)
-      ({ pkgs, username }: {
+      ({ pkgs, username, ... }: {
         os = { };
 
         homemanager = {

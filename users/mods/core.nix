@@ -2,7 +2,7 @@
 #
 # All normal users should extend from "core"
 
-{ username, pkgs }:
+{ username, pkgs, ... }:
 
 let
   homeDirectory =
