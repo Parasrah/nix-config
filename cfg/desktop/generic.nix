@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   compiledLayout =
@@ -21,10 +21,14 @@ in
       ${pkgs.xlibs.xset}/bin/xset r rate 250 20
     '';
 
+    # for configuring touchpad
     libinput = {
       enable = true;
       naturalScrolling = true;
-      tapping = true;
+      additionalOptions = ''MatchIsTouchpad "on"'';
     };
+
+    # for configuring everything else
+    # inputClassSections = [ ];
   };
 }

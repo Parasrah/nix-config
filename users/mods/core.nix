@@ -30,7 +30,6 @@ in
       curl
       unzip
       gnupg
-      kitty
       broot
       p7zip
       parted
@@ -60,6 +59,7 @@ in
       unstable.nnn
       unstable.ytop
       unstable.brave
+      unstable.kitty
       unstable.httpie
       unstable.flameshot
     ];

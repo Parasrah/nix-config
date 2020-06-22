@@ -8,6 +8,7 @@
       bc
       jq
       file
+      dash
       ripgrep
       coreutils
       kakoune-unwrapped

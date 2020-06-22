@@ -16,6 +16,7 @@
       NVIMCONFIG = "${DOTFILES}/nvim";
       KAKCONFIG = "${DOTFILES}/kak";
       POWERLINE_GIT = "1";
+      KAKOUNE_POSIX_SHELL = "${pkgs.dash}/bin/dash";
 
       # projects
       PROJECTS = "$HOME/Projects";
