@@ -133,7 +133,7 @@
 
       fzf = {
         enable = true;
-        defaultCommand = "rg --files";
+        defaultCommand = "rg --files -g '!.git/' -g '!node_modules/'";
       };
 
       git = {
