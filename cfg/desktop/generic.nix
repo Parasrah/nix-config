@@ -7,7 +7,8 @@ let
     '';
 in
 {
-  console.useXkbConfig = true;
+  # console.useXkbConfig = true;
+  i18n.consoleUseXkbConfig = true;
 
   services.xserver = {
     enable = true;
@@ -25,6 +26,7 @@ in
     libinput = {
       enable = true;
       naturalScrolling = true;
+      tapping = true;
       additionalOptions = ''MatchIsTouchpad "on"'';
     };
 
