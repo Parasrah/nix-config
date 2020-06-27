@@ -31,7 +31,6 @@
     noto-fonts
     font-awesome
 
-    unstable.hasklig
     unstable.cascadia-code
   ];
 
