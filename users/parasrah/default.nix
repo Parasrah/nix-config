@@ -37,6 +37,7 @@
     };
 
     home.packages = with pkgs; [
+      feh
       breeze-gtk
       asciidoctor
       signal-desktop
@@ -160,6 +161,77 @@
         signing = {
           signByDefault = true;
           key = builtins.readFile ../../secrets/gpg/signingkey;
+        };
+      };
+
+      autorandr = {
+        enable = true;
+        hooks = {
+          postswitch = {
+            notify-i3 = ''
+              ${pkgs.i3}/bin/i3-msg restart
+            '';
+
+            change-background = ''
+            '';
+
+            change-dpi = ''
+              case "$AUTORANDR_CURRENT_PROFILE" in
+                mobile)
+                  DPI=96
+                  ;;
+                home)
+                  DPI=96
+                  ;;
+                *)
+                  echo "unknown profile: $AUTORANDR_CURRENT_PROFILE"
+                  exit 1
+              esac
+
+              echo "Xft.dpi: $DPI" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            '';
+          };
+        };
+
+        profiles = {
+          mobile = {
+            fingerprint = {
+              eDP1 = "00ffffffffffff004d10841400000000281b0104a51d11780ede50a3544c99260f505400000001010101010101010101010101010101ac3780a070383e403020350026a510000018892c80a070383e403020350026a510000018000000fe005754315233814c513133334d31000000000002410328001200000b010a20200001";
+            };
+
+            config = {
+              eDP1 = {
+                enable = true;
+                # crtc = 0;
+                primary = true;
+                position = "0x0";
+                mode = "1920x1080";
+                gamma = "1.0:1.0:1.0";
+                rate = "60.00";
+                rotate = "normal";
+              };
+            };
+          };
+
+          home = {
+            fingerprint = {
+              eDP1 = "00ffffffffffff004d10841400000000281b0104a51d11780ede50a3544c99260f505400000001010101010101010101010101010101ac3780a070383e403020350026a510000018892c80a070383e403020350026a510000018000000fe005754315233814c513133334d31000000000002410328001200000b010a20200001";
+              DP1 = "00ffffffffffff0009d1497945540000101e0103803e22782e08a5a2574fa2280f5054a56b80d1c081c081008180a9c0b300a940010151d000a0f0703e80302035006d552100001a000000ff0054344c3033363238534c300a20000000fd00184c1e873c000a202020202020000000fc0042656e5120454c32383730550a013c02034ef15661605d5e5f100504030207060f1f2021221413121601230907076d030c001000384420006001020367d85dc401788003e305c301e40f030000e60605015a5344681a00000101283c00565e00a0a0a02950302035006d552100001af45100a0f0701980302035006d552100001e00000000000000000000000000fb";
+            };
+            config = {
+              eDP1.enable = false;
+              DP1 = {
+                enable = true;
+                # crtc = 1;
+                primary = true;
+                position = "0x0";
+                mode = "2560x1440";
+                gamma = "1.0:1.0:1.0";
+                rate = "60.00";
+                rotate = "normal";
+              };
+            };
+          };
         };
       };
     };

@@ -24,3 +24,4 @@ These configuration files are used to provision my various machines with NixOS. 
 == TODO
 
 * [ ] pin current channel for NixOS stable
+* [ ] use `feh` to set background
