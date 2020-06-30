@@ -33,11 +33,13 @@
 
       # this is so profile will be loaded in all environments
       PROFILE_LOADED = "1";
-      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.cargo/bin:$HOME/Scripts:$PATH";
+      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.gnpm/bin:$HOME/.cargo/bin:$HOME/Scripts:$PATH";
     };
 
     home.packages = with pkgs; [
       feh
+      cloc
+      cmatrix
       breeze-gtk
       asciidoctor
       signal-desktop
@@ -173,6 +175,7 @@
             '';
 
             change-background = ''
+              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.jpg}
             '';
 
             change-dpi = ''
