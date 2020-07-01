@@ -2,7 +2,7 @@ id:
 let
   wgIpv4Address = id: "192.168.10.${builtins.toString id}";
 
-  wgIpv6Address = id: "ed32:ed32:ed32:ed32::${builtins.toString id}";
+  wgIpv6Address = id: "fdc9:ed32:ed32:ed32::${builtins.toString id}";
 
   peerAddresses = id: [
     "${wgIpv4Address id}/24"

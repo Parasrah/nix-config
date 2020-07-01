@@ -39,7 +39,7 @@ in
       killall
       hddtemp
       usbutils
-      nettools
+      inetutils
       libnotify
       nix-index
       wireguard
