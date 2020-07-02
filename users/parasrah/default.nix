@@ -40,6 +40,7 @@
       feh
       cloc
       cmatrix
+      ncurses
       breeze-gtk
       asciidoctor
       signal-desktop

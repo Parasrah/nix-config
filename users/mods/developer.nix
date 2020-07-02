@@ -18,7 +18,6 @@
       unstable.vscode
       unstable.postman
       unstable.chromium
-      unstable.google-chrome
     ];
   };
 }
