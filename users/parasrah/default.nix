@@ -162,7 +162,7 @@
 
         signing = {
           signByDefault = true;
-          key = builtins.readFile ../../secrets/gpg/signingkey;
+          key = lib.strings.fileContents ../../secrets/gpg/signingkey;
         };
       };
 

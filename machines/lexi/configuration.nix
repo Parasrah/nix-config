@@ -58,7 +58,7 @@
 
   programs = {
     gnupg.agent = {
-      enable = false;
+      enable = true;
       enableSSHSupport = false;
     };
 

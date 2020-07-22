@@ -4,7 +4,8 @@
 
   extensionPackages = with pkgs; [
     mopidy-spotify
-    mopidy-local-sqlite
+    # seems broken on 20.03
+    # mopidy-local-sqlite
     mopidy-iris
   ];
 

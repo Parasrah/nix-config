@@ -7,15 +7,14 @@ let
     '';
 in
 {
-  # console.useXkbConfig = true;
-  i18n.consoleUseXkbConfig = true;
+  console.useXkbConfig = true;
 
   services.xserver = {
     enable = true;
 
     # doesn't work?
-    # autoRepeatDelay = 250;
-    # autoRepeatInterval = 20;
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 20;
 
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
