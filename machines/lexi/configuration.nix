@@ -8,7 +8,6 @@
       ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/lexi.nix
-      ../../users/qnbst/lexi.nix
     ];
 
   # Hardware
@@ -19,35 +18,20 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  programs = {
-    gnupg.agent = {
-      enable = false;
-      enableSSHSupport = false;
-    };
+  # packages available to all users
+  environment.systemPackages = with pkgs; [
+    polkit_gnome
 
-    dconf = {
-      enable = true;
-    };
-  };
+    xorg.xbacklight
 
-  services = {
-    postgresql = {
-      enable = true;
-    };
+    linuxPackages.batman_adv
+  ];
 
-    blueman = {
-      enable = true;
-    };
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    liveRestore = true;
+  environment.variables = {
+    WIRELESS_INTERFACE = "wlp4s0";
   };
 
   # Networking
-  
   networking = {
     hostName = "lexi";
 
@@ -70,6 +54,35 @@
     };
 
     wg-quick.interfaces = import ../../cfg/wireguard 5;
+  };
+
+  programs = {
+    gnupg.agent = {
+      enable = false;
+      enableSSHSupport = false;
+    };
+
+    dconf = {
+      enable = true;
+    };
+  };
+
+  services = {
+    postgresql = {
+      enable = true;
+    };
+
+    blueman = {
+      enable = true;
+    };
+
+    mopidy = import ../../cfg/mopidy { inherit pkgs; };
+  };
+
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    liveRestore = true;
   };
 
   # Sound

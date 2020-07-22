@@ -23,6 +23,8 @@
     windowManager.i3 = {
       enable = true;
 
+      package = pkgs.unstable.i3;
+
       extraPackages = with pkgs; [
         dmenu
         rofi
@@ -46,10 +48,6 @@
     menuOpacity = "1.0";
     fade = true;
     fadeDelta = 3;
-  };
-
-  services.mpd = {
-    enable = true;
   };
 
   services.gnome3.gnome-keyring.enable = true;

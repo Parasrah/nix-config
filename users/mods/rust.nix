@@ -6,7 +6,8 @@
   homemanager = {
     home.packages = with pkgs; [
       unstable.rustc
-      unstable.rls
+      # FIXME: waiting for file lock on build directory
+      # unstable.rls
       unstable.cargo
     ];
   };
