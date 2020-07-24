@@ -5,7 +5,6 @@ These configuration files are used to provision my various machines with NixOS. 
 
 * Development
 ** kakoune
-** neovim
 ** vscode
 ** Elm
 ** Elixir
@@ -14,14 +13,9 @@ These configuration files are used to provision my various machines with NixOS. 
 ** React
 
 * Gaming
-** AMD CPU & Card
+** AMD CPU & GPU
 ** Steam
 
 * Multi-User
 ** gnome & i3
 ** home-manager
-
-== TODO
-
-* [ ] pin current channel for NixOS stable
-* [ ] use `feh` to set background

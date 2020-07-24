@@ -28,7 +28,7 @@
   ];
 
   environment.variables = {
-    WIRELESS_INTERFACE = "wlp4s0";
+    WIRELESS_INTERFACE = "wlp7s0";
   };
 
   # Networking
@@ -38,11 +38,13 @@
     networkmanager.enable = true;
 
     interfaces = {
+      # ethernet
       enp3s0 = {
         useDHCP = true;
       };
 
-      wlp4s0 = {
+      # wireless
+      wlp7s0 = {
         useDHCP = true;
       };
     };
