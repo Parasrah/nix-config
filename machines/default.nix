@@ -35,14 +35,17 @@
     unstable.cascadia-code
   ];
 
-  systemd.services.configuration-perms = {
-    script = ''
-      chown -R root:nixos-config /etc/nixos
-      chmod -R g+rw /etc/nixos
-    '';
-    wantedBy = [ "multi-user.target" ];
-    description = "allow nixos-config user access to change system config";
+  systemd.services = {
+    configuration-perms = {
+      script = ''
+        chown -R root:nixos-config /etc/nixos
+        chmod -R g+rw /etc/nixos
+      '';
+      wantedBy = [ "multi-user.target" ];
+      description = "allow nixos-config user access to change system config";
+    };
   };
+
 
   time = import ../cfg/time;
 

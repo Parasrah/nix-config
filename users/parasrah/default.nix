@@ -52,6 +52,8 @@
     home.file = {
       ".background-image".source = ./dotfiles/wallpaper.jpg;
       ".npmrc".source = ./dotfiles/npmrc;
+      ".xinitrc".source = ./dotfiles/xinitrc;
+      ".xsession".source = ./dotfiles/xinitrc;
       xterm-kitty = {
         source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
         target = ".terminfo/x/xterm-kitty";
@@ -170,15 +172,7 @@
         enable = true;
         hooks = {
           postswitch = {
-            notify-i3 = ''
-              ${pkgs.i3}/bin/i3-msg restart
-            '';
-
-            change-background = ''
-              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.jpg}
-            '';
-
-            change-dpi = ''
+            "10-change-dpi" = ''
               case "$AUTORANDR_CURRENT_PROFILE" in
                 mobile)
                   DPI=96
@@ -195,6 +189,14 @@
               esac
 
               echo "Xft.dpi: $DPI" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            '';
+
+            "20-notify-i3" = ''
+              ${pkgs.i3}/bin/i3-msg restart
+            '';
+
+            "30-change-background" = ''
+              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.jpg}
             '';
           };
         };
