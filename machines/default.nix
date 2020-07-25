@@ -65,6 +65,10 @@
 
   users.groups.nixos-config = {};
 
+  hardware.pulseaudio.extraConfig = ''
+    load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+  '';
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you

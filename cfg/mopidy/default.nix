@@ -17,7 +17,7 @@
 
     [audio]
     mixer = software
-    output = autoaudiosink
+    output = pulsesink server=127.0.0.1
     # buffer_time =
 
     [file]
