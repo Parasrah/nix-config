@@ -18,15 +18,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # packages available to all users
-  environment.systemPackages = with pkgs; [
-    polkit_gnome
-
-    xorg.xbacklight
-
-    linuxPackages.batman_adv
-  ];
-
   environment.variables = {
     WIRELESS_INTERFACE = "wlp7s0";
   };

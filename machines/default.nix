@@ -26,6 +26,12 @@
     '';
   };
 
+  environment.systemPackages = with pkgs; [
+    imagemagick
+    polkit_gnome
+    linuxPackages.batman_adv
+  ];
+
   fonts.fonts = with pkgs; [
     unifont
     noto-fonts
@@ -45,7 +51,6 @@
       description = "allow nixos-config user access to change system config";
     };
   };
-
 
   time = import ../cfg/time;
 

@@ -40,6 +40,7 @@
       cloc
       cmatrix
       ncurses
+      xss-lock
       breeze-gtk
       asciidoctor
       nixpkgs-fmt
