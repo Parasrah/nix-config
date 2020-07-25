@@ -180,7 +180,7 @@
                   DPI=96
                   ;;
                 hdmi)
-                  DPI=130
+                  DPI=144
                   ;;
                 home)
                   DPI=96
