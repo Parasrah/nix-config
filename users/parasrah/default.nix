@@ -42,6 +42,7 @@
       ncurses
       breeze-gtk
       asciidoctor
+      nixpkgs-fmt
       signal-desktop
       adapta-gtk-theme
       paper-icon-theme
@@ -54,6 +55,7 @@
       ".npmrc".source = ./dotfiles/npmrc;
       ".xinitrc".source = ./dotfiles/xinitrc;
       ".xsession".source = ./dotfiles/xinitrc;
+      ".xprofile".source = ./dotfiles/xinitrc;
       xterm-kitty = {
         source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
         target = ".terminfo/x/xterm-kitty";
