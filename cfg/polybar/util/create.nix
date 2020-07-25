@@ -59,5 +59,5 @@ in
   modules-left = ${modsUtil.modNames bottom.left}
   modules-right = ${modsUtil.modNames bottom.right}
 
-  ${modsUtil.modsContent [top.left, top.right, bottom.left, bottom.right]}
+  ${modsUtil.modsContent [ top.left, top.right, bottom.left, bottom.right ]}
 ''

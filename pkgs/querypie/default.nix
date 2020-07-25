@@ -9,4 +9,3 @@ appimageTools.wrapType1 {
   };
   extraPkgs = with pkgs; [ openssl_1_1 ];
 }
-

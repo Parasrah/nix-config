@@ -31,11 +31,13 @@
         pango
         unstable.i3lock
         pulseaudio-ctl
-        (unstable.polybar.override {
-          i3Support = true;
-          mpdSupport = true;
-          pulseSupport = true;
-        })
+        (
+          unstable.polybar.override {
+            i3Support = true;
+            mpdSupport = true;
+            pulseSupport = true;
+          }
+        )
       ];
     };
   };
@@ -56,8 +58,10 @@
   security.pam.services.login.enableGnomeKeyring = true;
 
   security.pam.services.passwd = with pkgs; {
-    text = lib.mkDefault (lib.mkAfter ''
-      password optional ${gnome3.gnome-keyring}/lib/security/pam_gnome_keyring.so
-    '');
+    text = lib.mkDefault (
+      lib.mkAfter ''
+        password optional ${gnome3.gnome-keyring}/lib/security/pam_gnome_keyring.so
+      ''
+    );
   };
 }

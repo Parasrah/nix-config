@@ -2,22 +2,14 @@
 
 {
   top = {
-    left = [
+    left = [];
 
-    ];
-
-    right = [
-
-    ];
+    right = [];
   };
 
   bottom = {
-    left = {
+    left = {};
 
-    };
-
-    right = {
-
-    };
+    right = {};
   };
 }

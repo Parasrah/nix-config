@@ -6,7 +6,8 @@
 let
   dynamic-linker = pkgs.stdenv.cc.bintools.dynamicLinker;
 
-in pkgs.stdenv.mkDerivation rec {
+in
+pkgs.stdenv.mkDerivation rec {
 
   name = "azuredatastudio";
 
@@ -32,12 +33,14 @@ in pkgs.stdenv.mkDerivation rec {
 
   rpath = with pkgs; pkgs.stdenv.lib.concatStringsSep ":" [
     atomEnv.libPath
-    (lib.makeLibraryPath [
-      libuuid
-      at-spi2-core
-      at_spi2_atk
-      pkgs.stdenv.cc.cc.lib
-    ])
+    (
+      lib.makeLibraryPath [
+        libuuid
+        at-spi2-core
+        at_spi2_atk
+        pkgs.stdenv.cc.cc.lib
+      ]
+    )
     targetPath
     "${targetPath}/resources/app/extensions/mssql/sqltoolsservice/Linux/2.0.0-release.40"
   ];

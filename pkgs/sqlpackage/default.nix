@@ -13,7 +13,5 @@ stdenv.mkDerivation {
 
   dontBuild = true;
 
-  buildInputs = [
-
-  ];
+  buildInputs = [];
 }

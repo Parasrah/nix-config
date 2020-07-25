@@ -12,7 +12,7 @@
       NIX = "/etc/nixos";
 
       # dotfiles
-      DOTFILES =  "${NIX}/users/parasrah/dotfiles";
+      DOTFILES = "${NIX}/users/parasrah/dotfiles";
       NVIMCONFIG = "${DOTFILES}/nvim";
       KAKCONFIG = "${DOTFILES}/kak";
       POWERLINE_GIT = "1";
@@ -88,8 +88,7 @@
           "image/png" = "brave-browser.desktop";
           "application/pdf" = "okularApplication_dvi.desktop";
         };
-        removed = {
-        };
+        removed = {};
       };
       defaultApplications = {
         "x-scheme-handler/http" = "brave-browser.desktop";
@@ -117,25 +116,26 @@
     programs = {
       bash = {
         enable = true;
-        initExtra = lib.mkBefore (builtins.readFile ./dotfiles/powerline.sh + ''
-          set -o vi
+        initExtra = lib.mkBefore (
+          builtins.readFile ./dotfiles/powerline.sh + ''
+            set -o vi
 
-          # ssh agent fix for i3
-          if [ -n "$DESKTOP_SESSION" ]; then
-            eval $(gnome-keyring-daemon --start)
-            export SSH_AUTH_SOCK
-          fi
+            # ssh agent fix for i3
+            if [ -n "$DESKTOP_SESSION" ]; then
+              eval $(gnome-keyring-daemon --start)
+              export SSH_AUTH_SOCK
+            fi
 
-          # ensure profile is loaded
-          if [ -z "$PROFILE_LOADED" ]; then
-            . $HOME/.profile
-          fi
+            # ensure profile is loaded
+            if [ -z "$PROFILE_LOADED" ]; then
+              . $HOME/.profile
+            fi
 
-          source $HOME/.config/broot/launcher/bash/br
-        '');
+            source $HOME/.config/broot/launcher/bash/br
+          ''
+        );
 
-        shellAliases = {
-        };
+        shellAliases = {};
       };
 
       fzf = {

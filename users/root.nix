@@ -7,15 +7,17 @@ create
     username = "root";
 
     mods = [
-      ({ pkgs, ... }: {
-        os = {
-          home = "/root";
-          isNormalUser = false;
-          group = "root";
-          extraGroups = [ "nixos-config" ];
-        };
+      (
+        { pkgs, ... }: {
+          os = {
+            home = "/root";
+            isNormalUser = false;
+            group = "root";
+            extraGroups = [ "nixos-config" ];
+          };
 
-        homemanager = {  };
-      })
+          homemanager = {};
+        }
+      )
     ];
   }

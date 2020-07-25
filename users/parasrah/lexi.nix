@@ -17,15 +17,17 @@ util.create
       (import ../mods/rust.nix)
       (import ../mods/lua.nix)
       (import ./default.nix)
-      ({ pkgs, username, ... }: {
-        os = { };
+      (
+        { pkgs, username, ... }: {
+          os = {};
 
-        homemanager = {
-          home.packages = with pkgs; [
-            tigervnc
-            batctl
-          ];
-        };
-      })
+          homemanager = {
+            home.packages = with pkgs; [
+              tigervnc
+              batctl
+            ];
+          };
+        }
+      )
     ];
   }

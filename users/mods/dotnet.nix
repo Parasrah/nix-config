@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  os = {  };
+  os = {};
 
   homemanager = {
     home.packages = with pkgs; [

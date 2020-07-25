@@ -11,5 +11,5 @@ create {
     home = "/home/meg";
     extraGroups = [ "wheel" "networkmanager" "nixos-config" ];
   };
-  home = { };
+  home = {};
 }
