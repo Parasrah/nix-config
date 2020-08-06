@@ -23,8 +23,9 @@ util.create
 
           homemanager = {
             home.packages = with pkgs; [
-              tigervnc
               batctl
+              tigervnc
+              libva-utils
             ];
           };
         }

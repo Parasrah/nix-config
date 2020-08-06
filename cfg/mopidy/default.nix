@@ -3,10 +3,13 @@
   enable = true;
 
   extensionPackages = with pkgs; [
-    mopidy-spotify
     # seems broken on 20.03
     # mopidy-local-sqlite
     mopidy-iris
+    mopidy-spotify
+
+    unstable.mopidy-mopify
+    unstable.mopidy-mpd
   ];
 
   configuration = ''
@@ -35,6 +38,9 @@
     locale = en_CA
     # spotify_authorization_url =
     # lastfm_authorization_url =
+
+    [mopify]
+    enabled = true
 
     [local]
     enabled = false

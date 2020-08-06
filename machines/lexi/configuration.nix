@@ -69,6 +69,10 @@
       enable = true;
     };
 
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+    };
+
     mopidy = import ../../cfg/mopidy { inherit pkgs; };
   };
 

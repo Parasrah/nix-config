@@ -8,6 +8,7 @@
       spotify
       unstable.steam
       unstable.discord
+      unstable.google-chrome
     ];
   };
 }

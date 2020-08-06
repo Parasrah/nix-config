@@ -40,6 +40,7 @@ in
       hddtemp
       usbutils
       inetutils
+      playerctl
       libnotify
       nix-index
       wireguard

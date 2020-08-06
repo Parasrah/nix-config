@@ -2,12 +2,12 @@
 
 unstable.kakoune-unwrapped.overrideAttrs (
   old: {
-    version = "2020-06-01";
+    version = "2020-08-04";
     src = fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "6fa26b8dd2ac0931fe688370728c47086277d883";
-      sha256 = "1sm5800j7s3ls2951hiza930vawnfg7lwpq7ycgd89ds2hij6gzh";
+      rev = "2c437cfa02ca568750182209ef6249c6975243a5";
+      sha256 = "1cgkis8bywy5k8k6j4i3prikpmhh1p6zyklliyxbc89mj64kvx4s";
     };
   }
 )
