@@ -37,8 +37,7 @@
     noto-fonts
     font-awesome
     dejavu_fonts
-
-    unstable.cascadia-code
+    cascadia-code
   ];
 
   systemd.services = {
