@@ -1,0 +1,1 @@
+{ unstable }: unstable.nushell

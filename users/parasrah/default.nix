@@ -1,38 +1,63 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, username, ... }:
 
+let
+  home =
+    "/home/${username}";
+
+  env = rec {
+    # base
+    nix = "/etc/nixos";
+    dotfiles = "${nix}/users/${username}/dotfiles";
+    projects = "${home}/Projects";
+
+    # config
+    kak = "${dotfiles}/kak";
+    nvim = "${dotfiles}/nvim";
+
+    # common
+    manpager = "kak-man-pager";
+    editor = "vi";
+    visual = "kak";
+    terminal = "kitty";
+    kak_posix_shell = "${pkgs.dash}/bin/dash";
+
+  };
+
+  paths = with env; [
+    "${kak}/plugins/connect.kak/bin"
+    "${kak}/bin"
+    "${home}/gnpm/bin"
+    "${home}/.cargo/bin"
+    "${home}/Scripts"
+  ];
+
+in
 {
   os = {
     description = "Brad";
     extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" ];
     initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
+    shell = pkgs.bash;
   };
 
   homemanager = {
-    home.sessionVariables = rec {
-      NIX = "/etc/nixos";
-
-      # dotfiles
-      DOTFILES = "${NIX}/users/parasrah/dotfiles";
-      NVIMCONFIG = "${DOTFILES}/nvim";
-      KAKCONFIG = "${DOTFILES}/kak";
-      POWERLINE_GIT = "1";
-      KAKOUNE_POSIX_SHELL = "${pkgs.dash}/bin/dash";
-
-      # projects
-      PROJECTS = "$HOME/Projects";
-      BLOG = "${PROJECTS}/blog";
-      ACREAGE = "${PROJECTS}/acreage";
-      NERVES = "${PROJECTS}/nerves";
-
-      # common variables
-      MANPAGER = "kak-man-pager";
-      EDITOR = "vi";
-      VISUAL = "kak";
-      TERMINAL = "kitty";
+    home.sessionVariables = {
+      NIX = env.nix;
+      DOTFILES = env.dotfiles;
+      NVIMCONFIG = env.nvim;
+      KAKCONFIG = env.kak;
+      KAKOUNE_POSIX_SHELL = env.kak_posix_shell;
+      PROJECTS = env.projects;
+      MANPAGER = env.manpager;
+      EDITOR = env.editor;
+      VISUAL = env.visual;
+      TERMINAL = env.terminal;
 
       # this is so profile will be loaded in all environments
       PROFILE_LOADED = "1";
-      PATH = "${KAKCONFIG}/plugins/connect.kak/bin:${KAKCONFIG}/bin:$HOME/.gnpm/bin:$HOME/.cargo/bin:$HOME/Scripts:$PATH";
+
+      # setup path
+      PATH = "${lib.strings.concatStringsSep ":" paths}:$PATH";
     };
 
     home.packages = with pkgs; [
@@ -50,6 +75,7 @@
       paper-icon-theme
 
       unstable.etcher
+      unstable.starship
     ];
 
     home.file = {
@@ -81,6 +107,29 @@
       kak-lsp.source = ./dotfiles/kak/kak-lsp;
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
       "broot/conf.toml".source = ./dotfiles/broot/conf.toml;
+      "starship.toml".source = ./dotfiles/starship.toml;
+      "nu/config.toml".text =
+        let
+          surroundedPaths =
+            builtins.map (x: "\"${x}\"") paths;
+
+          joinedPath =
+            builtins.concatStringsSep ", " surroundedPaths;
+
+        in
+          ''
+             path = [${joinedPath}]
+             use_starship = true
+             edit_mode = "vi"
+             skip_welcome_message = true
+
+            KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
+             PROJECTS = "${env.projects}"
+             MANPAGER = "${env.manpager}"
+             EDITOR = "${env.editor}"
+             VISUAL = "${env.visual}"
+             TERMINAL = "${env.terminal}"
+          '';
     };
 
     xdg.mimeApps = {
@@ -118,24 +167,24 @@
     programs = {
       bash = {
         enable = true;
-        initExtra = lib.mkBefore (
-          builtins.readFile ./dotfiles/powerline.sh + ''
-            set -o vi
+        initExtra = lib.mkBefore ''
+          set -o vi
 
-            # ssh agent fix for i3
-            if [ -n "$DESKTOP_SESSION" ]; then
-              eval $(gnome-keyring-daemon --start)
-              export SSH_AUTH_SOCK
-            fi
+          eval "$(starship init bash)"
 
-            # ensure profile is loaded
-            if [ -z "$PROFILE_LOADED" ]; then
-              . $HOME/.profile
-            fi
+          # ssh agent fix for i3
+          if [ -n "$DESKTOP_SESSION" ]; then
+            eval $(gnome-keyring-daemon --start)
+            export SSH_AUTH_SOCK
+          fi
 
-            source $HOME/.config/broot/launcher/bash/br
-          ''
-        );
+          # ensure profile is loaded
+          if [ -z "$PROFILE_LOADED" ]; then
+            . $HOME/.profile
+          fi
+
+          source $HOME/.config/broot/launcher/bash/br
+        '';
 
         shellAliases = {};
       };

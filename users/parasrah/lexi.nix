@@ -16,6 +16,7 @@ util.create
       (import ../mods/utilities.nix)
       (import ../mods/rust.nix)
       (import ../mods/lua.nix)
+      (import ../mods/nushell.nix)
       (import ./default.nix)
       (
         { pkgs, username, ... }: {
