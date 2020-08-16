@@ -8,14 +8,15 @@ util.create
 
     mods = [
       (import ../mods/core.nix)
-      (import ../mods/developer.nix)
       (import ../mods/kakoune.nix)
       (import ../mods/neovim.nix)
+      (import ../mods/developer.nix)
       (import ../mods/gamer.nix)
-      (import ../mods/python.nix)
-      (import ../mods/rust.nix)
       (import ../mods/web.nix)
       (import ../mods/utilities.nix)
+      (import ../mods/rust.nix)
+      (import ../mods/lua.nix)
+      (import ../mods/nushell.nix)
       (import ./default.nix)
       (
         { pkgs, username, ... }: {
@@ -23,8 +24,8 @@ util.create
 
           homemanager = {
             home.packages = with pkgs; [
-              tigervnc
               batctl
+              tigervnc
             ];
           };
         }

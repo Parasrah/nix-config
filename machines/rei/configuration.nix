@@ -65,8 +65,6 @@
         Option "TearFree" "true"
       '';
     };
-
-    mopidy = import ../../cfg/mopidy { inherit pkgs; };
   };
 
   virtualisation = {
