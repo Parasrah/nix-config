@@ -16,6 +16,11 @@
       defaultSession = "none+i3";
       lightdm = {
         enable = true;
+        greeters = {
+          gtk = {
+            enable = true;
+          };
+        };
       };
     };
 

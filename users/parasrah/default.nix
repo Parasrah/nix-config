@@ -26,7 +26,7 @@ let
   paths = with env; [
     "${kak}/plugins/connect.kak/bin"
     "${kak}/bin"
-    "${home}/gnpm/bin"
+    "${home}/.gnpm/bin"
     "${home}/.cargo/bin"
     "${home}/Scripts"
   ];
@@ -118,17 +118,17 @@ in
 
         in
           ''
-             path = [${joinedPath}]
-             use_starship = true
-             edit_mode = "vi"
-             skip_welcome_message = true
+            path = [${joinedPath}]
+            use_starship = true
+            edit_mode = "vi"
+            skip_welcome_message = true
 
             KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
-             PROJECTS = "${env.projects}"
-             MANPAGER = "${env.manpager}"
-             EDITOR = "${env.editor}"
-             VISUAL = "${env.visual}"
-             TERMINAL = "${env.terminal}"
+            PROJECTS = "${env.projects}"
+            MANPAGER = "${env.manpager}"
+            EDITOR = "${env.editor}"
+            VISUAL = "${env.visual}"
+            TERMINAL = "${env.terminal}"
           '';
     };
 
