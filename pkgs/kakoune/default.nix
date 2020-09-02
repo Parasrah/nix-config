@@ -6,8 +6,8 @@ unstable.kakoune-unwrapped.overrideAttrs (
     src = fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "2c437cfa02ca568750182209ef6249c6975243a5";
-      sha256 = "1cgkis8bywy5k8k6j4i3prikpmhh1p6zyklliyxbc89mj64kvx4s";
+      rev = "e0d2602e6a924c9a4067fa9ff23f034b906dd56d";
+      sha256 = "091qzk0qs7hql0q51hix99srgma35mhdnjfd5ncfba1bmc1h8x5i";
     };
   }
 )
