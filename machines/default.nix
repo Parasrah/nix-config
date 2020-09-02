@@ -8,29 +8,35 @@
       ../users/root.nix
     ];
 
-  environment.variables = {
-    TERMINAL = "kitty";
-  };
+  environment = {
+    variables = {
+      TERMINAL = "kitty";
+    };
 
-  environment.etc."inputrc" = {
-    text = ''
-      set meta-flag on
-      set input-meta on
-      set convert-meta off
-      set output-meta on
-      set colored-stats on
-      set completion-ignore-case On
-      set show-all-if-ambiguous On
-      set show-all-if-unmodified On
-      set visible-stats On
-    '';
-  };
+    etc."inputrc" = {
+      text = ''
+        set meta-flag on
+        set input-meta on
+        set convert-meta off
+        set output-meta on
+        set colored-stats on
+        set completion-ignore-case On
+        set show-all-if-ambiguous On
+        set show-all-if-unmodified On
+        set visible-stats On
+      '';
+    };
 
-  environment.systemPackages = with pkgs; [
-    imagemagick
-    polkit_gnome
-    linuxPackages.batman_adv
-  ];
+    systemPackages = with pkgs; [
+      imagemagick
+      polkit_gnome
+      linuxPackages.batman_adv
+    ];
+
+    shells = with pkgs; [
+      nushell
+    ];
+  };
 
   fonts.fonts = with pkgs; [
     unifont
@@ -39,6 +45,12 @@
     dejavu_fonts
     cascadia-code
   ];
+
+  services = {
+    printing = {
+      enable = true;
+    };
+  };
 
   systemd.services = {
     configuration-perms = {
