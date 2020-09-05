@@ -8,6 +8,8 @@
       ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/rei.nix
+      # services
+      ../../services/mopidy
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -65,8 +67,6 @@
         Option "TearFree" "true"
       '';
     };
-
-    mopidy = import ../../cfg/mopidy { inherit pkgs; };
   };
 
   virtualisation = {

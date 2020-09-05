@@ -8,6 +8,8 @@
       ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/lexi.nix
+      # services
+      ../../services/mopidy
     ];
 
   # Hardware
@@ -72,8 +74,6 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
-
-    mopidy = import ../../cfg/mopidy { inherit pkgs; };
   };
 
   virtualisation.docker = {
