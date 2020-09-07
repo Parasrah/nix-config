@@ -65,6 +65,14 @@
 
   time = import ../cfg/time;
 
+  nix = {
+    package = pkgs.nixUnstable;
+
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   nixpkgs.overlays = [
     (import ../pkgs)
   ];

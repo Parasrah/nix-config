@@ -17,7 +17,6 @@ let
     # mopidy-local-sqlite
     mopidy-mopify
     mopidy-mpd
-    mopidy-mpdris
   ];
 
   mopidyEnv = with pkgs.unstable; buildEnv {
