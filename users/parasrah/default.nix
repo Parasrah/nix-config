@@ -48,7 +48,6 @@ in
       KAKCONFIG = env.kak;
       KAKOUNE_POSIX_SHELL = env.kak_posix_shell;
       PROJECTS = env.projects;
-      MANPAGER = env.manpager;
       EDITOR = env.editor;
       VISUAL = env.visual;
       TERMINAL = env.terminal;
@@ -63,6 +62,7 @@ in
     home.packages = with pkgs; [
       feh
       cloc
+      direnv
       cmatrix
       ncurses
       mpdris2
@@ -171,6 +171,8 @@ in
           set -o vi
 
           eval "$(starship init bash)"
+
+          eval "$(direnv hook bash)"
 
           # ssh agent fix for i3
           if [ -n "$DESKTOP_SESSION" ]; then

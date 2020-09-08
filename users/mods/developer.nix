@@ -8,6 +8,7 @@
       gcc
       pass
       conda
+      direnv
       gnumake
       firefox
       mkpasswd
