@@ -20,7 +20,7 @@
         set convert-meta off
         set output-meta on
         set colored-stats on
-        set completion-ignore-case On
+        set completion-ignore-case Off
         set show-all-if-ambiguous On
         set show-all-if-unmodified On
         set visible-stats On
