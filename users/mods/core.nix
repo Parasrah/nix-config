@@ -19,12 +19,15 @@ in
     home.homeDirectory = homeDirectory;
 
     home.packages = with pkgs; [
+      fd
+      sd
       at
       iw
       vlc
       git
       vim
       zip
+      bat
       lsof
       wget
       curl
