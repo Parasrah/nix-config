@@ -15,12 +15,10 @@ let
     nvim = "${dotfiles}/nvim";
 
     # common
-    manpager = "kak-man-pager";
     editor = "vi";
     visual = "kak";
     terminal = "kitty";
     kak_posix_shell = "${pkgs.dash}/bin/dash";
-
   };
 
   paths = with env; [
@@ -61,20 +59,16 @@ in
 
     home.packages = with pkgs; [
       feh
-      cloc
-      direnv
-      cmatrix
+      delta
+      todoist
       ncurses
       mpdris2
       xss-lock
       breeze-gtk
-      asciidoctor
-      nixpkgs-fmt
       signal-desktop
       adapta-gtk-theme
       paper-icon-theme
 
-      unstable.etcher
       unstable.starship
     ];
 
@@ -105,6 +99,7 @@ in
       kitty.source = ./dotfiles/kitty;
       rofi.source = ./dotfiles/rofi;
       kak-lsp.source = ./dotfiles/kak/kak-lsp;
+      gitui.source = ./dotfiles/gitui;
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
       "broot/conf.toml".source = ./dotfiles/broot/conf.toml;
       "starship.toml".source = ./dotfiles/starship.toml;
@@ -120,15 +115,26 @@ in
           ''
             path = [${joinedPath}]
             use_starship = true
-            edit_mode = "vi"
             skip_welcome_message = true
 
+            [env]
             KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
-            PROJECTS = "${env.projects}"
-            MANPAGER = "${env.manpager}"
             EDITOR = "${env.editor}"
             VISUAL = "${env.visual}"
             TERMINAL = "${env.terminal}"
+            DOTFILES = "${env.dotfiles}"
+            NIX = "${env.nix}"
+
+            [line_editor]
+            edit_mode = "vi"
+            max_history_size = 10000
+            history_duplicates = "ignoreconsecutive" # alwaysadd, ignoreconsecutive
+            history_ignore_space = true
+            completion_type = "circular" # circular, list, fuzzy
+            auto_add_history = true
+            bell_style = "none" # audible, none, visible
+            color_mode = "enabled" # enabled, forced, disabled
+            keyseq_timeout_ms = 50
           '';
     };
 
@@ -170,6 +176,8 @@ in
         initExtra = lib.mkBefore ''
           set -o vi
 
+          eval "$(zoxide init bash)"
+
           eval "$(starship init bash)"
 
           eval "$(direnv hook bash)"
@@ -184,8 +192,6 @@ in
           if [ -z "$PROFILE_LOADED" ]; then
             . $HOME/.profile
           fi
-
-          source $HOME/.config/broot/launcher/bash/br
         '';
 
         shellAliases = {};
@@ -202,10 +208,8 @@ in
         userName = "Parasrah";
 
         aliases = {
-          co = "checkout";
-          all = "add -A";
           st = "status";
-          pullprev = "!git checkout - && git pull && git checkout -";
+          co = "checkout";
           last = "log -1 HEAD";
           tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
           recent = "for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/";
@@ -215,6 +219,10 @@ in
         extraConfig = {
           core = {
             editor = "kak";
+            pager = "delta";
+          };
+          merge = {
+            tool = "meld";
           };
         };
 

@@ -33,10 +33,10 @@ in
       curl
       unzip
       gnupg
-      broot
       p7zip
       parted
       mtools
+      zoxide
       openssl
       ripgrep
       killall
@@ -51,6 +51,7 @@ in
       lm_sensors
       pavucontrol
       bluez-tools
+      nixpkgs-fmt
       lxappearance
       desktop-file-utils
 

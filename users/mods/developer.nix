@@ -5,10 +5,13 @@
 
   homemanager = {
     home.packages = with pkgs; [
+      git
       gcc
+      cloc
       pass
-      grex
+      meld
       conda
+      delta
       tokei
       direnv
       gnumake
@@ -16,6 +19,7 @@
       mkpasswd
       git-crypt
       hyperfine
+      nix-direnv
       inotify-tools
 
       unstable.scc

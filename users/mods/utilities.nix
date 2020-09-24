@@ -8,7 +8,9 @@
       gimp
       nomacs
       okular
+      asciidoctor
       poppler_utils
+      unstable.etcher
     ];
   };
 }
