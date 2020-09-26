@@ -11,8 +11,8 @@
       pass
       meld
       conda
-      delta
       tokei
+      godot
       direnv
       gnumake
       firefox
@@ -23,10 +23,13 @@
       inotify-tools
 
       unstable.scc
-      unstable.gitui
+      unstable.zoxide
       unstable.vscode
       unstable.postman
       unstable.chromium
+
+      unstable.gitAndTools.gitui
+      unstable.gitAndTools.delta
     ];
   };
 }

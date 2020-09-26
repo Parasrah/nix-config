@@ -59,7 +59,6 @@ in
 
     home.packages = with pkgs; [
       feh
-      delta
       todoist
       ncurses
       mpdris2
@@ -70,6 +69,8 @@ in
       paper-icon-theme
 
       unstable.starship
+
+      unstable.gitAndTools.delta
     ];
 
     home.file = {
@@ -174,6 +175,12 @@ in
       bash = {
         enable = true;
         initExtra = lib.mkBefore ''
+          # ensure profile is loaded
+          # TODO: this isn't working on i3 as anticipated
+          if [ -z "$PROFILE_LOADED" ]; then
+            . $HOME/.profile
+          fi
+
           set -o vi
 
           eval "$(zoxide init bash)"
@@ -186,11 +193,6 @@ in
           if [ -n "$DESKTOP_SESSION" ]; then
             eval $(gnome-keyring-daemon --start)
             export SSH_AUTH_SOCK
-          fi
-
-          # ensure profile is loaded
-          if [ -z "$PROFILE_LOADED" ]; then
-            . $HOME/.profile
           fi
         '';
 

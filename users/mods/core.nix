@@ -36,7 +36,6 @@ in
       p7zip
       parted
       mtools
-      zoxide
       openssl
       ripgrep
       killall
