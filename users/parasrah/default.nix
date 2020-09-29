@@ -27,6 +27,7 @@ let
     "${home}/.gnpm/bin"
     "${home}/.cargo/bin"
     "${home}/Scripts"
+    "${home}/.local/bin"
   ];
 
 in
