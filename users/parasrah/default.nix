@@ -1,4 +1,4 @@
-{ pkgs, lib, username, ... }:
+{ pkgs, lib, username, fun, ... }:
 
 let
   home =
@@ -28,6 +28,7 @@ let
     "${home}/.cargo/bin"
     "${home}/Scripts"
     "${home}/.local/bin"
+    "${dotfiles}/scripts"
   ];
 
 in
@@ -51,9 +52,6 @@ in
       VISUAL = env.visual;
       TERMINAL = env.terminal;
 
-      # this is so profile will be loaded in all environments
-      PROFILE_LOADED = "1";
-
       # setup path
       PATH = "${lib.strings.concatStringsSep ":" paths}:$PATH";
     };
@@ -74,12 +72,25 @@ in
       unstable.gitAndTools.delta
     ];
 
-    home.file = {
+    home.file =
+    let
+      xinitrc =
+        fun.pipe
+          [
+            (builtins.readFile)
+            (x: lib.strings.concatStringsSep "\n\n" [x ''
+              . ~/.profile
+            ''])
+            (builtins.toFile ".xinitrc")
+          ]
+          ./dotfiles/xinitrc;
+    in
+    {
       ".background-image".source = ./dotfiles/wallpaper.jpg;
       ".npmrc".source = ./dotfiles/npmrc;
-      ".xinitrc".source = ./dotfiles/xinitrc;
-      ".xsession".source = ./dotfiles/xinitrc;
-      ".xprofile".source = ./dotfiles/xinitrc;
+      ".xinitrc".source = xinitrc;
+      ".xsession".source = xinitrc;
+      ".xprofile".source = xinitrc;
       xterm-kitty = {
         source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
         target = ".terminfo/x/xterm-kitty";
@@ -176,11 +187,8 @@ in
       bash = {
         enable = true;
         initExtra = lib.mkBefore ''
-          # ensure profile is loaded
-          # TODO: this isn't working on i3 as anticipated
-          if [ -z "$PROFILE_LOADED" ]; then
-            . $HOME/.profile
-          fi
+          # this is okay because home manager ensures it's only loaded once
+          . $HOME/.profile
 
           set -o vi
 

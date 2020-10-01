@@ -16,7 +16,7 @@ let
   user =
     fun.pipe
       [
-        (fun.lists.map (mod: mod { inherit username pkgs lib; }))
+        (fun.lists.map (mod: mod { inherit username pkgs lib fun; }))
         (fun.lists.map (x: x.os))
         (fun.lists.foldl fun.recursiveUpdateConcat {})
       ] mods;
@@ -24,7 +24,7 @@ let
   homemanager =
     fun.pipe
       [
-        (fun.lists.map (mod: mod { inherit username pkgs lib; }))
+        (fun.lists.map (mod: mod { inherit username pkgs lib fun; }))
         (fun.lists.map (x: x.homemanager))
         (fun.lists.foldl fun.recursiveUpdateConcat {})
       ] mods;
