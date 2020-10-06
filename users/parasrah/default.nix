@@ -58,6 +58,7 @@ in
 
     home.packages = with pkgs; [
       feh
+      mpc_cli
       todoist
       ncurses
       mpdris2
@@ -68,42 +69,48 @@ in
       paper-icon-theme
 
       unstable.starship
+      unstable.spotify-tui
 
       unstable.gitAndTools.delta
     ];
 
     home.file =
-    let
-      xinitrc =
-        fun.pipe
-          [
-            (builtins.readFile)
-            (x: lib.strings.concatStringsSep "\n\n" [x ''
-              . ~/.profile
-            ''])
-            (builtins.toFile ".xinitrc")
-          ]
-          ./dotfiles/xinitrc;
-    in
-    {
-      ".background-image".source = ./dotfiles/wallpaper.jpg;
-      ".npmrc".source = ./dotfiles/npmrc;
-      ".xinitrc".source = xinitrc;
-      ".xsession".source = xinitrc;
-      ".xprofile".source = xinitrc;
-      xterm-kitty = {
-        source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
-        target = ".terminfo/x/xterm-kitty";
-      };
-      kak-connect = {
-        source = ./dotfiles/kak/share/kakoune-connect.desktop;
-        target = ".local/share/applications/kakoune-connect.desktop";
-      };
-      "kakoune.svg" = {
-        source = ./dotfiles/kak/share/kakoune.logo;
-        target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
-      };
-    };
+      let
+        xinitrc =
+          fun.pipe
+            [
+              (builtins.readFile)
+              (
+                x: lib.strings.concatStringsSep "\n\n" [
+                  x
+                  ''
+                    . ~/.profile
+                  ''
+                ]
+              )
+              (builtins.toFile ".xinitrc")
+            ]
+            ./dotfiles/xinitrc;
+      in
+        {
+          ".background-image".source = ./dotfiles/wallpaper.jpg;
+          ".npmrc".source = ./dotfiles/npmrc;
+          ".xinitrc".source = xinitrc;
+          ".xsession".source = xinitrc;
+          ".xprofile".source = xinitrc;
+          xterm-kitty = {
+            source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
+            target = ".terminfo/x/xterm-kitty";
+          };
+          kak-connect = {
+            source = ./dotfiles/kak/share/kakoune-connect.desktop;
+            target = ".local/share/applications/kakoune-connect.desktop";
+          };
+          "kakoune.svg" = {
+            source = ./dotfiles/kak/share/kakoune.logo;
+            target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
+          };
+        };
 
     xdg.configFile = {
       i3.source = ./dotfiles/i3;
@@ -221,6 +228,7 @@ in
         aliases = {
           st = "status";
           co = "checkout";
+          all = "add -A";
           last = "log -1 HEAD";
           tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
           recent = "for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/";
@@ -329,6 +337,23 @@ in
                 rotate = "normal";
               };
             };
+          };
+        };
+      };
+    };
+
+    systemd.user.startServices = true;
+
+    services = {
+      spotifyd = {
+        enable = true;
+        # package = with pkgs.unstable.spotifyd;
+        settings = {
+          global = {
+            username = builtins.readFile ../../secrets/spotify/username;
+            password = builtins.readFile ../../secrets/spotify/password;
+            backend = "pulseaudio";
+            device_name = "nix";
           };
         };
       };
