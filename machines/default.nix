@@ -66,6 +66,8 @@
   time = import ../cfg/time;
 
   nix = {
+    trustedUsers = [ "root" "@wheel" ];
+
     package = pkgs.nixUnstable;
 
     extraOptions = ''

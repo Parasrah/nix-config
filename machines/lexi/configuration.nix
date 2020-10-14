@@ -74,6 +74,10 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
+
+    postfix = {
+      enable = true;
+    };
   };
 
   virtualisation.docker = {
