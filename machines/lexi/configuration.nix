@@ -20,8 +20,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  environment.variables = {
-    WIRELESS_INTERFACE = "wlp7s0";
+  environment = {
+    systemPackages = with pkgs; [
+      imagemagick
+      polkit_gnome
+      vulkan-tools
+
+      linuxPackages.batman_adv
+    ];
+
+    variables = {
+      WIRELESS_INTERFACE = "wlp7s0";
+    };
   };
 
   # Networking

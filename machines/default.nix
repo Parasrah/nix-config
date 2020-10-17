@@ -27,12 +27,6 @@
       '';
     };
 
-    systemPackages = with pkgs; [
-      imagemagick
-      polkit_gnome
-      linuxPackages.batman_adv
-    ];
-
     shells = with pkgs; [
       nushell
     ];

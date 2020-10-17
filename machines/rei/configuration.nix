@@ -18,6 +18,11 @@
 
   # packages available to all users
   environment.systemPackages = with pkgs; [
+    imagemagick
+    polkit_gnome
+
+    linuxPackages.batman_adv
+
     xorg.xbacklight
   ];
 
