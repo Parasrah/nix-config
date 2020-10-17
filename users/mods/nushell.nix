@@ -5,7 +5,7 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      nushell
+      unstable.nushell
     ];
   };
 }

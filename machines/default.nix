@@ -28,7 +28,7 @@
     };
 
     shells = with pkgs; [
-      nushell
+      unstable.nushell
     ];
   };
 
