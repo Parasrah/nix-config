@@ -61,10 +61,10 @@ in
       gnome3.seahorse
 
       unstable.nnn
-      unstable.ytop
       unstable.brave
       unstable.kitty
       unstable.httpie
+      unstable.bottom
       unstable.flameshot
     ];
   };
