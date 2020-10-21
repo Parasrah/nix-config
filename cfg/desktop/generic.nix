@@ -3,7 +3,7 @@
 let
   compiledLayout =
     pkgs.runCommand "keyboard-layout" {} ''
-      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${./layout.xkb} $out
+      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${../../users/parasrah/dotfiles/layout.xkb} $out
     '';
 in
 {
