@@ -18,6 +18,7 @@ util.create
       (import ../mods/lua.nix)
       (import ../mods/nushell.nix)
       (import ../mods/dwarf-fortress.nix)
+      (import ../mods/pentesting.nix)
       (import ./default.nix)
       (
         { pkgs, username, ... }: {

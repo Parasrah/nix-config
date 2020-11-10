@@ -243,6 +243,9 @@ in
           merge = {
             tool = "meld";
           };
+          pull = {
+            rebase = false;
+          };
         };
 
         signing = {
