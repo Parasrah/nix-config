@@ -13,8 +13,6 @@
     ];
 
   # Hardware
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -31,6 +29,10 @@
 
     variables = {
       WIRELESS_INTERFACE = "wlp7s0";
+      # For radv
+      # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+      # for amdvlk
+      # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
     };
   };
 
@@ -54,8 +56,8 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ ];
     };
 
     wg-quick.interfaces = import ../../cfg/wireguard 5;
@@ -96,10 +98,20 @@
     liveRestore = true;
   };
 
+  # Vulkan
+  hardware.opengl = {
+    driSupport = true;
+    extraPackages = with pkgs; [ amdvlk ];
+    # 32 bit support
+    # driSupport32Bit = true;
+    # extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+  };
+
   # Sound
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
+    support32Bit = true;
     extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };

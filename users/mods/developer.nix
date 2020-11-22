@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  os = {};
+  os = { };
 
   homemanager = {
     home.packages = with pkgs; [
@@ -26,7 +26,7 @@
       unstable.zoxide
       unstable.vscode
       unstable.postman
-      unstable.chromium
+      (chromium.override { enableVaapi = true; })
 
       unstable.gitAndTools.gitui
       unstable.gitAndTools.delta
