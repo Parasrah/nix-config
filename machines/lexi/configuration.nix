@@ -56,7 +56,7 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ ];
+      allowedTCPPorts = [ 22 ];
       allowedUDPPorts = [ ];
     };
 
@@ -90,6 +90,17 @@
     postfix = {
       enable = true;
     };
+
+    openssh = {
+      passwordAuthentication = false;
+      enable = true;
+      permitRootLogin = "prohibit-password";
+    };
+
+    xrdp = {
+      enable = false;
+      defaultWindowManager = "${pkgs.unstable.i3}/bin/i3";
+    };
   };
 
   virtualisation.docker = {
@@ -102,9 +113,9 @@
   hardware.opengl = {
     driSupport = true;
     extraPackages = with pkgs; [ amdvlk ];
+
     # 32 bit support
-    # driSupport32Bit = true;
-    # extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    driSupport32Bit = true;
   };
 
   # Sound
