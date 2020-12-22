@@ -51,6 +51,7 @@ in
       pavucontrol
       bluez-tools
       nixpkgs-fmt
+      appimage-run
       lxappearance
       desktop-file-utils
 

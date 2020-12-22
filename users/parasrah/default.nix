@@ -63,6 +63,7 @@ in
       ncurses
       mpdris2
       xss-lock
+      tdesktop
       breeze-gtk
       signal-desktop
       adapta-gtk-theme
@@ -93,7 +94,7 @@ in
             ./dotfiles/xinitrc;
       in
         {
-          ".background-image".source = ./dotfiles/wallpaper.jpg;
+          ".background-image".source = ./dotfiles/wallpaper.png;
           ".npmrc".source = ./dotfiles/npmrc;
           ".xinitrc".source = xinitrc;
           ".xsession".source = xinitrc;
@@ -282,7 +283,7 @@ in
             '';
 
             "30-change-background" = ''
-              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.jpg}
+              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.png}
             '';
           };
         };
