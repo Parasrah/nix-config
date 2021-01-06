@@ -3,3 +3,5 @@
 result
 secrets/*
 !secrets/.gitkeep
+*.deb
+*.zip

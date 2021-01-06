@@ -19,6 +19,8 @@ util.create
       (import ../mods/nushell.nix)
       (import ../mods/dwarf-fortress.nix)
       (import ../mods/pentesting.nix)
+      (import ../mods/minecraft.nix)
+      (import ../mods/dnd.nix)
       (import ./default.nix)
       (
         { pkgs, username, ... }: {

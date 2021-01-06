@@ -56,7 +56,7 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [ 22 43000 ];
       allowedUDPPorts = [ ];
     };
 
@@ -70,6 +70,10 @@
     };
 
     dconf = {
+      enable = true;
+    };
+
+    java = {
       enable = true;
     };
   };

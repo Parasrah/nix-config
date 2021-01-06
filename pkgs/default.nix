@@ -1,7 +1,7 @@
 self: super:
 
 {
-  neovim = super.callPackage ./neovim {};
+  wonderdraft = super.callPackage ./wonderdraft {};
   cascadia-code = super.callPackage ./cascadia-code {};
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (
     old: {

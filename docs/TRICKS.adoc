@@ -1,0 +1,9 @@
+= Tips & Tricks
+Parasrah <git@parasrah.com>
+
+I will be using this document to keep track of tricks I discover while using nix.
+
+== Packaging Binaries
+
+A good example of this case is Wonderdraft & Dungeondraft. They are distributed
+either via debian files or a zipped file containing the binary and desktop files.
