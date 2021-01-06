@@ -8,11 +8,11 @@ in
 stdenv.mkDerivation {
   inherit name version;
 
-  src = ./wonderdraft.deb;
+  src = ./wonderdraft.zip;
 
   nativeBuildInputs = with pkgs; [
     autoPatchelfHook
-    dpkg
+    unzip
   ];
 
   buildInputs = with pkgs; [
@@ -26,17 +26,22 @@ stdenv.mkDerivation {
     libGL
   ];
 
-  unpackPhase = "true";
+  unpackCmd = "unzip $curSrc -d ./wonderdraft";
+
+  sourceRoot = "wonderdraft";
 
   installPhase = ''
     mkdir -p $out/bin
-    dpkg -x $src $out
-    cp -av $out/opt/Wonderdraft/* $out
-    rm -rf $out/opt
-    mv $out/Wonderdraft.x86_64 $out/bin/
-    mv $out/Wonderdraft.pck $out/bin/
-    substituteInPlace $out/usr/share/applications/Wonderdraft.desktop \
-      --replace '/opt/Wonderdraft/Wonderdraft.x86_64' "$out/bin/Wonderdraft.x86_64" \
+    mkdir -p $out/share/applications
+
+    chmod +x Wonderdraft.x86_64
+
+    mv ./Wonderdraft.desktop $out/share/applications/
+    mv ./Wonderdraft.x86_64 $out/bin/wonderdraft
+    mv ./Wonderdraft.pck $out/bin/wonderdraft.pck
+
+    substituteInPlace $out/share/applications/Wonderdraft.desktop \
+      --replace '/opt/Wonderdraft/Wonderdraft.x86_64' "$out/bin/wonderdraft" \
       --replace '/opt/Wonderdraft' $out \
       --replace '/opt/Wonderdraft/Wonderdraft.png' "$out/Wonderdraft.png"
   '';
