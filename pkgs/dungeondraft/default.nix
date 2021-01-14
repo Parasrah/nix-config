@@ -15,10 +15,12 @@ stdenv.mkDerivation {
   ];
 
   buildInputs = with pkgs; [
-    alsaLib
     libpulseaudio
+    alsaLib
     libGLU
     zlib
+
+    makeWrapper
 
     stdenv.cc.cc.lib
 
@@ -33,7 +35,7 @@ stdenv.mkDerivation {
 
   sourceRoot = "dungeondraft";
 
-  installPhase = ''
+  installPhase = with pkgs; ''
     name=${name}
 
     mkdir -p $out/bin
@@ -50,7 +52,8 @@ stdenv.mkDerivation {
     mv ./Dungeondraft.x86_64 "$out/$name"
     mv ./Dungeondraft.pck $out/$name.pck
 
-    ln -s "$out/$name" "$out/bin/$name"
+    makeWrapper $out/$name $out/bin/$name \
+        --prefix PATH : ${lib.makeBinPath [ gnome3.zenity ]}
 
     mv ./* $out
   '';
