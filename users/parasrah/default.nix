@@ -35,7 +35,7 @@ in
 {
   os = {
     description = "Brad";
-    extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" "vboxusers" ];
     initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
     shell = pkgs.bash;
   };
@@ -169,6 +169,8 @@ in
         removed = {};
       };
       defaultApplications = {
+        "application/x-directory" = "org.gnome.Nautilus.desktop";
+        "inode/directory" = "org.gnome.Nautilus.desktop";
         "x-scheme-handler/http" = "brave-browser.desktop";
         "x-scheme-handler/https" = "brave-browser.desktop";
         "x-scheme-handler/ftp" = "brave-browser.desktop";

@@ -113,6 +113,17 @@
     liveRestore = true;
   };
 
+  virtualisation.virtualbox = {
+    host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
+
+    guest = {
+      enable = false;
+    };
+  };
+
   # Vulkan
   hardware.opengl = {
     driSupport = true;
@@ -130,4 +141,10 @@
     extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };
+
+  # This value determines the NixOS release with which your system is to be
+  # compatible, in order to avoid breaking some software such as database
+  # servers. You should change this only after NixOS release notes say you
+  # should.
+  system.stateVersion = "20.03"; # Did you read the comment?
 }

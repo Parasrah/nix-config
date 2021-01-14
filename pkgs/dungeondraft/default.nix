@@ -1,5 +1,4 @@
 { pkgs, stdenv }:
-
 let
   name = "dungeondraft";
   version = "1.1.4";
@@ -16,16 +15,18 @@ stdenv.mkDerivation {
   ];
 
   buildInputs = with pkgs; [
+    alsaLib
+    libpulseaudio
+    libGLU
+    zlib
+
+    stdenv.cc.cc.lib
+
     xorg.libX11
     xorg.libXcursor
     xorg.libXinerama
     xorg.libXrandr
     xorg.libXi
-    alsaLib
-    libpulseaudio
-    libGL
-    zlib
-    stdenv.cc.cc.lib
   ];
 
   unpackCmd = "unzip $curSrc -d ./dungeondraft";
@@ -33,7 +34,7 @@ stdenv.mkDerivation {
   sourceRoot = "dungeondraft";
 
   installPhase = ''
-    name=dungeondraft
+    name=${name}
 
     mkdir -p $out/bin
     mkdir -p $out/share/applications
@@ -41,7 +42,7 @@ stdenv.mkDerivation {
     chmod +x Dungeondraft.x86_64
 
     substituteInPlace ./Dungeondraft.desktop \
-      --replace '/opt/Dungeondraft/Dungeondraft.x86_64' "$out/bin/dungeondraft" \
+      --replace '/opt/Dungeondraft/Dungeondraft.x86_64' "$out/bin/$name" \
       --replace '/opt/Dungeondraft' $out \
       --replace '/opt/Dungeondraft/Dungeondraft.png' "$out/Dungeondraft.png"
 
