@@ -1,7 +1,25 @@
-{ pkgs, stdenv }:
+{ stdenv
+, autoPatchelfHook
+, unzip
+, zlib
+, libGLU
+, alsaLib
+, libpulseaudio
+, makeWrapper
+, libXi
+, libX11
+, libXrandr
+, libXcursor
+, libXinerama
+, gnome3
+, gdb
+}:
 let
+  inherit (stdenv) lib;
+  inherit (gnome3) zenity;
   name = "dungeondraft";
-  version = "1.1.4";
+  version = "1.0.0.0";
+  path = lib.makeBinPath [ zenity gdb ];
 
 in
 stdenv.mkDerivation {
@@ -9,33 +27,33 @@ stdenv.mkDerivation {
 
   src = ./dungeondraft.zip;
 
-  nativeBuildInputs = with pkgs; [
+  nativeBuildInputs = [
     autoPatchelfHook
     unzip
   ];
 
-  buildInputs = with pkgs; [
-    libpulseaudio
-    alsaLib
-    libGLU
+  buildInputs = [
     zlib
+    libGLU
+    alsaLib
+    libpulseaudio
 
     makeWrapper
 
     stdenv.cc.cc.lib
 
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXrandr
-    xorg.libXi
+    libXi
+    libX11
+    libXrandr
+    libXcursor
+    libXinerama
   ];
 
   unpackCmd = "unzip $curSrc -d ./dungeondraft";
 
   sourceRoot = "dungeondraft";
 
-  installPhase = with pkgs; ''
+  installPhase = ''
     name=${name}
 
     mkdir -p $out/bin
@@ -53,7 +71,7 @@ stdenv.mkDerivation {
     mv ./Dungeondraft.pck $out/$name.pck
 
     makeWrapper $out/$name $out/bin/$name \
-        --prefix PATH : ${lib.makeBinPath [ gnome3.zenity ]}
+        --prefix PATH : ${path}
 
     mv ./* $out
   '';

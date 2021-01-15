@@ -7,3 +7,11 @@ I will be using this document to keep track of tricks I discover while using nix
 
 A good example of this case is Wonderdraft & Dungeondraft. They are distributed
 either via debian files or a zipped file containing the binary and desktop files.
+
+== How to find what package contains a library?
+
+`nix-index && nix-locate <library>`
+
+example:
+
+`nix-index && nix-locate libmonosgen`
