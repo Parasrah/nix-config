@@ -1,8 +1,7 @@
 { pkgs, lib, ... }:
-
 let
   compiledLayout =
-    pkgs.runCommand "keyboard-layout" {} ''
+    pkgs.runCommand "keyboard-layout" { } ''
       ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${../../users/parasrah/dotfiles/layout.xkb} $out
     '';
 in
@@ -21,15 +20,25 @@ in
       ${pkgs.xlibs.xset}/bin/xset r rate 250 20
     '';
 
-    # for configuring touchpad
-    libinput = {
-      enable = true;
-      naturalScrolling = true;
-      tapping = true;
-      additionalOptions = ''MatchIsTouchpad "on"'';
-    };
+    libinput.enable = true;
 
-    # for configuring everything else
-    # inputClassSections = [ ];
+    # doesn't use built in options as NixOS only supports
+    # a single section
+    inputClassSections = [
+      ''
+        Identifier     "custom mouse"
+        Driver         "libinput"
+        MatchIsPointer "on"
+        Option         "AccelProfile" "flat"
+        Option         "AccelSpeed"   "0"
+      ''
+      ''
+        Identifier "custom touchpad"
+        Driver "libinput"
+        MatchIsTouchpad "on"
+        Option "NaturalScrolling" "true"
+        Option "Tapping" "on"
+      ''
+    ];
   };
 }
