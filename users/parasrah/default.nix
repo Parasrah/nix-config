@@ -24,7 +24,7 @@ let
   paths = with env; [
     "${kak}/plugins/connect.kak/bin"
     "${kak}/bin"
-    "${home}/.gnpm/bin"
+    "${home}/.npm-global/bin"
     "${home}/.cargo/bin"
     "${home}/Scripts"
     "${home}/.local/bin"

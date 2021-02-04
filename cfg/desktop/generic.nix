@@ -29,8 +29,6 @@ in
         Identifier     "custom mouse"
         Driver         "libinput"
         MatchIsPointer "on"
-        Option         "AccelProfile" "flat"
-        Option         "AccelSpeed"   "0"
       ''
       ''
         Identifier "custom touchpad"
