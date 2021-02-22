@@ -89,6 +89,10 @@
 
     xserver = {
       videoDrivers = [ "amdgpu" ];
+
+      deviceSection = ''
+        Option "VariableRefresh" "true"
+      '';
     };
 
     postfix = {
