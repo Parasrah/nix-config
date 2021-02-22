@@ -1,10 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, system, ... }:
 
 {
   imports =
     [
-      ../hardware-configuration.nix
-      <home-manager/nixos>
       ../users/root.nix
     ];
 
@@ -73,7 +71,7 @@
     (import ../pkgs)
   ];
 
-  nixpkgs.config = import ../cfg/pkgsConfig { inherit config; };
+  nixpkgs.config = import ../cfg/pkgsConfig { inherit inputs system config; };
 
   # Security
   security.sudo = {
@@ -83,11 +81,38 @@
   # Users
   users.mutableUsers = true;
 
-  users.groups.nixos-config = {};
+  users.groups.nixos-config = { };
 
-  users.groups.vboxusers = {};
+  users.groups.vboxusers = { };
 
   hardware.pulseaudio.extraConfig = ''
     load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
   '';
+
+  # sops
+  sops.defaultSopsFile = ../secrets.yaml;
+  sops.gnupgHome = "/root/.gnupg";
+  sops.sshKeyPaths = [ ];
+
+  sops.secrets = {
+    gpg_signing_key = { };
+    wireguard_address = {
+      owner = "root";
+    };
+    wireguard_client_private_key = {
+      mode = "0440";
+      owner = "root";
+      group = "wheel";
+    };
+    wireguard_client_public_key = {
+      owner = "root";
+    };
+    wireguard_server_public_key = {
+      owner = "root";
+    };
+    spotify_username = { };
+    spotify_password = { };
+    spotify_client_id = { };
+    spotify_client_secret = { };
+  };
 }

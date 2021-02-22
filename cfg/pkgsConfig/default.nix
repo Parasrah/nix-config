@@ -1,9 +1,10 @@
-{ config }:
+{ config, inputs, system }:
 
 {
   allowUnfree = true;
   packageOverrides = {
-    unstable = import <nixos-unstable> {
+    unstable = import inputs.nixpkgs-unstable {
+      inherit system;
       config = config.nixpkgs.config;
       overlays = config.nixpkgs.overlays;
     };

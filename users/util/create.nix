@@ -7,7 +7,7 @@
 { mods, username }:
 
 # input from `imports`
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, system, ... }:
 
 let
   fun =
@@ -33,10 +33,11 @@ in
 {
   users.users."${username}" = user;
 
-  home-manager.users."${username}" = {
-    nixpkgs.config = import ../../cfg/pkgsConfig { inherit config; };
+  home-manager.users."${username}" = fun.recursiveUpdateConcat {
+    nixpkgs.config = import ../../cfg/pkgsConfig { inherit inputs system config; };
+    home.stateVersion = "20.03";
     nixpkgs.overlays = [
       (import ../../pkgs)
     ];
-  } // homemanager;
+  } homemanager;
 }

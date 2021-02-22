@@ -1,4 +1,4 @@
-id:
+{ id, config }:
 let
   wgIpv4Address = id: "192.168.10.${builtins.toString id}";
 
@@ -13,11 +13,11 @@ in
 {
   wg0 = {
     address = peerAddresses id;
-    privateKey = builtins.readFile ../../secrets/wireguard/privatekey;
+    privateKey = builtins.readFile config.sops.secrets.wireguard_client_private_key.path;
     peers = [
       {
-        publicKey = builtins.readFile ../../secrets/wireguard/s_publickey;
-        endpoint = builtins.readFile ../../secrets/wireguard/address;
+        publicKey = builtins.readFile config.sops.secrets.wireguard_server_public_key.path;
+        endpoint = builtins.readFile config.sops.secrets.wireguard_address.path;
         allowedIPs = [ "0.0.0.0/0" "::/0" ];
         persistentKeepalive = 21;
       }
