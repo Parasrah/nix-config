@@ -5,8 +5,8 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      wonderdraft
-      dungeondraft
+      # wonderdraft
+      # dungeondraft
     ];
   };
 }

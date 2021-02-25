@@ -17,6 +17,7 @@ in
 
   homemanager = {
     home.homeDirectory = homeDirectory;
+    home.username = username;
 
     home.packages = with pkgs; [
       fd

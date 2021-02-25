@@ -4,9 +4,12 @@
 
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home.url = "github:rycee/home-manager";
+    home.url = "github:rycee/home-manager/release-20.09";
 
-    sops-nix.url = github:Mic92/sops-nix;
+    sops-nix = {
+      url = github:Mic92/sops-nix;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -75,8 +78,8 @@
             nixpkgs.nixosModules.notDetected
             home.nixosModules.home-manager
             homeManagerConfig
-            sops-nix.nixosModules.sops
             ./machines/lexi/configuration.nix
+            sops-nix.nixosModules.sops
           ];
         };
 

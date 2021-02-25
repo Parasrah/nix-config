@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 let
   compiledLayout =
     pkgs.runCommand "keyboard-layout" { } ''
-      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${../../users/parasrah/dotfiles/layout.xkb} $out
+      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${inputs.dotfiles}/layout.xkb $out
     '';
 in
 {

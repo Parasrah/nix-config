@@ -44,16 +44,18 @@
     };
   };
 
-  systemd.services = {
-    configuration-perms = {
-      script = ''
-        chown -R root:nixos-config /etc/nixos
-        chmod -R g+rw /etc/nixos
-      '';
-      wantedBy = [ "multi-user.target" ];
-      description = "allow nixos-config user access to change system config";
-    };
+  systemd.services.configuration-perms = {
+    script = ''
+      chown -R root:nixos-config /etc/nixos
+      chmod -R g+rw /etc/nixos
+    '';
+    wantedBy = [ "multi-user.target" ];
+    description = "allow nixos-config user access to change system config";
   };
+
+  systemd.services.wg-quick-wg0.serviceConfig.SupplementaryGroups = [
+    config.users.groups.keys.name
+  ];
 
   time = import ../cfg/time;
 
@@ -90,29 +92,12 @@
   '';
 
   # sops
+  # TODO: prevent loading to store
   sops.defaultSopsFile = ../secrets.yaml;
   sops.gnupgHome = "/root/.gnupg";
   sops.sshKeyPaths = [ ];
 
   sops.secrets = {
-    gpg_signing_key = { };
-    wireguard_address = {
-      owner = "root";
-    };
-    wireguard_client_private_key = {
-      mode = "0440";
-      owner = "root";
-      group = "wheel";
-    };
-    wireguard_client_public_key = {
-      owner = "root";
-    };
-    wireguard_server_public_key = {
-      owner = "root";
-    };
-    spotify_username = { };
-    spotify_password = { };
-    spotify_client_id = { };
-    spotify_client_secret = { };
+    wireguard_client_private_key = { };
   };
 }

@@ -9,15 +9,17 @@ let
     "${wgIpv6Address id}/64"
   ];
 
+  inherit (config.sops) secrets;
+
 in
 {
   wg0 = {
     address = peerAddresses id;
-    privateKey = builtins.readFile config.sops.secrets.wireguard_client_private_key.path;
+    privateKeyFile = secrets.wireguard_client_private_key.path;
     peers = [
       {
-        publicKey = builtins.readFile config.sops.secrets.wireguard_server_public_key.path;
-        endpoint = builtins.readFile config.sops.secrets.wireguard_address.path;
+        publicKey = "mnMS75gHAoSr/HyZ0NxppZt3B1IZ9Iq3uVoxay3BVxs=";
+        endpoint = "kali.parasrah.com:51820";
         allowedIPs = [ "0.0.0.0/0" "::/0" ];
         persistentKeepalive = 21;
       }
