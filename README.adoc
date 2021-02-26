@@ -1,7 +1,7 @@
 = NixOS Configuration
 Parasrah <git@parasrah.com>
 
-These configuration files are used to provision my various machines with NixOS. These configurations are tailored for the following use-cases:
+This is the configuration for my NixOS machines, leveraging the new flakes feature. These are some of the things I use my machines for that has guided the configuration:
 
 * Development
 ** kakoune
@@ -15,6 +15,10 @@ These configuration files are used to provision my various machines with NixOS. 
 * Gaming
 ** AMD CPU & GPU
 ** Steam
+
+* D&D
+** Wonderdraft
+** Dungeondraft
 
 * Multi-User
 ** gnome & i3
