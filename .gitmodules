@@ -1,3 +1,6 @@
 [submodule "dotfiles"]
 	path = users/parasrah/dotfiles
 	url = git@github.com:Parasrah/dotfiles.git
+[submodule "pkgs/dungeondraft"]
+	path = pkgs/dungeondraft
+	url = git@github.com:Parasrah/dungeondraft.nix.git

@@ -12,6 +12,18 @@
         "type": "path"
       }
     },
+    "dungeondraft": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-7WnJPrNpN3K21DtJ8JsneoZ4GvUA9INA7M0nVpf4mgg=",
+        "path": "/etc/nixos/pkgs/dungeondraft",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/pkgs/dungeondraft",
+        "type": "path"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1610051610,
@@ -95,6 +107,7 @@
     "root": {
       "inputs": {
         "dotfiles": "dotfiles",
+        "dungeondraft": "dungeondraft",
         "flake-utils": "flake-utils",
         "home": "home",
         "nixpkgs": "nixpkgs_2",

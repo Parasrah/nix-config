@@ -17,6 +17,11 @@
       url = "/etc/nixos/users/parasrah/dotfiles";
       flake = false;
     };
+
+    dungeondraft = {
+      url = "/etc/nixos/pkgs/dungeondraft";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home, sops-nix, flake-utils, ... }:
