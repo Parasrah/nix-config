@@ -1,4 +1,4 @@
-{ id, config }:
+{ id, config, name }:
 let
   wgIpv4Address = id: "192.168.10.${builtins.toString id}";
 
@@ -15,7 +15,7 @@ in
 {
   wg0 = {
     address = peerAddresses id;
-    privateKeyFile = secrets.wireguard_client_private_key.path;
+    privateKeyFile = secrets."wireguard_${name}_private_key".path;
     peers = [
       {
         publicKey = "mnMS75gHAoSr/HyZ0NxppZt3B1IZ9Iq3uVoxay3BVxs=";

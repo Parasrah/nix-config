@@ -59,6 +59,7 @@
 
     wg-quick.interfaces = import ../../cfg/wireguard {
       inherit config;
+      name = "lexi";
       id = 5;
     };
   };

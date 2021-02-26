@@ -118,6 +118,6 @@
   sops.sshKeyPaths = [ ];
 
   sops.secrets = {
-    wireguard_client_private_key = { };
+    wireguard_lexi_private_key = { };
   };
 }
