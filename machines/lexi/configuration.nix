@@ -64,17 +64,12 @@
   };
 
   programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = false;
-    };
-
     dconf = {
       enable = true;
     };
 
     java = {
-      enable = true;
+      enable = false;
     };
   };
 

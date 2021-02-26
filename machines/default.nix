@@ -38,10 +38,30 @@
     cascadia-code
   ];
 
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = false;
+      pinentryFlavor = "curses";
+    };
+  };
+
   services = {
+    yubikey-agent = {
+      enable = true;
+    };
+
     printing = {
       enable = true;
     };
+
+    pcscd = {
+      enable = true;
+    };
+
+    udev.packages = with pkgs; [
+      yubikey-personalization
+    ];
   };
 
   systemd.services.configuration-perms = {
