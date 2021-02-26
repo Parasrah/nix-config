@@ -1,10 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, system, ... }:
 
 {
   imports =
     [
-      ../hardware-configuration.nix
-      <home-manager/nixos>
       ../users/root.nix
     ];
 
@@ -66,16 +64,18 @@
     ];
   };
 
-  systemd.services = {
-    configuration-perms = {
-      script = ''
-        chown -R root:nixos-config /etc/nixos
-        chmod -R g+rw /etc/nixos
-      '';
-      wantedBy = [ "multi-user.target" ];
-      description = "allow nixos-config user access to change system config";
-    };
+  systemd.services.configuration-perms = {
+    script = ''
+      chown -R root:nixos-config /etc/nixos
+      chmod -R g+rw /etc/nixos
+    '';
+    wantedBy = [ "multi-user.target" ];
+    description = "allow nixos-config user access to change system config";
   };
+
+  systemd.services.wg-quick-wg0.serviceConfig.SupplementaryGroups = [
+    config.users.groups.keys.name
+  ];
 
   time = import ../cfg/time;
 
@@ -93,7 +93,7 @@
     (import ../pkgs)
   ];
 
-  nixpkgs.config = import ../cfg/pkgsConfig { inherit config; };
+  nixpkgs.config = import ../cfg/pkgsConfig { inherit inputs system config; };
 
   # Security
   security.sudo = {
@@ -103,11 +103,21 @@
   # Users
   users.mutableUsers = true;
 
-  users.groups.nixos-config = {};
+  users.groups.nixos-config = { };
 
-  users.groups.vboxusers = {};
+  users.groups.vboxusers = { };
 
   hardware.pulseaudio.extraConfig = ''
     load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
   '';
+
+  # sops
+  # TODO: prevent loading to store
+  sops.defaultSopsFile = ../secrets.yaml;
+  sops.gnupgHome = "/root/.gnupg";
+  sops.sshKeyPaths = [ ];
+
+  sops.secrets = {
+    wireguard_client_private_key = { };
+  };
 }

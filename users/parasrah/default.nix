@@ -1,4 +1,4 @@
-{ pkgs, lib, username, fun, ... }:
+{ pkgs, lib, username, fun, inputs, ... }:
 
 let
   home =
@@ -11,8 +11,8 @@ let
     projects = "${home}/Projects";
 
     # config
-    kak = "${dotfiles}/kak";
-    nvim = "${dotfiles}/nvim";
+    kak = "${inputs.dotfiles}/kak";
+    nvim = "${inputs.dotfiles}/nvim";
 
     # common
     editor = "vi";
@@ -28,7 +28,7 @@ let
     "${home}/.cargo/bin"
     "${home}/Scripts"
     "${home}/.local/bin"
-    "${dotfiles}/scripts"
+    "${inputs.dotfiles}/scripts"
   ];
 
 in
@@ -91,11 +91,11 @@ in
               )
               (builtins.toFile ".xinitrc")
             ]
-            ./dotfiles/xinitrc;
+            "${inputs.dotfiles}/xinitrc";
       in
         {
-          ".background-image".source = ./dotfiles/wallpaper.png;
-          ".npmrc".source = ./dotfiles/npmrc;
+          ".background-image".source = "${inputs.dotfiles}/wallpaper.png";
+          ".npmrc".source = "${inputs.dotfiles}/npmrc";
           ".xinitrc".source = xinitrc;
           ".xsession".source = xinitrc;
           ".xprofile".source = xinitrc;
@@ -104,26 +104,26 @@ in
             target = ".terminfo/x/xterm-kitty";
           };
           kak-connect = {
-            source = ./dotfiles/kak/share/kakoune-connect.desktop;
+            source = "${inputs.dotfiles}/kak/share/kakoune-connect.desktop";
             target = ".local/share/applications/kakoune-connect.desktop";
           };
           "kakoune.svg" = {
-            source = ./dotfiles/kak/share/kakoune.logo;
+            source = "${inputs.dotfiles}/kak/share/kakoune.logo";
             target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
           };
         };
 
     xdg.configFile = {
-      i3.source = ./dotfiles/i3;
-      polybar.source = ./dotfiles/polybar;
-      dunst.source = ./dotfiles/dunst;
-      kitty.source = ./dotfiles/kitty;
-      rofi.source = ./dotfiles/rofi;
-      kak-lsp.source = ./dotfiles/kak/kak-lsp;
-      gitui.source = ./dotfiles/gitui;
+      i3.source = "${inputs.dotfiles}/i3";
+      polybar.source = "${inputs.dotfiles}/polybar";
+      dunst.source = "${inputs.dotfiles}/dunst";
+      kitty.source = "${inputs.dotfiles}/kitty";
+      rofi.source = "${inputs.dotfiles}/rofi";
+      kak-lsp.source = "${inputs.dotfiles}/kak/kak-lsp";
+      gitui.source = "${inputs.dotfiles}/gitui";
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
-      "broot/conf.toml".source = ./dotfiles/broot/conf.toml;
-      "starship.toml".source = ./dotfiles/starship.toml;
+      "broot/conf.toml".source = "${inputs.dotfiles}/broot/conf.toml";
+      "starship.toml".source = "${inputs.dotfiles}/starship.toml";
       "nu/config.toml".text =
         let
           surroundedPaths =
@@ -253,7 +253,7 @@ in
 
         signing = {
           signByDefault = true;
-          key = lib.strings.fileContents ../../secrets/gpg/signingkey;
+          key = "EE3B51937CBE9FE434C9857CD0C65EACF6656DA4";
         };
       };
 
@@ -285,7 +285,7 @@ in
             '';
 
             "30-change-background" = ''
-              ${pkgs.feh}/bin/feh --bg-scale ${./dotfiles/wallpaper.png}
+              ${pkgs.feh}/bin/feh --bg-scale ${"${inputs.dotfiles}/wallpaper.png"}
             '';
           };
         };
@@ -349,20 +349,5 @@ in
     };
 
     systemd.user.startServices = true;
-
-    services = {
-      spotifyd = {
-        enable = true;
-        # package = with pkgs.unstable.spotifyd;
-        settings = {
-          global = {
-            username = builtins.readFile ../../secrets/spotify/username;
-            password = builtins.readFile ../../secrets/spotify/password;
-            backend = "pulseaudio";
-            device_name = "nix";
-          };
-        };
-      };
-    };
   };
 }

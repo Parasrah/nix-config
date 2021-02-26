@@ -7,7 +7,7 @@
 { mods, username }:
 
 # input from `imports`
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, system, ... }:
 
 let
   fun =
@@ -16,7 +16,7 @@ let
   user =
     fun.pipe
       [
-        (fun.lists.map (mod: mod { inherit username pkgs lib fun; }))
+        (fun.lists.map (mod: mod { inherit username pkgs lib fun inputs; }))
         (fun.lists.map (x: x.os))
         (fun.lists.foldl fun.recursiveUpdateConcat {})
       ] mods;
@@ -24,7 +24,7 @@ let
   homemanager =
     fun.pipe
       [
-        (fun.lists.map (mod: mod { inherit username pkgs lib fun; }))
+        (fun.lists.map (mod: mod { inherit username pkgs lib fun inputs; }))
         (fun.lists.map (x: x.homemanager))
         (fun.lists.foldl fun.recursiveUpdateConcat {})
       ] mods;
@@ -33,10 +33,11 @@ in
 {
   users.users."${username}" = user;
 
-  home-manager.users."${username}" = {
-    nixpkgs.config = import ../../cfg/pkgsConfig { inherit config; };
+  home-manager.users."${username}" = fun.recursiveUpdateConcat {
+    nixpkgs.config = import ../../cfg/pkgsConfig { inherit inputs system config; };
+    home.stateVersion = "20.09";
     nixpkgs.overlays = [
       (import ../../pkgs)
     ];
-  } // homemanager;
+  } homemanager;
 }

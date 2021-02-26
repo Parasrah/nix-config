@@ -15,3 +15,9 @@ either via debian files or a zipped file containing the binary and desktop files
 example:
 
 `nix-index && nix-locate libmonosgen`
+
+== How to see the currently instantiated options?
+
+`nixos-option systemd`
+
+Not sure how to get this working with Flakes as of yet

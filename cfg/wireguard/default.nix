@@ -1,4 +1,4 @@
-id:
+{ id, config }:
 let
   wgIpv4Address = id: "192.168.10.${builtins.toString id}";
 
@@ -9,15 +9,17 @@ let
     "${wgIpv6Address id}/64"
   ];
 
+  inherit (config.sops) secrets;
+
 in
 {
   wg0 = {
     address = peerAddresses id;
-    privateKey = builtins.readFile ../../secrets/wireguard/privatekey;
+    privateKeyFile = secrets.wireguard_client_private_key.path;
     peers = [
       {
-        publicKey = builtins.readFile ../../secrets/wireguard/s_publickey;
-        endpoint = builtins.readFile ../../secrets/wireguard/address;
+        publicKey = "mnMS75gHAoSr/HyZ0NxppZt3B1IZ9Iq3uVoxay3BVxs=";
+        endpoint = "kali.parasrah.com:51820";
         allowedIPs = [ "0.0.0.0/0" "::/0" ];
         persistentKeepalive = 21;
       }

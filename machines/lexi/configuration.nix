@@ -3,13 +3,14 @@
 {
   imports =
     [
+      # hardware
+      ./hardware-configuration.nix
+      # defaults
       ../default.nix
       # desktop
       ../../cfg/desktop/gnome-i3.nix
       # users
       ../../users/parasrah/lexi.nix
-      # services
-      ../../services/mopidy
     ];
 
   # Hardware
@@ -29,10 +30,6 @@
 
     variables = {
       WIRELESS_INTERFACE = "wlp7s0";
-      # For radv
-      # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
-      # for amdvlk
-      # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
     };
   };
 
@@ -60,7 +57,10 @@
       allowedUDPPorts = [ ];
     };
 
-    wg-quick.interfaces = import ../../cfg/wireguard 5;
+    wg-quick.interfaces = import ../../cfg/wireguard {
+      inherit config;
+      id = 5;
+    };
   };
 
   programs = {
@@ -145,5 +145,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
 }
