@@ -4,3 +4,6 @@
 [submodule "pkgs/dungeondraft"]
 	path = pkgs/dungeondraft
 	url = git@github.com:Parasrah/dungeondraft.nix.git
+[submodule "pkgs/wonderdraft"]
+	path = pkgs/wonderdraft
+	url = git@github.com:Parasrah/wonderdraft.nix.git

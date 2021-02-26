@@ -22,6 +22,11 @@
       url = "/etc/nixos/pkgs/dungeondraft";
       flake = false;
     };
+
+    wonderdraft = {
+      url = "/etc/nixos/pkgs/wonderdraft";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home, sops-nix, flake-utils, ... }:

@@ -92,6 +92,7 @@
   nixpkgs.overlays = [
     (import ../pkgs)
     (import "${inputs.dungeondraft}/overlay.nix")
+    (import "${inputs.wonderdraft}/overlay.nix")
   ];
 
   nixpkgs.config = import ../cfg/pkgsConfig { inherit inputs system config; };
