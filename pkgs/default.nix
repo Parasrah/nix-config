@@ -2,7 +2,7 @@ self: super:
 
 {
   wonderdraft = super.callPackage ./wonderdraft {};
-  cascadia-code = super.callPackage ./cascadia-code {};
+  dungeondraft = super.callPackage ./dungeondraft {};
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (
     old: {
       version = "2020-08-04";

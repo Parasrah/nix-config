@@ -208,11 +208,19 @@ in
 
           eval "$(direnv hook bash)"
 
-          # ssh agent fix for i3
-          if [ -n "$DESKTOP_SESSION" ]; then
-            eval $(gnome-keyring-daemon --start)
-            export SSH_AUTH_SOCK
-          fi
+          # ssh
+          # if [ -n "$DESKTOP_SESSION" ]; then
+          #   eval $(gnome-keyring-daemon --start)
+          #   export SSH_AUTH_SOCK
+          # fi
+
+          # or just unlock keyring
+          eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
+
+          # gpg
+          export GPG_TTY="$(tty)"
+          export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+          gpgconf --launch gpg-agent
         '';
 
         shellAliases = {};
@@ -225,7 +233,7 @@ in
 
       git = {
         enable = true;
-        userEmail = "git@parasrah.com";
+        userEmail = "gpg@parasrah.com";
         userName = "Parasrah";
 
         aliases = {
@@ -253,7 +261,7 @@ in
 
         signing = {
           signByDefault = true;
-          key = "EE3B51937CBE9FE434C9857CD0C65EACF6656DA4";
+          key = "B909C2B388D31FD5CBCAE1A94CBE600F7547E797";
         };
       };
 

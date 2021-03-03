@@ -35,13 +35,17 @@
     noto-fonts
     font-awesome
     dejavu_fonts
-    cascadia-code
+    (nerdfonts.override {
+      fonts = [ "FiraCode" ];
+    })
   ];
 
   programs = {
+    ssh.startAgent = false;
+
     gnupg.agent = {
       enable = true;
-      enableSSHSupport = false;
+      enableSSHSupport = true;
       pinentryFlavor = "curses";
     };
   };

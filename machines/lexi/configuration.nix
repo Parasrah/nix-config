@@ -108,7 +108,7 @@
   };
 
   virtualisation.docker = {
-    enable = true;
+    enable = false;
     enableOnBoot = true;
     liveRestore = true;
   };
