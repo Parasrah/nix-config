@@ -21,6 +21,7 @@ util.create
       (import ../mods/pentesting.nix)
       (import ../mods/minecraft.nix)
       (import ../mods/dnd.nix)
+      (import ../mods/gamedev.nix)
       (import ./default.nix)
       (
         { pkgs, username, ... }: {

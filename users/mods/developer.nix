@@ -12,7 +12,6 @@
       meld
       conda
       tokei
-      godot
       direnv
       gnumake
       firefox
