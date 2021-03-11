@@ -3,7 +3,7 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-O/Djnl5pwSaq4nZzlKWLxS9xCc4DnPFAfwSo1VaCQYo=",
+        "narHash": "sha256-DM9O4VZonOlrAl3LEGDbvhHYBLjbWsVvhOhRRFV8QKg=",
         "path": "/etc/nixos/users/parasrah/dotfiles",
         "type": "path"
       },
@@ -74,11 +74,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1613761605,
-        "narHash": "sha256-lUF6UPR96ZzQC0faNXBHLoLhNAdxZqYqDwz0PaIZ/7Y=",
+        "lastModified": 1614989413,
+        "narHash": "sha256-g503bGSdVhLu2cKR5sHG8XetLFrVUzAL3+mrnQJpmdY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9816b99e71c3504b0b4c1f8b2e004148460029d4",
+        "rev": "102eb68ceecbbd32ab1906a53ef5a7269dc9794a",
         "type": "github"
       },
       "original": {
@@ -90,11 +90,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1613980253,
-        "narHash": "sha256-3jZJAUsTSsKaElPy509a4OX87Vvy1Mu5Z1V3pMg/Pc0=",
+        "lastModified": 1615028506,
+        "narHash": "sha256-OiRfJ81e/kDAtg6YOlaVbvXLZ6tbo2Av/SEC1qs4WnE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d4189f68fdbe0b14b7637447cb0efde2711f4abf",
+        "rev": "37b47da04ca50d17934881192e65ad2df83704b5",
         "type": "github"
       },
       "original": {
@@ -139,7 +139,7 @@
     "wonderdraft": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-3Ff9rpXVFSzpy5R7knUDphdvII+T0Zc/63h9qIdol2o=",
+        "narHash": "sha256-zRlUDRX1gEZ/N0jl+ASGAkQCN4LcN+z6Fy/8CqJ9Osw=",
         "path": "/etc/nixos/pkgs/wonderdraft",
         "type": "path"
       },
