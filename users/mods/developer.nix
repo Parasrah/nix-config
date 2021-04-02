@@ -12,6 +12,7 @@
       meld
       conda
       tokei
+      vscode
       direnv
       gnumake
       firefox
@@ -23,7 +24,6 @@
 
       unstable.scc
       unstable.zoxide
-      unstable.vscode
       unstable.postman
       (chromium.override { enableVaapi = true; })
 

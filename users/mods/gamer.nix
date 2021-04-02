@@ -1,15 +1,16 @@
 { pkgs, ... }:
 
 {
-  os = {};
+  os = { };
 
   homemanager = {
     home.packages = with pkgs; [
       mono
+      steam
       spotify
-      unstable.steam
-      unstable.discord
       google-chrome
+
+      unstable.discord
     ];
   };
 }
