@@ -3,7 +3,7 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-R8/ghkRNuqyIGDKhMPn7rRz6EFMUWIf/OqnHcccbmqA=",
+        "narHash": "sha256-LiW08Kk4CEi4efLfzzuDtqVWQjKi4SjC9VRgojD1dN8=",
         "path": "/etc/nixos/users/parasrah/dotfiles",
         "type": "path"
       },

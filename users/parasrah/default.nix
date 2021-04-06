@@ -120,6 +120,7 @@ in
       kitty.source = "${inputs.dotfiles}/kitty";
       rofi.source = "${inputs.dotfiles}/rofi";
       kak-lsp.source = "${inputs.dotfiles}/kak/kak-lsp";
+      gitui.source = "${inputs.dotfiles}/gitui";
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
       "broot/conf.toml".source = "${inputs.dotfiles}/broot/conf.toml";
       "starship.toml".source = "${inputs.dotfiles}/starship.toml";
