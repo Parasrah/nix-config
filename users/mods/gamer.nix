@@ -7,6 +7,7 @@
     home.packages = with pkgs; [
       mono
       steam
+      piper
       spotify
       google-chrome
 

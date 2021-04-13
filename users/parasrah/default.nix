@@ -202,6 +202,8 @@ in
 
           set -o vi
 
+          alias :q="exit"
+
           eval "$(zoxide init bash)"
 
           eval "$(starship init bash)"

@@ -105,6 +105,10 @@
       enable = false;
       defaultWindowManager = "${pkgs.unstable.i3}/bin/i3";
     };
+
+    ratbagd = {
+      enable = true;
+    };
   };
 
   virtualisation.docker = {
