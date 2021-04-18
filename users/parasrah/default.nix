@@ -1,5 +1,4 @@
 { pkgs, lib, username, fun, inputs, ... }:
-
 let
   home =
     "/home/${username}";
@@ -15,20 +14,19 @@ let
     nvim = "${inputs.dotfiles}/nvim";
 
     # common
-    editor = "vi";
-    visual = "kak";
+    editor = "vi -e";
+    visual = "kcr edit";
     terminal = "kitty";
     kak_posix_shell = "${pkgs.dash}/bin/dash";
   };
 
   paths = with env; [
-    "${kak}/plugins/connect.kak/bin"
     "${kak}/bin"
     "${home}/.npm-global/bin"
     "${home}/.cargo/bin"
     "${home}/Scripts"
     "${home}/.local/bin"
-    "${inputs.dotfiles}/scripts"
+    "$DOTFILES/scripts"
   ];
 
 in
@@ -93,37 +91,35 @@ in
             ]
             "${inputs.dotfiles}/xinitrc";
       in
-        {
-          ".background-image".source = "${inputs.dotfiles}/wallpaper.png";
-          ".npmrc".source = "${inputs.dotfiles}/npmrc";
-          ".xinitrc".source = xinitrc;
-          ".xsession".source = xinitrc;
-          ".xprofile".source = xinitrc;
-          xterm-kitty = {
-            source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
-            target = ".terminfo/x/xterm-kitty";
-          };
-          kak-connect = {
-            source = "${inputs.dotfiles}/kak/share/kakoune-connect.desktop";
-            target = ".local/share/applications/kakoune-connect.desktop";
-          };
-          "kakoune.svg" = {
-            source = "${inputs.dotfiles}/kak/share/kakoune.logo";
-            target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
-          };
+      {
+        ".background-image".source = "${inputs.dotfiles}/wallpaper.png";
+        ".npmrc".source = "${inputs.dotfiles}/npmrc";
+        ".xinitrc".source = xinitrc;
+        ".xsession".source = xinitrc;
+        ".xprofile".source = xinitrc;
+        xterm-kitty = {
+          source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
+          target = ".terminfo/x/xterm-kitty";
         };
+        "kakoune.svg" = {
+          source = "${inputs.dotfiles}/kak/share/kakoune.logo";
+          target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
+        };
+      };
 
     xdg.configFile = {
       i3.source = "${inputs.dotfiles}/i3";
       polybar.source = "${inputs.dotfiles}/polybar";
       dunst.source = "${inputs.dotfiles}/dunst";
       kitty.source = "${inputs.dotfiles}/kitty";
-      rofi.source = "${inputs.dotfiles}/rofi";
       kak-lsp.source = "${inputs.dotfiles}/kak/kak-lsp";
       gitui.source = "${inputs.dotfiles}/gitui";
       kaksys.source = "${pkgs.unstable.kakoune-unwrapped}/share/kak/autoload";
       "broot/conf.toml".source = "${inputs.dotfiles}/broot/conf.toml";
       "starship.toml".source = "${inputs.dotfiles}/starship.toml";
+      "rofi/config.rasi".source = "${inputs.dotfiles}/rofi/config.rasi";
+      "rofi/launcher.sh".source = "${inputs.dotfiles}/rofi/launcher.sh";
+      "rofi/themes/style_8.rasi".source = "${inputs.dotfiles}/rofi/themes/style_8.rasi";
       "nu/config.toml".text =
         let
           surroundedPaths =
@@ -133,30 +129,30 @@ in
             builtins.concatStringsSep ", " surroundedPaths;
 
         in
-          ''
-            path = [${joinedPath}]
-            use_starship = true
-            skip_welcome_message = true
+        ''
+          path = [${joinedPath}]
+          use_starship = true
+          skip_welcome_message = true
 
-            [env]
-            KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
-            EDITOR = "${env.editor}"
-            VISUAL = "${env.visual}"
-            TERMINAL = "${env.terminal}"
-            DOTFILES = "${env.dotfiles}"
-            NIX = "${env.nix}"
+          [env]
+          KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
+          EDITOR = "${env.editor}"
+          VISUAL = "${env.visual}"
+          TERMINAL = "${env.terminal}"
+          DOTFILES = "${env.dotfiles}"
+          NIX = "${env.nix}"
 
-            [line_editor]
-            edit_mode = "vi"
-            max_history_size = 10000
-            history_duplicates = "ignoreconsecutive" # alwaysadd, ignoreconsecutive
-            history_ignore_space = true
-            completion_type = "circular" # circular, list, fuzzy
-            auto_add_history = true
-            bell_style = "none" # audible, none, visible
-            color_mode = "enabled" # enabled, forced, disabled
-            keyseq_timeout_ms = 50
-          '';
+          [line_editor]
+          edit_mode = "vi"
+          max_history_size = 10000
+          history_duplicates = "ignoreconsecutive" # alwaysadd, ignoreconsecutive
+          history_ignore_space = true
+          completion_type = "circular" # circular, list, fuzzy
+          auto_add_history = true
+          bell_style = "none" # audible, none, visible
+          color_mode = "enabled" # enabled, forced, disabled
+          keyseq_timeout_ms = 50
+        '';
     };
 
     xdg.mimeApps = {
@@ -166,7 +162,7 @@ in
           "image/png" = "brave-browser.desktop";
           "application/pdf" = "okularApplication_dvi.desktop";
         };
-        removed = {};
+        removed = { };
       };
       defaultApplications = {
         "application/x-directory" = "org.gnome.Nautilus.desktop";
@@ -200,23 +196,29 @@ in
           # this is okay because home manager ensures it's only loaded once
           . $HOME/.profile
 
+          # vim mode
           set -o vi
 
+          # aliases
           alias :q="exit"
+          alias cat='bat --paging=never'
+
+          # kak alias
+          alias :e='kcr edit'
+          alias :k='kcr-fzf-shell'
+          alias :c='kcr-fzf-shell --working-directory .'
+          alias :l='kcr list'
+          alias :a='kcr attach'
+          alias :s='kcr send'
+          alias val='kcr get --value'
+          alias opt='kcr get --option'
+          alias reg='kcr get --register'
 
           eval "$(zoxide init bash)"
-
           eval "$(starship init bash)"
-
           eval "$(direnv hook bash)"
 
-          # ssh
-          # if [ -n "$DESKTOP_SESSION" ]; then
-          #   eval $(gnome-keyring-daemon --start)
-          #   export SSH_AUTH_SOCK
-          # fi
-
-          # or just unlock keyring
+          # unlock keyring
           eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
 
           # gpg
@@ -225,7 +227,7 @@ in
           gpgconf --launch gpg-agent
         '';
 
-        shellAliases = {};
+        shellAliases = { };
       };
 
       fzf = {

@@ -4,6 +4,8 @@
 
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    kakoune-cr.url = "github:parasrah/kakoune.cr";
+
     home.url = "github:rycee/home-manager/release-20.09";
 
     sops-nix = {

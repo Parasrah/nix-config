@@ -3,7 +3,7 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-GnJ21yDibBKrY48W8XuWARQn9iN/pOb3RZuJ+ONX8iM=",
+        "narHash": "sha256-FHGG89hTUyHsOxszYvXX/ddrVdNukrWbNzqKuh937D0=",
         "path": "/etc/nixos/users/parasrah/dotfiles",
         "type": "path"
       },
@@ -39,6 +39,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1618217525,
+        "narHash": "sha256-WGrhVczjXTiswQaoxQ+0PTfbLNeOQM6M36zvLn78AYg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c6169a2772643c4a93a0b5ac1c61e296cba68544",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -55,6 +70,25 @@
         "owner": "rycee",
         "ref": "release-20.09",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "kakoune-cr": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1618699036,
+        "narHash": "sha256-yZotL3RFZYDwHlxBvMFfVcY6p8jxLGxRvKK1AIiys1Q=",
+        "owner": "parasrah",
+        "repo": "kakoune.cr",
+        "rev": "6f9e1ccd9361505e21518e552addc56f3c7dccb0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "parasrah",
+        "repo": "kakoune.cr",
         "type": "github"
       }
     },
@@ -90,6 +124,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1618530127,
+        "narHash": "sha256-jQPk7XpabppYa+GIO5LVTtUFhHq/VqHhPggwIKhTCnQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "294d1925af6462e55c76b49624b983036f0093b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1618170470,
         "narHash": "sha256-6l43B/yy3dxAb3OaF20S0le83Uy+/ouUCXuJrIQP1Gs=",
         "owner": "NixOS",
@@ -110,7 +160,8 @@
         "dungeondraft": "dungeondraft",
         "flake-utils": "flake-utils",
         "home": "home",
-        "nixpkgs": "nixpkgs_2",
+        "kakoune-cr": "kakoune-cr",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "sops-nix": "sops-nix",
         "wonderdraft": "wonderdraft"

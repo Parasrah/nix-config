@@ -6,11 +6,11 @@
   homemanager = {
     home.packages = with pkgs; [
       mono
-      steam
       piper
       spotify
       google-chrome
 
+      unstable.steam
       unstable.discord
     ];
   };

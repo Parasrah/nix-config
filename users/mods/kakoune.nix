@@ -12,6 +12,7 @@
       aspell
       ripgrep
       coreutils
+      kakoune-cr
       editorconfig-core-c
 
       aspellDicts.en
