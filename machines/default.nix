@@ -35,9 +35,12 @@
     noto-fonts
     font-awesome
     dejavu_fonts
+
     (nerdfonts.override {
       fonts = [ "FiraCode" ];
     })
+
+    unstable.cascadia-code
   ];
 
   programs = {
