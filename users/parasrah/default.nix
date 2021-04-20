@@ -120,39 +120,7 @@ in
       "rofi/config.rasi".source = "${inputs.dotfiles}/rofi/config.rasi";
       "rofi/launcher.sh".source = "${inputs.dotfiles}/rofi/launcher.sh";
       "rofi/themes/style_8.rasi".source = "${inputs.dotfiles}/rofi/themes/style_8.rasi";
-      "nu/config.toml".text =
-        let
-          surroundedPaths =
-            builtins.map (x: "\"${x}\"") paths;
-
-          joinedPath =
-            builtins.concatStringsSep ", " surroundedPaths;
-
-        in
-        ''
-          path = [${joinedPath}]
-          use_starship = true
-          skip_welcome_message = true
-
-          [env]
-          KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
-          EDITOR = "${env.editor}"
-          VISUAL = "${env.visual}"
-          TERMINAL = "${env.terminal}"
-          DOTFILES = "${env.dotfiles}"
-          NIX = "${env.nix}"
-
-          [line_editor]
-          edit_mode = "vi"
-          max_history_size = 10000
-          history_duplicates = "ignoreconsecutive" # alwaysadd, ignoreconsecutive
-          history_ignore_space = true
-          completion_type = "circular" # circular, list, fuzzy
-          auto_add_history = true
-          bell_style = "none" # audible, none, visible
-          color_mode = "enabled" # enabled, forced, disabled
-          keyseq_timeout_ms = 50
-        '';
+      "nu/config.toml".text = import ./nu.nix { inherit paths env; };
     };
 
     xdg.mimeApps = {
