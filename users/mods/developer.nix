@@ -21,6 +21,7 @@
       hyperfine
       nix-direnv
       inotify-tools
+      webdev-browser
 
       unstable.scc
       unstable.zoxide

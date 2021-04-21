@@ -7,10 +7,9 @@
     home.packages = with pkgs; [
       mono
       piper
+      steam
       spotify
-      google-chrome
 
-      unstable.steam
       unstable.discord
     ];
   };

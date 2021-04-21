@@ -133,13 +133,27 @@ in
         removed = { };
       };
       defaultApplications = {
+        "application/csv" = "kakoune.desktop";
+        "application/json" = "kakoune.desktop";
+        "application/postscript" = "kakoune.desktop";
+        "text/html" = "kakoune.desktop";
+        "text/plain" = "kakoune.desktop";
+        "text/troff" = "kakoune.desktop";
+        "text/x-c++" = "kakoune.desktop";
+        "text/x-c" = "kakoune.desktop";
+        "text/x-java" = "kakoune.desktop";
+        "text/x-lisp" = "kakoune.desktop";
+        "text/x-makefile" = "kakoune.desktop";
+        "text/xml" = "kakoune.desktop";
+        "text/x-ruby" = "kakoune.desktop";
+        "text/x-script.python" = "kakoune.desktop";
+        "text/x-shellscript" = "kakoune.desktop";
         "application/x-directory" = "org.gnome.Nautilus.desktop";
         "inode/directory" = "org.gnome.Nautilus.desktop";
         "x-scheme-handler/http" = "brave-browser.desktop";
         "x-scheme-handler/https" = "brave-browser.desktop";
         "x-scheme-handler/ftp" = "brave-browser.desktop";
         "x-scheme-handler/chrome" = "brave-browser.desktop";
-        "text/html" = "brave-browser.desktop";
         "application/x-extension-htm" = "brave-browser.desktop";
         "application/x-extension-html" = "brave-browser.desktop";
         "application/x-extension-shtml" = "brave-browser.desktop";
@@ -150,10 +164,6 @@ in
         "x-scheme-handler/unknown" = "brave-browser.desktop";
         "x-scheme-handler/postman" = "Postman.desktop";
         "x-scheme-handler/mailto" = "brave-browser.desktop";
-        "application/json" = "kakoune-connect.desktop";
-        "text/plain" = "kakoune-connect.desktop";
-        "text/xml" = "kakoune-connect.desktop";
-        "text/x-ruby" = "kakoune-connect.desktop";
       };
     };
 
@@ -172,15 +182,18 @@ in
           alias cat='bat --paging=never'
 
           # kak alias
-          alias :e='kcr edit'
-          alias :k='kcr-fzf-shell'
-          alias :c='kcr-fzf-shell --working-directory .'
-          alias :l='kcr list'
-          alias :a='kcr attach'
-          alias :s='kcr send'
-          alias val='kcr get --value'
-          alias opt='kcr get --option'
-          alias reg='kcr get --register'
+          alias la="ls --long"
+          alias :e="kcr edit"
+          alias :e="kcr edit"
+          alias :k="kcr-fzf-shell"
+          alias :K="kcr-fzf-shell --working-directory ."
+          alias :l="kcr list"
+          alias :a="kcr attach"
+          alias :s="kcr send"
+          alias :kill="kcr kill"
+          alias val="kcr get --value"
+          alias opt="kcr get --option"
+          alias reg="kcr get --register"
 
           eval "$(zoxide init bash)"
           eval "$(starship init bash)"
