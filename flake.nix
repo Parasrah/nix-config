@@ -20,6 +20,11 @@
       flake = false;
     };
 
+    secrets = {
+      url = "/etc/nixos/secrets";
+      flake = false;
+    };
+
     dungeondraft = {
       url = "/etc/nixos/pkgs/dungeondraft";
       flake = false;
@@ -69,6 +74,8 @@
               pkgs = import nixpkgs { inherit system; };
             in
             pkgs.mkShell {
+              EDITOR = "kak";
+
               sopsPGPKeyDirs = [
                 "./keys/hosts/"
                 "./keys/users/"

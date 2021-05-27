@@ -163,8 +163,21 @@
         "kakoune-cr": "kakoune-cr",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "secrets": "secrets",
         "sops-nix": "sops-nix",
         "wonderdraft": "wonderdraft"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-gfbD2tDW/JODGce3MWHBftwV/HtkcbmwpFNqy+X+gwE=",
+        "path": "/etc/nixos/secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/secrets",
+        "type": "path"
       }
     },
     "sops-nix": {

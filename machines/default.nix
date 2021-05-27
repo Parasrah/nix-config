@@ -118,8 +118,7 @@
   '';
 
   # sops
-  # TODO: prevent loading to store
-  sops.defaultSopsFile = "/etc/nixos/secrets/secrets.yaml";
+  sops.defaultSopsFile = "${inputs.secrets}/secrets.yaml";
   sops.gnupgHome = "/root/.gnupg";
   sops.sshKeyPaths = [ ];
 
