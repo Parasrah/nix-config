@@ -7,3 +7,6 @@
 [submodule "pkgs/wonderdraft"]
 	path = pkgs/wonderdraft
 	url = git@github.com:Parasrah/wonderdraft.nix.git
+[submodule "secrets"]
+	path = secrets
+	url = git@github.com:Parasrah/secrets.git

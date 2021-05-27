@@ -20,6 +20,7 @@
       git-crypt
       hyperfine
       nix-direnv
+      timewarrior
       inotify-tools
       webdev-browser
 

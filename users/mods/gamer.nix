@@ -9,6 +9,7 @@
       piper
       steam
       spotify
+      steam-run
 
       unstable.discord
     ];

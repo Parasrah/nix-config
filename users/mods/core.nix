@@ -42,6 +42,7 @@ in
       killall
       hddtemp
       usbutils
+      tealdeer
       inetutils
       playerctl
       libnotify

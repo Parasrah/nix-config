@@ -32,7 +32,7 @@ in
       ]
 
   [env]
-  KAKOUNE_POSIX_SHELL = "${env.kak_posix_shell}"
+  KAKOUNE_POSIX_SHELL = "${env.kakPosixShell}"
   EDITOR = "${env.editor}"
   VISUAL = "${env.visual}"
   TERMINAL = "${env.terminal}"

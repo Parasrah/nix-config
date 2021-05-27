@@ -3,12 +3,12 @@ self: super:
 {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (
     old: {
-      version = "2020-08-04";
+      version = "2021-04-21";
       src = self.fetchFromGitHub {
         owner = "mawww";
         repo = "kakoune";
-        rev = "e0d2602e6a924c9a4067fa9ff23f034b906dd56d";
-        sha256 = "091qzk0qs7hql0q51hix99srgma35mhdnjfd5ncfba1bmc1h8x5i";
+        rev = "d5eb98f7fc4c0f065f96bec247504e99d67ffb54";
+        sha256 = "sha256-QqwNjMGiB3OOD6N03MkqHrMEi5oz4DbiOX9HQCo/a/Y=";
       };
     }
   );

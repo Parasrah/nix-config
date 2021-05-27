@@ -13,12 +13,12 @@
       ripgrep
       coreutils
       kakoune-cr
+      kakoune-unwrapped
       editorconfig-core-c
 
       aspellDicts.en
 
       unstable.nnn
-      unstable.kakoune-unwrapped
     ];
   };
 }

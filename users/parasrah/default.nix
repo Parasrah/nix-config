@@ -13,11 +13,14 @@ let
     kak = "${inputs.dotfiles}/kak";
     nvim = "${inputs.dotfiles}/nvim";
 
+    # fzf
+    fzfDefaultCmd = "fd --type f -H --exclude '.git/*'";
+
     # common
     editor = "vi -e";
     visual = "kcr edit";
     terminal = "kitty";
-    kak_posix_shell = "${pkgs.dash}/bin/dash";
+    kakPosixShell = "${pkgs.dash}/bin/dash";
   };
 
   paths = with env; [
@@ -44,7 +47,7 @@ in
       DOTFILES = env.dotfiles;
       NVIMCONFIG = env.nvim;
       KAKCONFIG = env.kak;
-      KAKOUNE_POSIX_SHELL = env.kak_posix_shell;
+      KAKOUNE_POSIX_SHELL = env.kakPosixShell;
       PROJECTS = env.projects;
       EDITOR = env.editor;
       VISUAL = env.visual;
@@ -241,6 +244,9 @@ in
           };
           pull = {
             rebase = false;
+          };
+          init = {
+            defaultBranch = "main";
           };
         };
 

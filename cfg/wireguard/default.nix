@@ -18,7 +18,7 @@ in
     privateKeyFile = secrets."wireguard_${name}_private_key".path;
     peers = [
       {
-        publicKey = "mnMS75gHAoSr/HyZ0NxppZt3B1IZ9Iq3uVoxay3BVxs=";
+        publicKey = "6QzVK+uE+N7WbCh+RuGUPUdfEVm3/a/kFCj3my7mIE8=";
         endpoint = "kali.parasrah.com:51820";
         allowedIPs = [ "0.0.0.0/0" "::/0" ];
         persistentKeepalive = 21;
