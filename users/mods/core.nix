@@ -4,15 +4,9 @@
 
 { username, pkgs, ... }:
 
-let
-  homeDirectory =
-    "/home/${username}";
-
-in
 {
   os = {
     isNormalUser = true;
-    home = homeDirectory;
   };
 
   homemanager = {
