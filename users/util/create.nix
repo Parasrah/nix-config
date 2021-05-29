@@ -8,7 +8,6 @@
 
 # input from `imports`
 { pkgs, config, lib, inputs, system, ... }:
-
 let
   fun =
     import ../../fun { inherit pkgs; };
@@ -18,26 +17,27 @@ let
       [
         (fun.lists.map (mod: mod { inherit username pkgs lib fun inputs; }))
         (fun.lists.map (x: x.os))
-        (fun.lists.foldl fun.recursiveUpdateConcat {})
-      ] mods;
+        (fun.lists.foldl fun.recursiveUpdateConcat { })
+      ]
+      mods;
 
   homemanager =
     fun.pipe
       [
         (fun.lists.map (mod: mod { inherit username pkgs lib fun inputs; }))
         (fun.lists.map (x: x.homemanager))
-        (fun.lists.foldl fun.recursiveUpdateConcat {})
-      ] mods;
+        (fun.lists.foldl fun.recursiveUpdateConcat { })
+      ]
+      mods;
 
 in
 {
   users.users."${username}" = user;
 
-  home-manager.users."${username}" = fun.recursiveUpdateConcat {
-    nixpkgs.config = import ../../cfg/pkgsConfig { inherit inputs system config; };
-    home.stateVersion = "20.09";
-    nixpkgs.overlays = [
-      (import ../../pkgs)
-    ];
-  } homemanager;
+  home-manager.users."${username}" = fun.recursiveUpdateConcat
+    {
+      nixpkgs = import ../../cfg/pkgs { inherit inputs system; };
+      home.stateVersion = "20.09";
+    }
+    homemanager;
 }

@@ -66,13 +66,17 @@
     in
     (flake-utils.lib.eachDefaultSystem
       (system:
+        let
+          pkgsConfig =
+            import ./cfg/pkgs { inherit inputs system; };
+
+          pkgs =
+            import nixpkgs pkgsConfig;
+        in
         {
           packages = { };
 
           devShell =
-            let
-              pkgs = import nixpkgs { inherit system; };
-            in
             pkgs.mkShell {
               EDITOR = "kak";
 
@@ -82,6 +86,8 @@
               ];
 
               buildInputs = with pkgs; [
+                unstable.go-task
+
                 (callPackage sops-nix { }).sops-pgp-hook
               ];
             };

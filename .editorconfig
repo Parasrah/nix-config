@@ -7,6 +7,6 @@ insert_final_newline = true
 [*.{js,nix,yaml}]
 charset = utf-8
 
-[*.{yaml,nix}]
+[*.{yaml,yml,nix}]
 indent_style = space
 indent_size = 2
