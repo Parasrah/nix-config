@@ -1,24 +1,33 @@
 { mods, username, homeDirectory, stateVersion }:
 
-passthrough@{ system, ... }:
-
-assert builtins.isString stateVersion;
-assert builtins.isString username;
-assert builtins.isList mods;
+{ extraSpecialArgs, system, pkgs }:
 let
-  homeDirectory =
-    "/home/${username}/";
+  inherit (pkgs) lib;
+
+  fun =
+    import ../../fun { inherit pkgs; };
 
 in
-({
-  inherit username homeDirectory;
+{
+  inherit system homeDirectory username extraSpecialArgs pkgs;
 
-  configuration = { pkgs, config, lib, inputs, ... }:
+  configuration = { pkgs, inputs, ... }:
     let
-      fun =
-        import ../../fun { inherit pkgs; };
+      payload =
+        { inherit stateVersion system homeDirectory username pkgs lib fun inputs; };
+
     in
-    import ./create-home-config.nix {
-      inherit username homeDirectory stateVersion pkgs lib fun inputs system mods;
-    };
-} // passthrough)
+    fun.pipe
+      [
+        (fun.lists.map (mod: mod payload))
+        (fun.lists.map (x: x.homemanager))
+        (fun.lists.foldl fun.recursiveUpdateConcat { })
+      ]
+      (mods ++ [
+        ({ ... }: {
+          homemanager = {
+            nixpkgs = import ../../cfg/pkgs { inherit system inputs; };
+          };
+        })
+      ]);
+}

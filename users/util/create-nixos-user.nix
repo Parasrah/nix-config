@@ -3,35 +3,35 @@
 # input from `imports`
 { pkgs, config, lib, inputs, system, ... }:
 let
+  inherit (config.system) stateVersion;
+
   fun =
     import ../../fun { inherit pkgs; };
 
-  user =
+  payload =
+    { inherit stateVersion system homeDirectory username pkgs lib fun inputs; };
+
+  userConfig =
     fun.pipe
       [
-        (fun.lists.map (mod: mod {
-          inherit username homeDirectory pkgs lib fun inputs;
-          inherit (config.system) stateVersion;
-        }))
-        (fun.lists.map (x: x.os or { }))
+        (fun.lists.map (mod: mod payload))
+        (fun.lists.map (x: x.os))
         (fun.lists.foldl fun.recursiveUpdateConcat { })
       ]
       mods;
 
   homeManagerConfig =
-    import ./create-home-config.nix
-      {
-        inherit username homeDirectory pkgs lib fun inputs system mods;
-      };
+    fun.pipe
+      [
+        (fun.lists.map (mod: mod payload))
+        (fun.lists.map (x: x.homemanager))
+        (fun.lists.foldl fun.recursiveUpdateConcat { })
+      ]
+      mods;
 
 in
-assert builtins.isString user.home;
-assert builtins.isAttrs homeManagerConfig;
-assert builtins.isAttrs homeManagerConfig.home;
-assert builtins.isString homeManagerConfig.home.homeDirectory;
-
 {
-  users.users."${username}" = user;
+  users.users."${username}" = userConfig;
 
   home-manager.users."${username}" = homeManagerConfig;
 }

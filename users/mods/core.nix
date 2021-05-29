@@ -15,8 +15,6 @@
     home.username = username;
     home.stateVersion = stateVersion;
 
-    nixpkgs = import ../../cfg/pkgs { inherit inputs system; };
-
     home.packages = with pkgs; [
       fd
       sd
