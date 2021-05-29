@@ -118,4 +118,8 @@
   sops.secrets = {
     wireguard_lexi_private_key = { };
   };
+
+  # home manager
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 }

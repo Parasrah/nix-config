@@ -14,7 +14,7 @@ tasks:
   build:
     deps: [ check-nixos ]
     cmds:
-      - nixos-rebuild build --flake /etc/nixos#{{ .HOST }}
+      - nixos-rebuild build --flake /etc/nixos#{{ .HOST }} {{ .CLI_ARGS }}
 
   switch:
     deps: [ check-nixos ]
@@ -24,3 +24,7 @@ tasks:
   check-nixos:
     preconditions:
       - test "{{ .HOST }}" != "robots"
+
+  build-home:
+    cmds:
+      - nix build '.#robots'

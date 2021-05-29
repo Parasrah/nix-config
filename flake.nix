@@ -6,7 +6,10 @@
 
     kakoune-cr.url = "github:parasrah/kakoune.cr";
 
-    home.url = "github:rycee/home-manager/release-20.09";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-20.09";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix = {
       url = github:Mic92/sops-nix;
@@ -36,12 +39,15 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home, sops-nix, flake-utils, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, sops-nix, flake-utils, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) nixosSystem;
 
       specialArgs = { inherit inputs; };
+
+      pkgsFor = system:
+        import nixpkgs (import ./cfg/pkgs { inherit inputs system; });
 
       specialArgsFor = system: specialArgs // {
         inherit system;
@@ -63,18 +69,27 @@
           );
         };
       };
+
     in
     (flake-utils.lib.eachDefaultSystem
       (system:
         let
-          pkgsConfig =
-            import ./cfg/pkgs { inherit inputs system; };
-
-          pkgs =
-            import nixpkgs pkgsConfig;
+          pkgs = pkgsFor system;
         in
         {
-          packages = { };
+          packages = {
+            robots = self.homeConfigurations."${system}".robots.activationPackage;
+          };
+
+          homeConfigurations =
+            let
+              extraSpecialArgs = specialArgsFor system;
+
+              payload = { inherit system extraSpecialArgs pkgs; };
+            in
+            {
+              robots = home-manager.lib.homeManagerConfiguration (import ./users/parasrah/robots.nix payload);
+            };
 
           devShell =
             pkgs.mkShell {
@@ -101,7 +116,7 @@
 
           modules = [
             nixpkgs.nixosModules.notDetected
-            home.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
             homeManagerConfig
             ./machines/lexi/configuration.nix
             sops-nix.nixosModules.sops

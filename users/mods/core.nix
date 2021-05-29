@@ -2,13 +2,8 @@
 #
 # All normal users should extend from "core"
 
-{ username, pkgs, ... }:
+{ username, pkgs, homeDirectory, stateVersion, inputs, system, ... }:
 
-let
-  homeDirectory =
-    "/home/${username}";
-
-in
 {
   os = {
     isNormalUser = true;
@@ -18,6 +13,7 @@ in
   homemanager = {
     home.homeDirectory = homeDirectory;
     home.username = username;
+    home.stateVersion = stateVersion;
 
     home.packages = with pkgs; [
       fd
