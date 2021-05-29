@@ -2,16 +2,20 @@
 #
 # All normal users should extend from "core"
 
-{ username, pkgs, ... }:
+{ username, pkgs, homeDirectory, stateVersion, inputs, system, ... }:
 
 {
   os = {
     isNormalUser = true;
+    home = homeDirectory;
   };
 
   homemanager = {
     home.homeDirectory = homeDirectory;
     home.username = username;
+    home.stateVersion = stateVersion;
+
+    nixpkgs = import ../../cfg/pkgs { inherit inputs system; };
 
     home.packages = with pkgs; [
       fd

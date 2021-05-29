@@ -1,16 +1,20 @@
 let
-  create = import ./util/create.nix;
+  createNixOsUser = import ./util/create-nixos-user.nix;
+
+  homeDirectory = "/root";
 
 in
-create
+createNixOsUser
   {
+    inherit homeDirectory;
+
     username = "root";
 
     mods = [
       (
         { pkgs, ... }: {
           os = {
-            home = "/root";
+            home = homeDirectory;
             isNormalUser = false;
             group = "root";
             extraGroups = [ "nixos-config" ];

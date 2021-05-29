@@ -50,22 +50,6 @@
         inherit system;
       };
 
-      homeManagerConfig = { config, sops-nix, ... }: {
-        # Submodules have merge semantics, making it possible to amend
-        # the `home-manager.users` submodule for additional functionality.
-        options.home-manager.users = lib.mkOption {
-          type = lib.types.attrsOf (
-            lib.types.submoduleWith {
-              modules = [ ];
-              # Makes specialArgs available to Home Manager modules as well.
-              specialArgs = specialArgs // {
-                # Allow accessing the parent NixOS configuration.
-                super = config;
-              };
-            }
-          );
-        };
-      };
     in
     (flake-utils.lib.eachDefaultSystem
       (system:
@@ -84,6 +68,9 @@
           homeConfigurations = {
             robots = home-manager.lib.homeManagerConfiguration (import ./users/parasrah/robots.nix {
               inherit system pkgs;
+              extraSpecialArgs = {
+                inherit pkgs system inputs;
+              };
             });
           };
 
@@ -113,7 +100,6 @@
           modules = [
             nixpkgs.nixosModules.notDetected
             home-manager.nixosModules.home-manager
-            homeManagerConfig
             ./machines/lexi/configuration.nix
             sops-nix.nixosModules.sops
           ];

@@ -2,7 +2,7 @@ let
   util = import ../util;
 
 in
-util.create
+util.createNixOsUser
   {
     username = "parasrah";
 
