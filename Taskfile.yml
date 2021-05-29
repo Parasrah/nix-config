@@ -1,0 +1,26 @@
+# https://taskfile.dev
+
+version: '3'
+
+env:
+  HOST:
+    sh: hostname
+
+tasks:
+  default:
+    cmds:
+      - task: build
+
+  build:
+    deps: [ check-nixos ]
+    cmds:
+      - nixos-rebuild build --flake /etc/nixos#{{ .HOST }}
+
+  switch:
+    deps: [ check-nixos ]
+    cmds:
+      - sudo nixos-rebuild switch --flake /etc/nixos#{{ .HOST }}
+
+  check-nixos:
+    preconditions:
+      - test "{{ .HOST }}" != "robots"

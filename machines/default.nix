@@ -92,14 +92,7 @@
     '';
   };
 
-  nixpkgs.overlays = [
-    (import ../pkgs)
-    (import "${inputs.dungeondraft}/overlay.nix")
-    (import "${inputs.wonderdraft}/overlay.nix")
-    inputs.kakoune-cr.overlay."${system}"
-  ];
-
-  nixpkgs.config = import ../cfg/pkgsConfig { inherit inputs system config; };
+  nixpkgs = import ../cfg/pkgs { inherit inputs system; };
 
   # Security
   security.sudo = {

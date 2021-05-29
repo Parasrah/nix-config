@@ -70,7 +70,11 @@
     (flake-utils.lib.eachDefaultSystem
       (system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgsConfig =
+            import ./cfg/pkgs { inherit inputs system; };
+
+          pkgs =
+            import nixpkgs pkgsConfig;
         in
         {
           packages = {
@@ -93,6 +97,8 @@
               ];
 
               buildInputs = with pkgs; [
+                unstable.go-task
+
                 (callPackage sops-nix { }).sops-pgp-hook
               ];
             };
