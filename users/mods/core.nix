@@ -61,7 +61,6 @@
 
       unstable.nnn
       unstable.brave
-      unstable.kitty
       unstable.httpie
       unstable.bottom
       unstable.flameshot

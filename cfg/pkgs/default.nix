@@ -14,8 +14,8 @@ rec {
 
   overlays = [
     (import ../../pkgs)
-    (import "${inputs.dungeondraft}/overlay.nix")
-    (import "${inputs.wonderdraft}/overlay.nix")
+    # (import "${inputs.dungeondraft}/overlay.nix")
+    # (import "${inputs.wonderdraft}/overlay.nix")
     (inputs.kakoune-cr.overlay."${system}")
   ];
 }

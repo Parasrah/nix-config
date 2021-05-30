@@ -27,4 +27,13 @@ tasks:
 
   build-home:
     cmds:
-      - nix build '.#robots'
+      - nix build '.#{{ .HOST }}'
+
+  switch-home:
+    deps: [build-home]
+    cmds:
+      - ./result/activate
+
+  update-dotfiles:
+    cmds:
+      - nix flake lock --update-input dotfiles
