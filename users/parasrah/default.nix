@@ -113,7 +113,6 @@ in
     xdg.configFile = {
       i3.source = "${inputs.dotfiles}/i3";
       polybar.source = "${inputs.dotfiles}/polybar";
-      dunst.source = "${inputs.dotfiles}/dunst";
       kitty.source = "${inputs.dotfiles}/kitty";
       kak-lsp.source = "${inputs.dotfiles}/kak/kak-lsp";
       gitui.source = "${inputs.dotfiles}/gitui";
