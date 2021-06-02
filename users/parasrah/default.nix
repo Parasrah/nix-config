@@ -172,30 +172,36 @@ in
     programs = {
       bash = {
         enable = true;
+        shellAliases = {
+          # aliases
+          ":q" = "exit";
+          "cat" = "bat --paging=never";
+
+          # timewarrior
+          ":t" = "timew";
+          ":tw" = "timew week";
+          ":ts" = "timew summary";
+
+          # kak alias
+          "la" = "ls --long";
+          ":e" = "kcr edit";
+          ":k" = "kcr-fzf-shell";
+          ":K" = "kcr-fzf-shell --working-directory .";
+          ":l" = "kcr list";
+          ":a" = "kcr attach";
+          ":s" = "kcr send";
+          ":kill" = "kcr kill";
+          "val" = "kcr get --value";
+          "opt" = "kcr get --option";
+          "reg" = "kcr get --register";
+        };
+
         initExtra = lib.mkBefore ''
           # this is okay because home manager ensures it's only loaded once
           . $HOME/.profile
 
           # vim mode
           set -o vi
-
-          # aliases
-          alias :q="exit"
-          alias cat='bat --paging=never'
-
-          # kak alias
-          alias la="ls --long"
-          alias :e="kcr edit"
-          alias :e="kcr edit"
-          alias :k="kcr-fzf-shell"
-          alias :K="kcr-fzf-shell --working-directory ."
-          alias :l="kcr list"
-          alias :a="kcr attach"
-          alias :s="kcr send"
-          alias :kill="kcr kill"
-          alias val="kcr get --value"
-          alias opt="kcr get --option"
-          alias reg="kcr get --register"
 
           eval "$(zoxide init bash)"
           eval "$(starship init bash)"
@@ -237,6 +243,7 @@ in
           core = {
             editor = "kak";
             pager = "delta";
+            excludesfile = "~/.gitignore";
           };
           merge = {
             tool = "meld";

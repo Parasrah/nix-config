@@ -1,6 +1,5 @@
 let
   util = import ../util;
-
 in
 util.createHomeUser
   ({
@@ -18,7 +17,24 @@ util.createHomeUser
       (import ../mods/nushell.nix)
       (import ./default.nix)
       (
-        { pkgs, username, ... }: {
+        { pkgs, username, ... }:
+        let
+          xinitrc =
+            pkgs.writeTextFile {
+              name = ".xinitrc";
+              text = ''
+                if [ -n "$__XINITRC_SOURCED" ]; then return; fi
+                export __XINITRC_SOURCED=1
+
+                . "$HOME/.profile"
+                echo "Xft.dpi: 144" | xrdb -merge
+                fix-keyboard 2>/dev/null
+                ${pkgs.feh}/bin/feh --bg-scale "$HOME/.background-image"
+              '';
+            };
+
+        in
+        {
           homemanager = {
             home.packages = with pkgs; [
               slack
@@ -49,14 +65,50 @@ util.createHomeUser
             programs.home-manager.enable = true;
             home.sessionVariables.LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             targets.genericLinux.enable = true;
-            programs.bash.profileExtra = ''
-              if [ -z "$NIX_PROFILE_LOADED" ]; then
-                export NIX_PROFILE_LOADED=1
-                . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-              fi
 
-              echo "Xft.dpi: 144" | xrdb -merge
-            '';
+            programs.bash = {
+              # TODO: make `util#create` support `lib.mkAfter` & `lib.mkBefore`
+              # or (preferabley) find way to make Nix modules to work w/ home manager
+              # and NixOS
+              initExtra = ''
+                # this is okay because home manager ensures it's only loaded once
+                . $HOME/.profile
+
+                # vim mode
+                set -o vi
+
+                eval "$(zoxide init bash)"
+                eval "$(starship init bash)"
+                eval "$(direnv hook bash)"
+
+                # unlock keyring
+                eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
+
+                # gpg
+                export GPG_TTY="$(tty)"
+                export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+                gpgconf --launch gpg-agent
+
+                if ! shopt -oq posix; then
+                  if [ -f /usr/share/bash-completion/bash_completion ]; then
+                    . /usr/share/bash-completion/bash_completion
+                  elif [ -f /etc/bash_completion ]; then
+                    . /etc/bash_completion
+                  fi
+                fi
+              '';
+
+              profileExtra = ''
+                if [ -n "$__PROFILE_SOURCED" ]; then return; fi
+                export __PROFILE_SOURCED=1
+
+                . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+              '';
+            };
+
+            home.file.".xinitrc".source = xinitrc;
+            home.file.".xsession".source = xinitrc;
+            home.file.".xprofile".source = xinitrc;
 
             services.dunst = {
               enable = true;
@@ -127,6 +179,13 @@ util.createHomeUser
             services.lorri = {
               enable = true;
             };
+
+            services.flameshot = {
+              # enable this after getting onto 21.05
+              enable = false;
+            };
+
+            services.screen-locker.enable = false;
           };
         }
       )
