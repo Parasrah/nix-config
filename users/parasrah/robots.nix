@@ -167,6 +167,11 @@ util.createHomeUser
                   summary = "*";
                   script = "play-notification";
                 };
+
+                slack = {
+                  desktop_entry = "Slack";
+                  urgency = "critical";
+                };
               };
             };
 
