@@ -36,6 +36,8 @@
     font-awesome
     dejavu_fonts
 
+    gnome3.adwaita-icon-theme
+
     unstable.recursive
   ];
 

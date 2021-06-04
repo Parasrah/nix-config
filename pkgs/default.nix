@@ -4,11 +4,10 @@ self: super:
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (
     old: {
       version = "2021-04-21";
-      src = self.fetchFromGitHub {
-        owner = "mawww";
-        repo = "kakoune";
-        rev = "d5eb98f7fc4c0f065f96bec247504e99d67ffb54";
-        sha256 = "sha256-QqwNjMGiB3OOD6N03MkqHrMEi5oz4DbiOX9HQCo/a/Y=";
+      src = builtins.fetchGit {
+        url = "https://github.com/Parasrah/kakoune";
+        ref = "daily-driver";
+        rev = "97a551c4c6522adf0079b45a3a5cb1f728ff6144";
       };
     }
   );

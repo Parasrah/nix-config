@@ -1,7 +1,7 @@
 let
   withHomeDirectory = create: args:
     create (args // {
-      homeDirectory = "/home/${args.username}/";
+      homeDirectory = "/home/${args.username}";
     });
 in
 {
