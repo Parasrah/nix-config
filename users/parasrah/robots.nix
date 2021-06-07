@@ -38,6 +38,7 @@ util.createHomeUser
           homemanager = {
             home.packages = with pkgs; [
               slack
+              wmctrl
 
               # fonts
               noto-fonts
@@ -104,6 +105,10 @@ util.createHomeUser
 
                 . "$HOME/.nix-profile/etc/profile.d/nix.sh"
               '';
+
+              shellAliases = {
+                ls = "ls --color=auto";
+              };
             };
 
             home.file.".xinitrc".source = xinitrc;
@@ -171,6 +176,7 @@ util.createHomeUser
                 slack = {
                   desktop_entry = "Slack";
                   urgency = "critical";
+                  script = "dunst-demand-attention";
                 };
               };
             };

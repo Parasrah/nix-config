@@ -177,10 +177,11 @@ in
           ":q" = "exit";
           "cat" = "bat --paging=never";
 
-          # timewarrior
-          ":t" = "timew";
-          ":tw" = "timew week";
-          ":ts" = "timew summary";
+          # cronus
+          ":t" = "cronus";
+          ":tw" = "cronus show week";
+          ":td" = "cronus show day";
+          ":ts" = "cronus status";
 
           # kak alias
           "la" = "ls --long";
@@ -191,9 +192,9 @@ in
           ":a" = "kcr attach";
           ":s" = "kcr send";
           ":kill" = "kcr kill";
-          "val" = "kcr get --value";
-          "opt" = "kcr get --option";
-          "reg" = "kcr get --register";
+          "val" = "kcr get -r --value";
+          "opt" = "kcr get -r --option";
+          "reg" = "kcr get -r --register";
         };
 
         initExtra = lib.mkBefore ''
