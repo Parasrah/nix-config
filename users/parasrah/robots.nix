@@ -17,7 +17,7 @@ util.createHomeUser
       (import ../mods/nushell.nix)
       (import ./default.nix)
       (
-        { pkgs, username, ... }:
+        { pkgs, username, homeDirectory, inputs, lib, ... }:
         let
           xinitrc =
             pkgs.writeTextFile {
@@ -26,10 +26,20 @@ util.createHomeUser
                 if [ -n "$__XINITRC_SOURCED" ]; then return; fi
                 export __XINITRC_SOURCED=1
 
-                . "$HOME/.profile"
+                # unlock keyring
+                eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
+
+                # force dpi, TODO: use autorandr (might be difficult w/ virtual monitor)
                 echo "Xft.dpi: 144" | xrdb -merge
-                fix-keyboard 2>/dev/null
-                ${pkgs.feh}/bin/feh --bg-scale "$HOME/.background-image"
+
+                # fix keyboard
+                ${inputs.dotfiles}/scripts/fix-keyboard "${inputs.dotfiles}/layout.xkb" 2>/dev/null
+
+                # source profile
+                . ~/.profile
+
+                # set background image
+                ${pkgs.feh}/bin/feh --bg-scale "${homeDirectory}/.background-image"
               '';
             };
 
@@ -69,10 +79,9 @@ util.createHomeUser
 
             programs.bash = {
               # TODO: make `util#create` support `lib.mkAfter` & `lib.mkBefore`
-              # or (preferabley) find way to make Nix modules to work w/ home manager
+              # or (preferably) find way to make Nix modules to work w/ home manager
               # and NixOS
               initExtra = ''
-                # this is okay because home manager ensures it's only loaded once
                 . $HOME/.profile
 
                 # vim mode
@@ -82,14 +91,11 @@ util.createHomeUser
                 eval "$(starship init bash)"
                 eval "$(direnv hook bash)"
 
-                # unlock keyring
-                eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
-
                 # gpg
-                export GPG_TTY="$(tty)"
-                export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-                gpgconf --launch gpg-agent
+                export GPG_TTY=$(tty)
+                gpg-connect-agent updatestartuptty /bye >/dev/null
 
+                # completions
                 if ! shopt -oq posix; then
                   if [ -f /usr/share/bash-completion/bash_completion ]; then
                     . /usr/share/bash-completion/bash_completion

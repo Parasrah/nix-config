@@ -9,7 +9,10 @@ let
     import ../../fun { inherit pkgs; };
 
   payload =
-    { inherit stateVersion system homeDirectory username pkgs lib fun inputs; };
+    {
+      inherit stateVersion system homeDirectory username pkgs lib fun inputs;
+      isNixOS = true;
+    };
 
   userConfig =
     fun.pipe
