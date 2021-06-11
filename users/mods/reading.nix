@@ -5,8 +5,8 @@
 
   homemanager = {
     home.packages = with pkgs; [
-      unstable.wine
-      unstable.winetricks
+      # unstable.wine
+      # unstable.winetricks
       unstable.calibre
     ];
   };
