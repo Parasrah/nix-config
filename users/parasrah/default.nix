@@ -98,21 +98,21 @@ in
           pkgs.writeTextFile {
             name = ".pam_environment";
             text = ''
-              LANGUAGE	        DEFAULT=en_CA:en
-              LANG	            DEFAULT=en_CA.UTF-8
-              LC_NUMERIC	      DEFAULT=en_CA.UTF-8
-              LC_TIME	          DEFAULT=en_CA.UTF-8
-              LC_MONETARY	      DEFAULT=en_CA.UTF-8
-              LC_PAPER	        DEFAULT=en_CA.UTF-8
-              LC_NAME	          DEFAULT=en_CA.UTF-8
-              LC_ADDRESS	      DEFAULT=en_CA.UTF-8
-              LC_TELEPHONE	    DEFAULT=en_CA.UTF-8
-              LC_MEASUREMENT	  DEFAULT=en_CA.UTF-8
-              LC_IDENTIFICATION	DEFAULT=en_CA.UTF-8
-              PAPERSIZE	        DEFAULT=letter
+              LANGUAGE          DEFAULT=en_CA:en
+              LANG              DEFAULT=en_CA.UTF-8
+              LC_NUMERIC        DEFAULT=en_CA.UTF-8
+              LC_TIME            DEFAULT=en_CA.UTF-8
+              LC_MONETARY        DEFAULT=en_CA.UTF-8
+              LC_PAPER          DEFAULT=en_CA.UTF-8
+              LC_NAME            DEFAULT=en_CA.UTF-8
+              LC_ADDRESS        DEFAULT=en_CA.UTF-8
+              LC_TELEPHONE      DEFAULT=en_CA.UTF-8
+              LC_MEASUREMENT    DEFAULT=en_CA.UTF-8
+              LC_IDENTIFICATION  DEFAULT=en_CA.UTF-8
+              PAPERSIZE          DEFAULT=letter
 
-              SSH_AGENT_PID	    DEFAULT=
-              SSH_AUTH_SOCK	    DEFAULT="''${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+              SSH_AGENT_PID      DEFAULT=
+              SSH_AUTH_SOCK      DEFAULT="''${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
             '';
           };
 
@@ -154,39 +154,39 @@ in
         removed = { };
       };
       defaultApplications = {
-        "application/pdf"               = "okularApplication_dvi.desktop";
-        "application/csv"               = "kakoune.desktop";
-        "application/json"              = "kakoune.desktop";
-        "application/postscript"        = "kakoune.desktop";
-        "text/html"                     = "kakoune.desktop";
-        "text/plain"                    = "kakoune.desktop";
-        "text/troff"                    = "kakoune.desktop";
-        "text/x-c++"                    = "kakoune.desktop";
-        "text/x-c"                      = "kakoune.desktop";
-        "text/x-java"                   = "kakoune.desktop";
-        "text/x-lisp"                   = "kakoune.desktop";
-        "text/x-makefile"               = "kakoune.desktop";
-        "text/xml"                      = "kakoune.desktop";
-        "text/x-ruby"                   = "kakoune.desktop";
-        "text/x-script.python"          = "kakoune.desktop";
-        "text/x-shellscript"            = "kakoune.desktop";
-        "application/x-directory"       = "org.gnome.Nautilus.desktop";
-        "inode/directory"               = "org.gnome.Nautilus.desktop";
-        "image/png"                     = "brave-browser.desktop";
-        "x-scheme-handler/http"         = "brave-browser.desktop";
-        "x-scheme-handler/https"        = "brave-browser.desktop";
-        "x-scheme-handler/ftp"          = "brave-browser.desktop";
-        "x-scheme-handler/chrome"       = "brave-browser.desktop";
-        "application/x-extension-htm"   = "brave-browser.desktop";
-        "application/x-extension-html"  = "brave-browser.desktop";
+        "application/pdf" = "okularApplication_dvi.desktop";
+        "application/csv" = "kakoune.desktop";
+        "application/json" = "kakoune.desktop";
+        "application/postscript" = "kakoune.desktop";
+        "text/html" = "kakoune.desktop";
+        "text/plain" = "kakoune.desktop";
+        "text/troff" = "kakoune.desktop";
+        "text/x-c++" = "kakoune.desktop";
+        "text/x-c" = "kakoune.desktop";
+        "text/x-java" = "kakoune.desktop";
+        "text/x-lisp" = "kakoune.desktop";
+        "text/x-makefile" = "kakoune.desktop";
+        "text/xml" = "kakoune.desktop";
+        "text/x-ruby" = "kakoune.desktop";
+        "text/x-script.python" = "kakoune.desktop";
+        "text/x-shellscript" = "kakoune.desktop";
+        "application/x-directory" = "org.gnome.Nautilus.desktop";
+        "inode/directory" = "org.gnome.Nautilus.desktop";
+        "image/png" = "brave-browser.desktop";
+        "x-scheme-handler/http" = "brave-browser.desktop";
+        "x-scheme-handler/https" = "brave-browser.desktop";
+        "x-scheme-handler/ftp" = "brave-browser.desktop";
+        "x-scheme-handler/chrome" = "brave-browser.desktop";
+        "application/x-extension-htm" = "brave-browser.desktop";
+        "application/x-extension-html" = "brave-browser.desktop";
         "application/x-extension-shtml" = "brave-browser.desktop";
-        "application/xhtml+xml"         = "brave-browser.desktop";
+        "application/xhtml+xml" = "brave-browser.desktop";
         "application/x-extension-xhtml" = "brave-browser.desktop";
-        "application/x-extension-xht"   = "brave-browser.desktop";
-        "x-scheme-handler/about"        = "brave-browser.desktop";
-        "x-scheme-handler/unknown"      = "brave-browser.desktop";
-        "x-scheme-handler/postman"      = "Postman.desktop";
-        "x-scheme-handler/mailto"       = "brave-browser.desktop";
+        "application/x-extension-xht" = "brave-browser.desktop";
+        "x-scheme-handler/about" = "brave-browser.desktop";
+        "x-scheme-handler/unknown" = "brave-browser.desktop";
+        "x-scheme-handler/postman" = "Postman.desktop";
+        "x-scheme-handler/mailto" = "brave-browser.desktop";
       };
     };
 
@@ -370,6 +370,72 @@ in
               };
             };
           };
+        };
+      };
+    };
+
+    services.dunst = {
+      enable = true;
+      settings = {
+        global = {
+          monitor = 0;
+          follow = "mouse";
+          geometry = "250x50-24+24";
+          indicate_hidden = true;
+          shrink = false;
+          separator_height = 0;
+          padding = 16;
+          horizontal_padding = 24;
+          frame_width = 2;
+          sort = false;
+          idle_threshold = 120;
+          font = "Noto Sans 8";
+          line_height = 4;
+          markup = "full";
+          format = "<b>%s</b>\\n%b";
+          alignment = "left";
+          show_age_threshold = 60;
+          word_wrap = true;
+          ignore_newline = false;
+          stack_duplicates = false;
+          hide_duplicate_count = true;
+          show_indicators = false;
+          icon_position = "off";
+          sticky_history = true;
+          history_length = 20;
+          browser = "brave-browser -new-tab";
+          always_run_script = false;
+          class = "Dunst";
+        };
+
+        urgency_low = {
+          background = "#2f343f";
+          foreground = "#d8dee8";
+          timeout = 2;
+        };
+
+        urgency_normal = {
+          background = "#2f343f";
+          foreground = "#d8dee8";
+          timeout = 4;
+        };
+
+        urgency_critical = {
+          background = "#2f343f";
+          foreground = "#d8dee8";
+          frame_color = "#bf616a";
+          timeout = 0;
+        };
+
+        play_sound = {
+          summary = "*";
+          script = "play-notification";
+        };
+
+        slack = {
+          desktop_entry = "Slack";
+          urgency = "critical";
+          script = "dunst-demand-attention";
         };
       };
     };

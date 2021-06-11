@@ -34,6 +34,15 @@ tasks:
     cmds:
       - ./result/activate
 
-  update-dotfiles:
+  update-paths:
+    desc: update local paths in lockfile
     cmds:
       - nix flake lock --update-input dotfiles
+      - nix flake lock --update-input dungeondraft
+      - nix flake lock --update-input wonderdraft
+
+  update-nixpkgs:
+    desc: update nixpkgs in lockfile
+    cmds:
+      - nix flake lock --update-input nixpkgs
+      - nix flake lock --update-input nixpkgs-unstable

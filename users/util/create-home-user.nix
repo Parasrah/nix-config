@@ -29,7 +29,7 @@ in
       (mods ++ [
         ({ ... }: {
           homemanager = {
-            nixpkgs = import ../../cfg/pkgs { inherit system inputs; };
+            nixpkgs = import ../../cfg/nixpkgs { inherit system inputs; };
           };
         })
       ]);
