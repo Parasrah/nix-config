@@ -14,7 +14,10 @@ in
   configuration = { pkgs, inputs, ... }:
     let
       payload =
-        { inherit stateVersion system homeDirectory username pkgs lib fun inputs; };
+        {
+          inherit stateVersion system homeDirectory username pkgs lib fun inputs;
+          isNixOS = false;
+        };
 
     in
     fun.pipe

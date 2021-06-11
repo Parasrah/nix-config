@@ -1,4 +1,4 @@
-{ pkgs, lib, username, fun, inputs, ... }:
+{ pkgs, lib, username, fun, inputs, isNixOS, ... }:
 let
   home =
     "/home/${username}";
@@ -65,41 +65,64 @@ in
       mpdris2
       xss-lock
       tdesktop
-      breeze-gtk
       signal-desktop
-      adapta-gtk-theme
-      paper-icon-theme
 
       unstable.starship
       unstable.spotify-tui
 
       unstable.gitAndTools.delta
+    ] ++ lib.lists.optionals isNixOS [
+      breeze-gtk
+      paper-icon-theme
+      adapta-gtk-theme
     ];
 
     home.file =
       let
         xinitrc =
-          fun.pipe
-            [
-              (builtins.readFile)
-              (
-                x: lib.strings.concatStringsSep "\n\n" [
-                  x
-                  ''
-                    . ~/.profile
-                  ''
-                ]
-              )
-              (builtins.toFile ".xinitrc")
-            ]
-            "${inputs.dotfiles}/xinitrc";
+          pkgs.writeTextFile {
+            name = ".xinitrc";
+            text = ''
+              if [ -n "$__XINITRC_SOURCED" ]; then return; fi
+              export __XINITRC_SOURCED=1
+
+              # unlock keyring
+              eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
+
+              # run autorandr
+              autorandr --change
+            '';
+          };
+
+        pamEnvironment =
+          pkgs.writeTextFile {
+            name = ".pam_environment";
+            text = ''
+              LANGUAGE	        DEFAULT=en_CA:en
+              LANG	            DEFAULT=en_CA.UTF-8
+              LC_NUMERIC	      DEFAULT=en_CA.UTF-8
+              LC_TIME	          DEFAULT=en_CA.UTF-8
+              LC_MONETARY	      DEFAULT=en_CA.UTF-8
+              LC_PAPER	        DEFAULT=en_CA.UTF-8
+              LC_NAME	          DEFAULT=en_CA.UTF-8
+              LC_ADDRESS	      DEFAULT=en_CA.UTF-8
+              LC_TELEPHONE	    DEFAULT=en_CA.UTF-8
+              LC_MEASUREMENT	  DEFAULT=en_CA.UTF-8
+              LC_IDENTIFICATION	DEFAULT=en_CA.UTF-8
+              PAPERSIZE	        DEFAULT=letter
+
+              SSH_AGENT_PID	    DEFAULT=
+              SSH_AUTH_SOCK	    DEFAULT="''${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+            '';
+          };
+
       in
       {
+        ".pam_environment".source = pamEnvironment;
         ".background-image".source = "${inputs.dotfiles}/wallpaper.png";
         ".npmrc".source = "${inputs.dotfiles}/npmrc";
         ".xinitrc".source = xinitrc;
         ".xsession".source = xinitrc;
-        ".xprofile".source = xinitrc;
         xterm-kitty = {
           source = "${pkgs.kitty}/lib/xterm/terminfo/x/xterm-kitty";
           target = ".terminfo/x/xterm-kitty";
@@ -113,7 +136,6 @@ in
     xdg.configFile = {
       i3.source = "${inputs.dotfiles}/i3";
       polybar.source = "${inputs.dotfiles}/polybar";
-      dunst.source = "${inputs.dotfiles}/dunst";
       kitty.source = "${inputs.dotfiles}/kitty";
       kak-lsp.source = "${inputs.dotfiles}/kak/kak-lsp";
       gitui.source = "${inputs.dotfiles}/gitui";
@@ -171,45 +193,51 @@ in
     programs = {
       bash = {
         enable = true;
-        initExtra = lib.mkBefore ''
+        shellAliases = {
+          # aliases
+          ":q" = "exit";
+          "cat" = "bat --paging=never";
+
+          # cronus
+          ":t" = "cronus";
+          ":tw" = "cronus show week";
+          ":td" = "cronus show day";
+          ":ts" = "cronus status";
+
+          # kak alias
+          "la" = "ls --long";
+          ":e" = "kcr edit";
+          ":k" = "kcr-fzf-shell";
+          ":K" = "kcr-fzf-shell --working-directory .";
+          ":l" = "kcr list";
+          ":a" = "kcr attach";
+          ":s" = "kcr send";
+          ":kill" = "kcr kill";
+          "val" = "kcr get -r --value";
+          "opt" = "kcr get -r --option";
+          "reg" = "kcr get -r --register";
+        };
+
+        initExtra = ''
           # this is okay because home manager ensures it's only loaded once
           . $HOME/.profile
 
           # vim mode
           set -o vi
 
-          # aliases
-          alias :q="exit"
-          alias cat='bat --paging=never'
-
-          # kak alias
-          alias la="ls --long"
-          alias :e="kcr edit"
-          alias :e="kcr edit"
-          alias :k="kcr-fzf-shell"
-          alias :K="kcr-fzf-shell --working-directory ."
-          alias :l="kcr list"
-          alias :a="kcr attach"
-          alias :s="kcr send"
-          alias :kill="kcr kill"
-          alias val="kcr get --value"
-          alias opt="kcr get --option"
-          alias reg="kcr get --register"
-
           eval "$(zoxide init bash)"
           eval "$(starship init bash)"
           eval "$(direnv hook bash)"
 
-          # unlock keyring
-          eval $(gnome-keyring-daemon --start --components=pkcs11,secrets)
-
           # gpg
-          export GPG_TTY="$(tty)"
-          export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-          gpgconf --launch gpg-agent
+          export GPG_TTY=$(tty)
+          gpg-connect-agent updatestartuptty /bye >/dev/null
         '';
 
-        shellAliases = { };
+        profileExtra = ''
+          if [ -n "$__PROFILE_SOURCED" ]; then return; fi
+          export __PROFILE_SOURCED=1
+        '';
       };
 
       fzf = {
@@ -236,6 +264,7 @@ in
           core = {
             editor = "kak";
             pager = "delta";
+            excludesfile = "~/.gitignore";
           };
           merge = {
             tool = "meld";

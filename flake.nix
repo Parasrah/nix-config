@@ -47,7 +47,7 @@
       specialArgs = { inherit inputs; };
 
       pkgsFor = system:
-        import nixpkgs (import ./cfg/pkgs { inherit inputs system; });
+        import nixpkgs (import ./cfg/nixpkgs { inherit inputs system; });
 
       specialArgsFor = system: specialArgs // {
         inherit system;

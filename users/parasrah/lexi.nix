@@ -8,6 +8,7 @@ util.createNixOsUser
 
     mods = [
       (import ../mods/core.nix)
+      (import ../mods/kitty.nix)
       (import ../mods/kakoune.nix)
       (import ../mods/neovim.nix)
       (import ../mods/developer.nix)

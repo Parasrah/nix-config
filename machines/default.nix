@@ -94,7 +94,7 @@
     '';
   };
 
-  nixpkgs = import ../cfg/pkgs { inherit inputs system; };
+  nixpkgs = import ../cfg/nixpkgs { inherit inputs system; };
 
   # Security
   security.sudo = {
