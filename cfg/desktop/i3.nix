@@ -56,7 +56,7 @@
     fadeDelta = 3;
   };
 
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   programs.nm-applet.enable = false;
 
@@ -65,7 +65,7 @@
   security.pam.services.passwd = with pkgs; {
     text = lib.mkDefault (
       lib.mkAfter ''
-        password optional ${gnome3.gnome-keyring}/lib/security/pam_gnome_keyring.so
+        password optional ${gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
       ''
     );
   };

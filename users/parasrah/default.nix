@@ -29,14 +29,14 @@ let
     "${home}/.cargo/bin"
     "${home}/Scripts"
     "${home}/.local/bin"
-    "$DOTFILES/scripts"
+    "${dotfiles}/scripts"
   ];
 
 in
 {
   os = {
     description = "Brad";
-    extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "nixos-config" "docker" "vboxusers" "plugdev" ];
     initialHashedPassword = "$6$HkJllhqe$C8oSl9ox6WyNAdN6yjzTf3R1HzMbA6dDY8ziafg.XSG3LUrt5yG927KpDuA1nqGiiwGyGJ5jn5j.OwtNplSd3/";
     shell = pkgs.bash;
   };
@@ -65,6 +65,7 @@ in
       mpdris2
       xss-lock
       tdesktop
+      wally-cli
       signal-desktop
 
       unstable.starship
@@ -98,16 +99,16 @@ in
           pkgs.writeTextFile {
             name = ".pam_environment";
             text = ''
-              LANGUAGE          DEFAULT=en_CA:en
-              LANG              DEFAULT=en_CA.UTF-8
-              LC_NUMERIC        DEFAULT=en_CA.UTF-8
+              LANGUAGE           DEFAULT=en_CA:en
+              LANG               DEFAULT=en_CA.UTF-8
+              LC_NUMERIC         DEFAULT=en_CA.UTF-8
               LC_TIME            DEFAULT=en_CA.UTF-8
               LC_MONETARY        DEFAULT=en_CA.UTF-8
-              LC_PAPER          DEFAULT=en_CA.UTF-8
+              LC_PAPER           DEFAULT=en_CA.UTF-8
               LC_NAME            DEFAULT=en_CA.UTF-8
-              LC_ADDRESS        DEFAULT=en_CA.UTF-8
-              LC_TELEPHONE      DEFAULT=en_CA.UTF-8
-              LC_MEASUREMENT    DEFAULT=en_CA.UTF-8
+              LC_ADDRESS         DEFAULT=en_CA.UTF-8
+              LC_TELEPHONE       DEFAULT=en_CA.UTF-8
+              LC_MEASUREMENT     DEFAULT=en_CA.UTF-8
               LC_IDENTIFICATION  DEFAULT=en_CA.UTF-8
               PAPERSIZE          DEFAULT=letter
 
@@ -118,7 +119,6 @@ in
 
       in
       {
-        ".pam_environment".source = pamEnvironment;
         ".background-image".source = "${inputs.dotfiles}/wallpaper.png";
         ".npmrc".source = "${inputs.dotfiles}/npmrc";
         ".xinitrc".source = xinitrc;
@@ -131,7 +131,11 @@ in
           source = "${inputs.dotfiles}/kak/share/kakoune.logo";
           target = ".local/share/icons/hicolor/scalable/apps/kakoune.svg";
         };
-      };
+      } // (if isNixOS then {
+        ".xprofile".source = xinitrc;
+      } else {
+        ".pam_environment".source = pamEnvironment;
+      });
 
     xdg.configFile = {
       i3.source = "${inputs.dotfiles}/i3";
@@ -218,21 +222,34 @@ in
           "reg" = "kcr get -r --register";
         };
 
-        initExtra = ''
-          # this is okay because home manager ensures it's only loaded once
-          . $HOME/.profile
+        initExtra =
+          let
+            gnupgInit =
+              lib.strings.optionalString isNixOS ''
+                unset SSH_AGENT_PID
+                if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+                  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+                fi
+              '';
 
-          # vim mode
-          set -o vi
+          in
+          ''
+            # this is okay because home manager ensures it's only loaded once
+            . $HOME/.profile
 
-          eval "$(zoxide init bash)"
-          eval "$(starship init bash)"
-          eval "$(direnv hook bash)"
+            # vim mode
+            set -o vi
 
-          # gpg
-          export GPG_TTY=$(tty)
-          gpg-connect-agent updatestartuptty /bye >/dev/null
-        '';
+            eval "$(zoxide init bash)"
+            eval "$(starship init bash)"
+            eval "$(direnv hook bash)"
+
+            ${gnupgInit}
+
+            # gpg (pinentry)
+            export GPG_TTY=$(tty)
+            gpg-connect-agent updatestartuptty /bye >/dev/null
+          '';
 
         profileExtra = ''
           if [ -n "$__PROFILE_SOURCED" ]; then return; fi
@@ -242,7 +259,12 @@ in
 
       fzf = {
         enable = true;
-        defaultCommand = "rg --files -g '!.git/' -g '!node_modules/'";
+        enableBashIntegration = true;
+        enableFishIntegration = false;
+        enableZshIntegration = false;
+        defaultCommand = "${pkgs.fd}/bin/fd --type f";
+        fileWidgetCommand = "${pkgs.fd}/bin/fd --type f";
+        changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
       };
 
       git = {
@@ -257,7 +279,7 @@ in
           last = "log -1 HEAD";
           tree = "!git log --graph --decorate --pretty=format:'%C(yellow)%h %Cred%cr %Cblue(%an)%C(cyan)%d%Creset %s' --abbrev-commit --all";
           recent = "for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/";
-          publish = "!git push -u origin $(git branch --show-current)";
+          publish = "!git push -u origin \"$(git branch --show-current)\"";
         };
 
         extraConfig = {

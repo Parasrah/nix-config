@@ -1,22 +1,17 @@
 { pkgs, lib, inputs, ... }:
-let
-  compiledLayout =
-    pkgs.runCommand "keyboard-layout" { } ''
-      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${inputs.dotfiles}/layout.xkb $out
-    '';
-in
+
 {
   console.useXkbConfig = true;
+
+  hardware.keyboard.zsa.enable = true;
 
   services.xserver = {
     enable = true;
 
-    # doesn't work?
     autoRepeatDelay = 250;
     autoRepeatInterval = 20;
 
     displayManager.sessionCommands = ''
-      ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
       ${pkgs.xlibs.xset}/bin/xset r rate 250 20
     '';
 

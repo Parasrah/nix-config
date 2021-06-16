@@ -7,7 +7,7 @@
 
   services.xserver = {
     desktopManager = {
-      gnome3.enable = true;
+      gnome.enable = true;
     };
 
     displayManager = {
@@ -20,5 +20,5 @@
 
   programs.nm-applet.enable = pkgs.lib.mkForce true;
 
-  services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
+  services.dbus.packages = with pkgs; [ gnome.dconf gnome2.GConf ];
 }

@@ -53,8 +53,14 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 43000 ];
-      allowedUDPPorts = [ ];
+      allowedTCPPorts = [
+        8096 # jellyfin (http)
+        8920 # jellyfin (https)
+      ];
+      allowedUDPPorts = [
+        1900 # jellyfin (auto-discovery)
+        7359 # jellyfin (auto-discovery)
+      ];
     };
 
     wg-quick.interfaces = import ../../cfg/wireguard {
@@ -108,6 +114,18 @@
 
     ratbagd = {
       enable = true;
+    };
+
+    jellyfin = {
+      enable = true;
+      group = "jellyfin";
+      user = "jellyfin";
+    };
+
+    openvpn.servers.expressvpn = {
+      config = "config /root/nixos/openvpn/expressvpn.ovpn";
+      autoStart = false;
+      updateResolvConf = true;
     };
   };
 

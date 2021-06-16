@@ -56,8 +56,8 @@
       xorg.xkbcomp
       xorg.xmodmap
 
-      gnome3.nautilus
-      gnome3.seahorse
+      gnome.nautilus
+      gnome.seahorse
 
       unstable.nnn
       unstable.brave

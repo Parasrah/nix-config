@@ -13,6 +13,7 @@
       conda
       tokei
       vscode
+      nodejs
       direnv
       gnumake
       firefox
@@ -20,14 +21,14 @@
       git-crypt
       hyperfine
       nix-direnv
-      timewarrior
       inotify-tools
       webdev-browser
+
+      nodePackages.eslint
 
       unstable.scc
       unstable.zoxide
       unstable.postman
-      (chromium.override { enableVaapi = true; })
 
       unstable.gitAndTools.gitui
       unstable.gitAndTools.delta
