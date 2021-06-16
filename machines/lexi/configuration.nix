@@ -156,13 +156,15 @@
   };
 
   # Sound
-  sound.enable = true;
-  hardware.pulseaudio = {
+  sound.enable = false;
+  services.pipewire = {
     enable = true;
-    support32Bit = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    media-session.enable = true;
   };
+  hardware.pulseaudio.enable = false;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
