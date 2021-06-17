@@ -87,9 +87,6 @@ util.createHomeUser
                 # vim mode
                 set -o vi
 
-                # <c-backspace> for consistency w/ browser
-                stty werase '^H'
-
                 eval "$(zoxide init bash)"
                 eval "$(starship init bash)"
                 eval "$(direnv hook bash)"
