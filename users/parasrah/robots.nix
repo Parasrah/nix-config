@@ -74,8 +74,27 @@ util.createHomeUser
 
             fonts.fontconfig.enable = true;
             programs.home-manager.enable = true;
+            xdg.enable = true;
+            xdg.mime.enable = true;
             home.sessionVariables.LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             targets.genericLinux.enable = true;
+
+            pam.sessionVariables = {
+              LANGUAGE          = "en_CA:en";
+              LANG              = "en_CA.UTF-8";
+              LC_NUMERIC        = "en_CA.UTF-8";
+              LC_TIME           = "en_CA.UTF-8";
+              LC_MONETARY       = "en_CA.UTF-8";
+              LC_PAPER          = "en_CA.UTF-8";
+              LC_NAME           = "en_CA.UTF-8";
+              LC_ADDRESS        = "en_CA.UTF-8";
+              LC_TELEPHONE      = "en_CA.UTF-8";
+              LC_MEASUREMENT    = "en_CA.UTF-8";
+              LC_IDENTIFICATION = "en_CA.UTF-8";
+              PAPERSIZE         = "letter";
+              SSH_AGENT_PID     = "";
+              SSH_AUTH_SOCK     = "\${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh";
+            };
 
             programs.bash = {
               # TODO: make `util#create` support `lib.mkAfter` & `lib.mkBefore`
