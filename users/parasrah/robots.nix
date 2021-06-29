@@ -49,6 +49,7 @@ util.createHomeUser
             home.packages = with pkgs; [
               slack
               wmctrl
+              chromium
 
               # fonts
               noto-fonts

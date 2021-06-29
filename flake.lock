@@ -3,7 +3,7 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-sGPtBMHeqfz/EJbYy+E4tKN3sTcZpVWnuppG+ruvrwc=",
+        "narHash": "sha256-C115VqOEsnwwRR/y0wQoYkuVeQfV5zwLskLUzB/Qzb8=",
         "path": "/etc/nixos/users/parasrah/dotfiles",
         "type": "path"
       },
@@ -15,7 +15,7 @@
     "dungeondraft": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-SoKDINm6RmJ59Dkgx9JaEZsEumwZMrbamMJlA0sFKs0=",
+        "narHash": "sha256-N1rv+mhHDJj+/3kwJgdRcYd+Eu91eIziMCooMppNhgw=",
         "path": "/etc/nixos/pkgs/dungeondraft",
         "type": "path"
       },
@@ -81,11 +81,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1618699036,
-        "narHash": "sha256-yZotL3RFZYDwHlxBvMFfVcY6p8jxLGxRvKK1AIiys1Q=",
+        "lastModified": 1624895459,
+        "narHash": "sha256-PVm40N+snq3KFaYC43+FMKEozl/Q6s9RUZ2tiN03GyE=",
         "owner": "parasrah",
         "repo": "kakoune.cr",
-        "rev": "6f9e1ccd9361505e21518e552addc56f3c7dccb0",
+        "rev": "834230c9b341bcf5c8dae74cad11789342587122",
         "type": "github"
       },
       "original": {
@@ -191,7 +191,7 @@
     "wonderdraft": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-zRlUDRX1gEZ/N0jl+ASGAkQCN4LcN+z6Fy/8CqJ9Osw=",
+        "narHash": "sha256-/YSFZ7AizyzZQkNZ52dd4hdlx5MSOX0TMV9q6W7rFwo=",
         "path": "/etc/nixos/pkgs/wonderdraft",
         "type": "path"
       },

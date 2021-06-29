@@ -6,8 +6,8 @@ self: super:
       version = "2021-04-21";
       src = builtins.fetchGit {
         url = "https://github.com/Parasrah/kakoune";
-        ref = "daily-driver";
-        rev = "97a551c4c6522adf0079b45a3a5cb1f728ff6144";
+        ref = "master";
+        rev = "c68f85659f419a59a477c2dc7464a66ab6e67ec5";
       };
     }
   );
