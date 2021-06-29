@@ -61,7 +61,6 @@ in
       feh
       mpc_cli
       todoist
-      ncurses
       mpdris2
       xss-lock
       tdesktop

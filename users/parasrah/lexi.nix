@@ -29,6 +29,7 @@ util.createNixOsUser
             home.packages = with pkgs; [
               batctl
               deluge
+              cryptee
               libva-utils
             ];
           };

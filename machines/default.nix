@@ -11,6 +11,10 @@
       TERMINAL = "kitty";
     };
 
+    systemPackages = with pkgs; [
+      ncurses
+    ];
+
     etc."inputrc" = {
       text = ''
         set meta-flag on

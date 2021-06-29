@@ -18,6 +18,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   environment = {
     systemPackages = with pkgs; [
@@ -53,14 +54,6 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        8096 # jellyfin (http)
-        8920 # jellyfin (https)
-      ];
-      allowedUDPPorts = [
-        1900 # jellyfin (auto-discovery)
-        7359 # jellyfin (auto-discovery)
-      ];
     };
 
     wg-quick.interfaces = import ../../cfg/wireguard {
@@ -114,12 +107,6 @@
 
     ratbagd = {
       enable = true;
-    };
-
-    jellyfin = {
-      enable = true;
-      group = "jellyfin";
-      user = "jellyfin";
     };
 
     openvpn.servers.expressvpn = {
