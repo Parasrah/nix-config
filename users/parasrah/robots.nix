@@ -8,13 +8,13 @@ util.createHomeUser
     stateVersion = "20.09";
 
     mods = [
+      (import ./default.nix)
       (import ../mods/core.nix)
       (import ../mods/kakoune.nix)
       (import ../mods/developer.nix)
       (import ../mods/web.nix)
       (import ../mods/rust.nix)
       (import ../mods/lua.nix)
-      (import ./default.nix)
       (
         { pkgs, username, homeDirectory, inputs, lib, ... }:
         let
@@ -81,20 +81,20 @@ util.createHomeUser
             targets.genericLinux.enable = true;
 
             pam.sessionVariables = {
-              LANGUAGE          = "en_CA:en";
-              LANG              = "en_CA.UTF-8";
-              LC_NUMERIC        = "en_CA.UTF-8";
-              LC_TIME           = "en_CA.UTF-8";
-              LC_MONETARY       = "en_CA.UTF-8";
-              LC_PAPER          = "en_CA.UTF-8";
-              LC_NAME           = "en_CA.UTF-8";
-              LC_ADDRESS        = "en_CA.UTF-8";
-              LC_TELEPHONE      = "en_CA.UTF-8";
-              LC_MEASUREMENT    = "en_CA.UTF-8";
+              LANGUAGE = "en_CA:en";
+              LANG = "en_CA.UTF-8";
+              LC_NUMERIC = "en_CA.UTF-8";
+              LC_TIME = "en_CA.UTF-8";
+              LC_MONETARY = "en_CA.UTF-8";
+              LC_PAPER = "en_CA.UTF-8";
+              LC_NAME = "en_CA.UTF-8";
+              LC_ADDRESS = "en_CA.UTF-8";
+              LC_TELEPHONE = "en_CA.UTF-8";
+              LC_MEASUREMENT = "en_CA.UTF-8";
               LC_IDENTIFICATION = "en_CA.UTF-8";
-              PAPERSIZE         = "letter";
-              SSH_AGENT_PID     = "";
-              SSH_AUTH_SOCK     = "\${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh";
+              PAPERSIZE = "letter";
+              SSH_AGENT_PID = "";
+              SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh";
             };
 
             programs.bash = {
@@ -140,7 +140,10 @@ util.createHomeUser
             home.file.".xinitrc".source = xinitrc;
             home.file.".xsession".source = xinitrc;
             home.file.".xprofile".source = xinitrc;
-
+            home.file.".npmrc".text = ''
+              prefix=~/.npm-global
+              ignore-scripts=false
+            '';
 
             services.gpg-agent = {
               enable = true;
