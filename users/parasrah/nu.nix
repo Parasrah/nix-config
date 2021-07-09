@@ -1,4 +1,4 @@
-{ paths, env }:
+{ fun, paths, env, aliases, ... }:
 let
   surroundedPaths =
     builtins.map (x: "\"${x}\"") paths;
@@ -6,29 +6,24 @@ let
   joinedPath =
     builtins.concatStringsSep ", " surroundedPaths;
 
+  shellAliases = with builtins; fun.pipe
+    [ (builtins.map (pair: '', "alias ${elemAt pair 0} = ${elemAt pair 1}"''))
+      (builtins.concatStringsSep "\n    ")
+    ]
+    aliases;
+
 in
 ''
   path = [${joinedPath}]
-  prompt = "__zoxide_hook;echo $(/home/brad/.nix-profile/bin/starship prompt)"
+  prompt = "__zoxide_hook;__zoxide_prompt"
   skip_welcome_message = true
   rm_always_trash = false
   ctrlc_exit = false
   complete_from_path = true
   startup = [ "zoxide init nushell --hook prompt | save ~/.zoxide.nu"
       , "source ~/.zoxide.nu"
-      , "def unlines [] { str collect $(char newline) }"
-      , "alias la = ls --long"
-      , "alias :e = kcr edit"
-      , "alias :e = kcr edit"
-      , "alias :k = kcr-fzf-shell"
-      , "alias :K = kcr-fzf-shell --working-directory ."
-      , "alias :l = kcr list"
-      , "alias :a = kcr attach"
-      , "alias :s = kcr send"
-      , "alias :kill = kcr kill"
-      , "alias val = kcr get --value"
-      , "alias opt = kcr get --option"
-      , "alias reg = kcr get --register"
+      , "def unlines [] { str collect (char newline) }"
+      ${shellAliases}
       ]
 
   [env]
@@ -48,7 +43,7 @@ in
   bell_style = "none"
   color_mode = "none"
   completion_prompt_limit = 100
-  completion_type = "circular" # circular, list, fuzzy
+  completion_type = "list" # circular, list, fuzzy
   edit_mode = "vi"
   history_duplicates = "ignoreconsecutive"
   history_ignore_space = true

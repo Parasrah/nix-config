@@ -3,7 +3,7 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-FeruUyF5hJrRnOYPnl5k7HJmXHO8MW6nF7MIUYA26c0=",
+        "narHash": "sha256-og/yd2XPxwEZxav8a7nGCEgWM7PiIkU9eTa6wpKkgPc=",
         "path": "/etc/nixos/users/parasrah/dotfiles",
         "type": "path"
       },
@@ -15,7 +15,7 @@
     "dungeondraft": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-SoKDINm6RmJ59Dkgx9JaEZsEumwZMrbamMJlA0sFKs0=",
+        "narHash": "sha256-N1rv+mhHDJj+/3kwJgdRcYd+Eu91eIziMCooMppNhgw=",
         "path": "/etc/nixos/pkgs/dungeondraft",
         "type": "path"
       },
@@ -191,7 +191,7 @@
     "wonderdraft": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-zRlUDRX1gEZ/N0jl+ASGAkQCN4LcN+z6Fy/8CqJ9Osw=",
+        "narHash": "sha256-/YSFZ7AizyzZQkNZ52dd4hdlx5MSOX0TMV9q6W7rFwo=",
         "path": "/etc/nixos/pkgs/wonderdraft",
         "type": "path"
       },

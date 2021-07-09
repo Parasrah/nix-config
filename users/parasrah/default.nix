@@ -32,6 +32,32 @@ let
     "${dotfiles}/scripts"
   ];
 
+  aliases = [
+    # aliases
+    [ ":q" "exit" ]
+    [ "cat" "bat --paging=never" ]
+
+    # cronus
+    [ ":t" "cronus" ]
+    [ ":tw" "cronus show week" ]
+    [ ":td" "cronus show day" ]
+    [ ":ts" "cronus status" ]
+
+    # kak alias
+    [ "la" "ls --long" ]
+    [ ":e" "kcr edit" ]
+    [ ":k" "kcr-fzf-shell" ]
+    [ ":K" "kcr-fzf-shell --working-directory ." ]
+    [ ":l" "kcr list" ]
+    [ ":a" "kcr attach" ]
+    [ ":s" "kcr send" ]
+    [ ":kill" "kcr kill" ]
+    [ "val" "kcr get -r --value" ]
+    [ "opt" "kcr get -r --option" ]
+    [ "reg" "kcr get -r --register" ]
+  ];
+
+  shellArgs = { inherit fun paths env aliases isNixOS; };
 in
 {
   os = {
@@ -67,6 +93,7 @@ in
       wally-cli
       signal-desktop
 
+      unstable.nushell
       unstable.starship
       unstable.spotify-tui
 
@@ -152,7 +179,7 @@ in
       "rofi/config.rasi".source = "${inputs.dotfiles}/rofi/config.rasi";
       "rofi/launcher.sh".source = "${inputs.dotfiles}/rofi/launcher.sh";
       "rofi/themes/style_8.rasi".source = "${inputs.dotfiles}/rofi/themes/style_8.rasi";
-      "nu/config.toml".text = import ./nu.nix { inherit paths env; };
+      "nu/config.toml".text = import ./nu.nix shellArgs;
     };
 
     xdg.mimeApps = {
@@ -198,67 +225,7 @@ in
     };
 
     programs = {
-      bash = {
-        enable = true;
-        shellAliases = {
-          # aliases
-          ":q" = "exit";
-          "cat" = "bat --paging=never";
-
-          # cronus
-          ":t" = "cronus";
-          ":tw" = "cronus show week";
-          ":td" = "cronus show day";
-          ":ts" = "cronus status";
-
-          # kak alias
-          "la" = "ls --long";
-          ":e" = "kcr edit";
-          ":k" = "kcr-fzf-shell";
-          ":K" = "kcr-fzf-shell --working-directory .";
-          ":l" = "kcr list";
-          ":a" = "kcr attach";
-          ":s" = "kcr send";
-          ":kill" = "kcr kill";
-          "val" = "kcr get -r --value";
-          "opt" = "kcr get -r --option";
-          "reg" = "kcr get -r --register";
-        };
-
-        initExtra =
-          let
-            gnupgInit =
-              lib.strings.optionalString isNixOS ''
-                unset SSH_AGENT_PID
-                if [ "''${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-                  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-                fi
-              '';
-
-          in
-          ''
-            # this is okay because home manager ensures it's only loaded once
-            . $HOME/.profile
-
-            # vim mode
-            set -o vi
-
-            eval "$(zoxide init bash)"
-            eval "$(starship init bash)"
-            eval "$(direnv hook bash)"
-
-            ${gnupgInit}
-
-            # gpg (pinentry)
-            export GPG_TTY=$(tty)
-            gpg-connect-agent updatestartuptty /bye >/dev/null
-          '';
-
-        profileExtra = ''
-          if [ -n "$__PROFILE_SOURCED" ]; then return; fi
-          export __PROFILE_SOURCED=1
-        '';
-      };
+      bash = import ./bash.nix shellArgs;
 
       fzf = {
         enable = true;
