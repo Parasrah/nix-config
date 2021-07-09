@@ -64,7 +64,7 @@ self: super:
           Name=Cryptee
           GenericName=Cryptee
           Comment=Cloud storage and documents
-          Exec=brave --app="https://crypt.ee/home" --class="cryptee" %U
+          Exec=brave --user-data-dir=".config/cryptee-browser" --app="https://crypt.ee/home" --class="cryptee" %U
           StartupNotify=true
           Terminal=false
           Icon=brave-browser
@@ -75,11 +75,11 @@ self: super:
 
           [Desktop Action new-window]
           Name=New Window
-          Exec=brave --app="https://crypt.ee/home" --class="cryptee" %U
+          Exec=brave --user-data-dir=".config/cryptee-browser" --app="https://crypt.ee/home" --class="cryptee" %U
 
           [Desktop Action new-private-window]
           Name=New Incognito Window
-          Exec=brave --incognito --app="https://crypt.ee/home" --class="cryptee" %U
+          Exec=brave --incognito --user-data-dir=".config/cryptee-browser" --app="https://crypt.ee/home" --class="cryptee" %U
         '';
       };
     in
