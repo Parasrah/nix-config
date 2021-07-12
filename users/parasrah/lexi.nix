@@ -14,7 +14,6 @@ util.createNixOsUser
       (import ../mods/gamer.nix)
       (import ../mods/utilities.nix)
       (import ../mods/rust.nix)
-      (import ../mods/nushell.nix)
       (import ../mods/dwarf-fortress.nix)
       (import ../mods/pentesting.nix)
       (import ../mods/dnd.nix)
